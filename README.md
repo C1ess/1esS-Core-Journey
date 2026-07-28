@@ -44,6 +44,8 @@ This repository documents my daily progress in:
 
 📂 CardNews
 
+📁 Google Ai Fundamental
+
 ---
 
 > Less Comfort. More Core.
