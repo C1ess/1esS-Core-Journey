@@ -6,6 +6,6 @@ This folder contains all card news scripts and production records.
 
 - Script
 - Caption
-- Hashtags
-- Music
-- References
+- Key Points
+- Images
+- Upload
