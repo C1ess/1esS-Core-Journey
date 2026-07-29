@@ -1,0 +1,48 @@
+# 💡 AI 기반 브레인스토밍 및 의사결정 워크북 (Brainstorming & Decision Making Guide)
+> **"AI는 단순히 답을 주는 도구가 아닙니다. 반대 의견을 제시하여 리스크를 발굴하고, 제약 조건을 반영하여 최선의 방향을 도출하는 최고의 전략적 파트너입니다."**
+> 
+## 📌 개요 (Overview)
+본 실습 가이드는 Google Marketing 소속 오웬이 제시하는 Gemini 활용법을 바탕으로 제작되었습니다. 문제 정의, 필수 맥락 제공, 그리고 사용자 본인의 꼼꼼한 최종 검토 과정을 거쳐 **아이디어 발상부터 리스크 검증, 전략 결정**까지 AI와 협업하는 프로세스를 다룹니다.
+## 🎯 핵심 학습 목표 (Key Learning Objectives)
+ * **⚡ 검증 속도 향상:** 다양한 아이디어에서 시작하여 최적의 아이디어로 빠르게 축소합니다.
+ * **📊 정보에 입각한 의사결정:** 단순 직감이 아닌, 정교한 인사이트를 바탕으로 최종 결정을 내립니다.
+ * **📡 업계 동향 자동 추적:** 자동화된 리포트 설정을 통해 최신 트렌드를 지속적으로 파악합니다.
+> 💡 **적용 가능 범위:** 헤드폰 제품 출시 액세서리 아이디어 도출, 캠페인 컨셉 평가, 기능 우선순위 설정, 신규 시장 기회 탐색 등 다양한 업무에 적용 가능합니다.
+> 
+## 🔄 핵심 업무 프로세스 (Process Flow)
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Gemini Collaboration Cycle                  │
+│                                                             │
+│   1. 구조화 브레인스토밍 ──> 2. 데이터 기반 Hook 도출        │
+│           ▲                                      │          │
+│           └────────── 3. 톤앤매너별 초안 생성 ──────┘          │
+└─────────────────────────────────────────────────────────────┘
+
+```
+## 🛠️ 단계별 프롬프트 실습 가이드 (Hands-on Practice)
+### 1단계: 프레젠테이션 구조 브레인스토밍
+AI를 활용하여 청중의 특성에 맞는 발표 구조와 아이디어를 탐색합니다.
+```text
+I'm preparing a presentation on [your topic, e.g. AI]. My primary goal is to [your main objective, e.g. show how AI can be useful at work]. Help me brainstorm [number] compelling ways to structure my presentation for an audience of [your specific audience, e.g. professionals].
+
+```
+### 2단계: 관심 유도를 위한 통계 자료 도출
+도출된 구조 중 가장 마음에 드는 항목을 선택하고, 청중의 시선을 사로잡을 통계/데이터를 요청합니다.
+```text
+I like [your favorite option from step 1, e.g. the value of AI at work]. Now I need a powerful hook for my introduction. What's a surprising statistic about [your topic from step 1, e.g. the value of AI at work]?
+
+```
+### 3단계: 톤앤매너별 도입부 초안 작성
+선정한 통계 자료를 바탕으로 다양한 톤앤매너(Casual, Professional 등)의 도입부 문단을 생성합니다.
+```text
+I like [your favorite hook from the previous step]. Using that, draft an opening paragraph for my presentation. Generate [number] options that range in tone from [one tone, e.g. casual] to [another tone, e.g. professional].
+
+```
+## 🔐 원칙 및 주의사항 (Golden Rules)
+ 1. **반대 의견 요청하기 (Devil's Advocate):**
+   * 아이디어가 결정된 후 "이 계획의 잠재적 위험 요소나 반대 의견 3가지를 제시해 줘"라고 추가 질문을 던져 리스크를 사전 검증하세요.
+ 2. **최종 결정권 유지:**
+   * AI의 제안은 선택지일 뿐입니다. 맥락과 전문성을 반영한 최종 판단은 항상 **사용자**가 내립니다.
+ 3. **개인정보 및 기밀보호:**
+   * 공개 AI 도구에 민감한 개인정보나 기업 비공개 데이터를 입력하지 않도록 주의하세요.
