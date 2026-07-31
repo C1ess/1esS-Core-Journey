@@ -1,0 +1,70 @@
+# SQLD Day3 - 오답노트
+
+> 날짜 : 2026-07-31
+
+---
+
+## ❌ 오답 1
+
+### 문제
+
+VIEW(V_LOANED_ITEM)에 대해 정상적으로 수행되는 SQL을 고르는 문제
+
+### 내가 선택
+
+① INSERT - LOAN_YN 컬럼을 생략하면 기본값 'N'이 적용되어 정상적으로 INSERT된다.
+
+### 정답
+
+④ DELETE FROM V_LOANED_ITEM
+WHERE ITEM_ID = 99;
+
+### 내가 헷갈린 이유
+
+기본값(DEFAULT)이 정의되어 있으면 VIEW에서도 자동으로 적용될 것이라고 생각했다.
+
+### 핵심 개념
+
+VIEW는 기본 테이블의 데이터를 조회하는 **가상 테이블**이다.
+
+VIEW를 통한 INSERT는 다음 조건을 만족해야 한다.
+
+- NOT NULL 컬럼은 반드시 입력 가능해야 한다.
+- 기본값(DEFAULT)이 VIEW를 통한 INSERT에서 항상 보장되는 것은 아니다.
+- VIEW 정의에 따라 INSERT 자체가 제한될 수도 있다.
+
+따라서 LOAN_YN을 생략했다고 무조건 기본값이 적용된다고 판단하면 안 된다.
+
+### 정답인 이유
+
+```sql
+DELETE FROM V_LOANED_ITEM
+WHERE ITEM_ID = 99;
+```
+
+삭제할 데이터가 존재하지 않아도 오류가 발생하지 않는다.
+
+결과는
+
+```
+0 rows deleted
+```
+
+만 반환되고 정상 종료된다.
+
+### SQLD 암기 포인트
+
+✅ DELETE는 조건에 맞는 행이 없어도 오류가 아니다.
+
+✅ 결과는 "0행 삭제"로 정상 처리된다.
+
+✅ INSERT는 DEFAULT가 있다고 무조건 성공하는 것이 아니다.
+
+✅ VIEW를 통한 DML은 VIEW 정의와 NOT NULL 조건을 반드시 확인한다.
+
+---
+
+## 📌 한 줄 암기
+
+- DELETE : 대상이 없어도 오류 X
+- INSERT : DEFAULT만 믿지 말고 VIEW와 제약조건을 먼저 확인
