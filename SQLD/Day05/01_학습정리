@@ -1,0 +1,180 @@
+# Day05 - SQLD 학습정리
+
+## 1. GROUP BY와 HAVING의 역할
+
+### GROUP BY
+- 특정 컬럼을 기준으로 데이터를 그룹화한다.
+- 그룹별 집계(합계, 평균, 개수 등)를 계산할 때 사용한다.
+
+```sql
+SELECT CUSTOMER_ID, COUNT(*)
+FROM ORDER_TB
+GROUP BY CUSTOMER_ID;
+```
+
+---
+
+### HAVING
+- GROUP BY 이후 생성된 그룹을 조건으로 필터링한다.
+- 집계함수를 사용할 수 있다.
+
+```sql
+SELECT CUSTOMER_ID
+FROM ORDER_TB
+GROUP BY CUSTOMER_ID
+HAVING COUNT(*) >= 3;
+```
+
+---
+
+## 2. WHERE와 HAVING 차이
+
+### WHERE
+- GROUP BY 이전에 행(Row)을 필터링
+- 집계함수 사용 불가
+
+```sql
+SELECT *
+FROM ORDER_TB
+WHERE ORDER_DATE >= DATE '2026-01-01';
+```
+
+---
+
+### HAVING
+- GROUP BY 이후 그룹(Group)을 필터링
+- 집계함수 사용 가능
+
+```sql
+SELECT CUSTOMER_ID
+FROM ORDER_TB
+GROUP BY CUSTOMER_ID
+HAVING SUM(AMOUNT) >= 100000;
+```
+
+---
+
+## 3. 전체 집계와 그룹별 집계
+
+### 그룹별 평균
+
+```sql
+SELECT CUSTOMER_ID,
+       AVG(AMOUNT)
+FROM ORDER_TB
+GROUP BY CUSTOMER_ID;
+```
+
+결과
+
+```
+고객1   40000
+고객2   25000
+고객3   52000
+```
+
+→ 고객마다 한 행씩 반환된다.
+
+---
+
+### 전체 평균
+
+```sql
+SELECT AVG(AMOUNT)
+FROM ORDER_TB;
+```
+
+결과
+
+```
+40321.4
+```
+
+→ 한 행만 반환된다.
+
+---
+
+## 4. 조건을 만족하는 대상의 전체 평균
+
+문제에서 자주 출제되는 유형
+
+예)
+
+> 주문을 3회 이상 한 고객들의 평균 주문금액
+
+올바른 방법
+
+```sql
+SELECT AVG(AMOUNT)
+FROM ORDER_TB
+WHERE CUSTOMER_ID IN (
+    SELECT CUSTOMER_ID
+    FROM ORDER_TB
+    GROUP BY CUSTOMER_ID
+    HAVING COUNT(*) >= 3
+);
+```
+
+순서
+
+1. GROUP BY로 고객별 주문횟수 계산
+2. HAVING으로 3회 이상 고객 추출
+3. WHERE IN으로 해당 고객의 주문만 선택
+4. AVG로 전체 평균 계산
+
+---
+
+## 5. GROUP BY를 사용하면 생기는 변화
+
+```sql
+SELECT CUSTOMER_ID,
+       SUM(AMOUNT)
+FROM ORDER_TB
+GROUP BY CUSTOMER_ID;
+```
+
+→ 고객 수만큼 결과가 나온다.
+
+반대로
+
+```sql
+SELECT SUM(AMOUNT)
+FROM ORDER_TB;
+```
+
+→ 결과는 항상 1행이다.
+
+---
+
+## 6. SQLD 빈출 포인트
+
+### GROUP BY
+- 그룹 생성
+- 그룹별 집계 수행
+
+### HAVING
+- 그룹 조건
+
+### WHERE
+- 행(Row) 조건
+
+### 시험에서 자주 나오는 함정
+
+❌ GROUP BY 후 AVG
+
+→ 고객별 평균
+
+⭕ 조건 만족 고객 전체 평균
+
+→ 서브쿼리 + WHERE IN + AVG
+
+---
+
+## 7. 암기 포인트
+
+- WHERE → 행(Row) 필터
+- GROUP BY → 그룹 생성
+- HAVING → 그룹 필터
+- GROUP BY 사용 시 결과는 그룹 개수만큼 반환
+- 전체 집계가 필요하면 GROUP BY를 바깥 SELECT에서 사용하지 않는다.
+- 조건을 만족하는 그룹은 서브쿼리에서 찾고, 바깥 쿼리에서 최종 집계한다.
