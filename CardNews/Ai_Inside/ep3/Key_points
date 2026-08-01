@@ -1,0 +1,44 @@
+# Key Points
+
+## 🎯 핵심 내용
+
+- CPU는 순차적으로 작업을 처리하는 데 최적화된 프로세서이다.
+- GPU는 수천 개의 연산을 동시에 수행하는 병렬 연산에 특화되어 있다.
+- AI는 대규모 데이터를 한꺼번에 계산하기 때문에 GPU가 CPU보다 효율적이다.
+- 생성형 AI, 자율주행, 이미지 인식 등 대부분의 AI 기술은 GPU를 기반으로 동작한다.
+
+---
+
+## ✅ 반드시 기억할 것
+
+- CPU = 순차 처리
+- GPU = 병렬 연산
+- AI는 동시에 많은 계산을 수행한다.
+- AI 성능은 GPU의 병렬 처리 능력에 크게 좌우된다.
+
+---
+
+## 🔍 알아두면 좋은 용어
+
+- CPU (Central Processing Unit)
+- GPU (Graphics Processing Unit)
+- Parallel Processing (병렬 연산)
+- Neural Network (신경망)
+- AI Accelerator (AI 가속기)
+- CUDA
+
+---
+
+## 📚 추가로 공부하면 좋은 내용
+
+- GPU는 원래 어떤 목적으로 개발되었을까?
+- CPU와 GPU의 구조 차이
+- NPU와 GPU의 차이
+- NVIDIA가 AI 시장을 주도하는 이유
+- GPU와 HBM 메모리의 관계
+
+---
+
+## 💡 한 줄 정리
+
+"AI는 수많은 계산을 동시에 수행해야 하기 때문에, 병렬 연산에 특화된 GPU를 CPU보다 더 많이 활용한다."
