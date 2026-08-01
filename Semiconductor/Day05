@@ -1,0 +1,72 @@
+# Day 05 - Semiconductor
+
+📅 **Date:** 2026-08-01
+
+## 🎯 핵심 내용
+
+### KMOOC
+
+#### Analog to Digital Conversion
+
+* 아날로그 신호는 Sampling → Quantization → Coding 과정을 거쳐 디지털 데이터로 변환된다.
+* Quantization 단계에서만 오차가 발생하며, 이후 디지털 데이터는 안정적으로 저장·전송할 수 있다.
+* Nyquist Sampling Theorem은 원 신호를 복원하기 위해 충분한 샘플링 속도가 필요함을 설명한다.
+
+#### AI와 인공신경망
+
+* 인공신경망은 오차를 줄이는 방향으로 가중치(Weight)를 반복적으로 조정하며 학습한다.
+* Activation Function은 뉴런의 출력 여부를 결정한다.
+* Deep Neural Network는 복잡한 데이터를 효과적으로 분류할 수 있다.
+
+#### Transformer와 LLM
+
+* Transformer는 Attention Mechanism을 이용해 단어 간 관계를 학습한다.
+* GPT는 Transformer 기반의 대표적인 대규모 언어 모델(LLM)이다.
+
+---
+
+## 📰 Card News Study
+
+### EP15 - 금도 은도 아닌 실리콘
+
+#### 핵심 내용
+
+* 실리콘은 반도체 산업에서 가장 중요한 소재이다.
+* 적절한 전기적 특성과 풍부한 매장량, 우수한 산화막 형성 능력 덕분에 표준 소재가 되었다.
+* 현대의 CPU, GPU, 메모리 반도체 대부분은 실리콘 웨이퍼 위에서 제조된다.
+
+---
+
+## 📰 Chip News
+
+### 삼성이 5년 계약을 맺었습니다
+
+* 삼성이 장기 공급 계약을 체결하며 반도체 사업의 안정적인 수주 기반을 확보했다.
+* 장기 계약은 생산 계획과 투자 안정성 확보에 중요한 의미를 가진다.
+
+---
+
+## 📚 핵심 키워드
+
+* ADC
+* Sampling
+* Quantization
+* Coding
+* Nyquist Sampling Theorem
+* Artificial Neural Network
+* Weight
+* Transformer
+* Attention
+* LLM
+* Silicon
+* Wafer
+
+---
+
+## 💡 Today I Learned
+
+* 디지털 반도체는 아날로그 데이터를 디지털로 변환하는 과정에서 시작된다.
+* 인공지능의 핵심은 가중치를 반복적으로 학습하는 인공신경망이다.
+* Transformer는 현대 생성형 AI를 가능하게 한 핵심 기술이다.
+* 실리콘은 단순한 원소가 아니라 현대 반도체 산업의 기반이다.
+* 반도체 산업에서는 기술 혁신뿐 아니라 장기 공급 계약도 매우 중요한 경쟁력이다.
