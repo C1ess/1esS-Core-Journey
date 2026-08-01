@@ -1,0 +1,169 @@
+# Day04 - 오답노트
+
+## 문제
+
+주문을 3회 이상 한 고객들의 **전체 주문 평균금액**을 구하는 SQL은?
+
+### 내가 고른 답
+
+```sql
+SELECT AVG(O.AMOUNT_KRW) AS AVG_AMOUNT
+FROM FRESH_ORDER O
+GROUP BY O.CUSTOMER_ID
+HAVING COUNT(*) >= 3;
+```
+
+### 정답
+
+```sql
+SELECT AVG(O.AMOUNT_KRW) AS AVG_AMOUNT
+FROM FRESH_ORDER O
+WHERE O.CUSTOMER_ID IN (
+    SELECT CUSTOMER_ID
+    FROM FRESH_ORDER
+    GROUP BY CUSTOMER_ID
+    HAVING COUNT(*) >= 3
+);
+```
+
+---
+
+## 왜 틀렸는가?
+
+내가 작성한 SQL은 고객별로 GROUP BY를 수행했기 때문에
+
+**고객별 평균**이 여러 행으로 반환된다.
+
+하지만 문제는
+
+**주문 3회 이상 고객들의 모든 주문을 합친 하나의 평균**
+
+을 요구했다.
+
+즉,
+
+- 고객을 찾는 것 → GROUP BY + HAVING
+- 평균 계산 → 전체 주문 대상으로 AVG
+
+를 수행해야 한다.
+
+---
+
+## 실행 과정 비교
+
+### ❌ 오답
+
+```sql
+GROUP BY CUSTOMER_ID
+```
+
+↓
+
+고객별 그룹 생성
+
+```
+고객1 평균
+고객4 평균
+```
+
+→ 결과가 2행 이상 반환
+
+---
+
+### ✅ 정답
+
+먼저
+
+```sql
+GROUP BY CUSTOMER_ID
+HAVING COUNT(*) >= 3
+```
+
+으로
+
+조건을 만족하는 고객만 찾는다.
+
+예)
+
+```
+1
+4
+```
+
+그 후
+
+```sql
+WHERE CUSTOMER_ID IN (1,4)
+```
+
+으로 해당 고객들의 모든 주문만 남긴다.
+
+마지막에
+
+```sql
+AVG(AMOUNT_KRW)
+```
+
+을 수행하면
+
+```
+모든 주문의 평균
+```
+
+이 1행으로 반환된다.
+
+---
+
+## 핵심 암기
+
+### GROUP BY를 하면
+
+집계 결과가 **그룹 개수만큼 반환된다.**
+
+```
+GROUP BY CUSTOMER_ID
+
+→ 고객별 평균
+→ 고객별 합계
+→ 고객별 개수
+```
+
+---
+
+### 전체 평균을 구하고 싶다면
+
+GROUP BY를 바깥 SELECT에서 사용하면 안 된다.
+
+조건을 만족하는 그룹만 찾은 뒤
+
+```sql
+WHERE IN (서브쿼리)
+```
+
+또는
+
+```sql
+JOIN
+```
+
+으로 다시 원본 데이터를 조회해야 한다.
+
+---
+
+## 시험 포인트
+
+문제에서
+
+- "고객별 평균"
+- "부서별 합계"
+
+라고 하면 **GROUP BY**
+
+반대로
+
+- "조건을 만족하는 고객들의 전체 평균"
+- "조건을 만족하는 직원들의 전체 합계"
+
+라고 하면
+
+**서브쿼리로 대상을 먼저 찾고, 바깥에서 집계**하는 문제일 가능성이 매우 높다.
