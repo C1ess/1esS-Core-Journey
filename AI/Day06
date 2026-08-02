@@ -1,0 +1,74 @@
+# AI Study - Day06
+
+## Google AI Fundamentals
+
+### Prompting
+- AI에게 원하는 결과를 명확하게 전달하는 과정
+- Persona
+- Task
+- Format
+- Context를 포함하면 품질 향상
+
+### 3C 원칙
+- Concise
+- Clear
+- Consistent
+
+### Iteration
+- 한 번에 끝내지 않고 반복적으로 수정
+- 세부 조건 추가
+- 작업 분할
+- 결과 개선
+
+### 출력 평가
+- Accuracy
+- Bias
+- Relevance
+- Consistency
+
+### Context Window
+- AI가 기억하는 대화 길이
+- 긴 작업은 새 채팅 활용
+
+### Reference Material
+- 텍스트
+- 이미지
+- 오디오
+- 동영상 제공 시 결과 향상
+
+---
+
+## KMOOC AI
+
+### 생성형 AI 응용
+- 개인 비서
+- 콘텐츠 생성
+- 의료
+- 법률
+- 교육
+- 연구
+- 마케팅
+
+### Cloud AI
+- 서버에서 AI 처리
+- 높은 성능
+- 대규모 모델 활용
+
+### On-Device AI
+- 스마트폰에서 직접 AI 수행
+- 빠른 응답
+- 개인정보 보호
+- 저전력 AI 반도체 중요
+
+### RAG
+- 외부 데이터를 검색하여 답변 생성
+- 기존 검색 엔진을 대체할 가능성
+
+### 생성형 AI 한계
+- 막대한 연산량
+- 높은 전력 소모
+- 맥락 이해 부족
+- 인간의 검증 필요
+
+### Today's AI Insight
+AI의 성능은 모델뿐 아니라 프롬프트와 실행 환경(Cloud / On-Device)에 따라서도 크게 달라진다.
