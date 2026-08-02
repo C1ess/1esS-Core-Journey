@@ -1,0 +1,166 @@
+# Day06 - 오답노트
+
+## 오답 1. EXISTS(상관 서브쿼리)
+
+### 문제
+부서 내 자신보다 급여가 높은 직원이 존재하는 직원만 조회하는 SQL
+
+```sql
+SELECT STAFF_ID, STAFF_NM, DEPT_CD, SAL
+FROM STAFF_DEPT S1
+WHERE EXISTS (
+    SELECT 1
+    FROM STAFF_DEPT S2
+    WHERE S2.DEPT_CD = S1.DEPT_CD
+      AND S2.SAL > S1.SAL
+)
+ORDER BY S1.STAFF_ID;
+```
+
+### 틀린 이유
+EXISTS는 조건을 만족하는 행이 **1개라도 존재하면 TRUE**가 된다.  
+반드시 최대값이나 집계 결과를 비교하는 것이 아니다.
+
+### 핵심 정리
+- EXISTS = 조건을 만족하는 행 존재 여부 확인
+- 상관 서브쿼리는 외부 테이블(S1)의 값을 내부 쿼리(S2)에서 사용
+- 같은 부서(DEPT_CD) 안에서 더 높은 급여가 있으면 조회
+
+---
+
+## 오답 2. LIKE '_' 와 '%'
+
+### 문제
+
+```sql
+SELECT RENTAL_ID, BIKE_MODEL
+FROM BIKE_RENTAL
+WHERE BIKE_MODEL LIKE 'TREK-FX_';
+```
+
+### 틀린 이유
+'_'는 **정확히 한 글자**만 의미한다.
+
+### 핵심 정리
+
+```
+%  : 0개 이상 문자
+_  : 정확히 1개의 문자
+```
+
+예시
+
+```
+TREK-FX3   → O
+TREK-FX5   → O
+TREK-FX35  → X (2글자)
+TREK-FX    → X (0글자)
+```
+
+---
+
+## 오답 3. USING 절과 컬럼 참조
+
+### 문제
+
+```sql
+SELECT ITEM_CD, WHSE_CD, STOCK_QTY, REQ_QTY
+FROM INVENTORY
+JOIN TRANSFER_REQ
+USING (ITEM_CD);
+```
+
+### 틀린 이유
+USING으로 조인하면 지정한 컬럼(ITEM_CD)만 하나로 합쳐진다.
+
+WHSE_CD처럼 양쪽 테이블에 모두 존재하는 컬럼은
+테이블명을 붙이지 않으면 모호성 오류(ORA-00918)가 발생한다.
+
+### 핵심 정리
+
+```sql
+SELECT INVENTORY.WHSE_CD
+```
+
+또는
+
+```sql
+SELECT T.WHSE_CD
+```
+
+처럼 반드시 테이블명을 명시해야 한다.
+
+---
+
+## 오답 4. BCNF
+
+### 틀린 이유
+3NF를 만족한다고 항상 BCNF를 만족하는 것은 아니다.
+
+### 핵심 정리
+
+```
+1NF → 원자값
+2NF → 부분 함수 종속 제거
+3NF → 이행 함수 종속 제거
+BCNF → 모든 결정자가 후보키
+```
+
+시험에서는
+
+> "3NF 만족하지만 BCNF 위반"
+
+문제가 자주 출제된다.
+
+---
+
+## 오답 5. DATE 연산
+
+### 틀린 이유
+Oracle에서 DATE에는 시간 정보까지 저장된다.
+
+```
+SYSDATE - START_DATE
+```
+
+는 날짜 차이를 NUMBER(일수)로 반환한다.
+
+시간이 포함되어 있으면 소수점이 생길 수 있다.
+
+### 핵심 정리
+
+```sql
+TRUNC(SYSDATE)
+```
+
+를 사용하면 시간 정보를 제거할 수 있다.
+
+```
+SYSDATE - DATE = 소수 가능
+TRUNC(SYSDATE) - DATE = 정수 일수
+```
+
+---
+
+## 오답 6. ROWS 와 RANGE
+
+### 틀린 이유
+ROWS는 **물리적인 행** 기준이고,
+RANGE는 **ORDER BY 값이 같은 행(동점)**을 모두 하나의 그룹으로 처리한다.
+
+동점 데이터가 있으면 ROWS 결과는 내부 정렬 순서에 따라 달라질 수 있다.
+
+### 핵심 정리
+
+|ROWS|RANGE|
+|---|---|
+|행 기준|값 기준|
+|동점 영향 O|동점 전체 포함|
+|결과 변동 가능|결과 일정|
+
+### 암기
+
+```
+ROWS = 행
+RANGE = 값
+```
