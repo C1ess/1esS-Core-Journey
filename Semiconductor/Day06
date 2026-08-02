@@ -1,0 +1,66 @@
+# Semiconductor Study - Day06
+
+## KMOOC
+
+### AI 반도체
+- 스마트폰 AP(Application Processor)
+- On-Device AI
+- AI 가속기(NPU)
+
+### Sensor Hub
+- 여러 센서를 통합 제어하는 MCU
+
+### MEMS
+- 초소형 마이크 제작 기술
+
+### 이미지 센서
+- 포토다이오드
+- ISP(Image Signal Processor)
+
+### Display
+#### OLED
+- 자체 발광
+
+#### LCD
+- 백라이트 사용
+- TFT 제어
+
+### TFT
+- 화소를 ON/OFF하는 초박막 트랜지스터
+
+### ToF Sensor
+- 빛의 왕복시간으로 거리 측정
+
+### 자율주행 센서
+- Camera
+- Radar
+- LiDAR
+
+---
+
+## Card News
+
+### EP16
+**거울보다 반짝이는 판**
+
+- 반도체 웨이퍼는 실리콘 잉곳을 얇게 절단해 만든 원판
+- 모든 반도체 회로가 웨이퍼 위에서 제작된다.
+- 웨이퍼의 평탄도와 순도가 반도체 수율을 결정하는 핵심 요소다.
+
+### CHIP NEWS
+**첨단 패키징 경쟁**
+
+- AI 시대 핵심 경쟁은 패키징
+- GPU + HBM + CPU 연결 기술 중요
+- EMIB
+- CoWoS
+- Chiplet 기술 확대
+- TSMC도 첨단 패키징 강화
+- TSMC 약 7% 상승
+- 인텔 약 13% 상승
+
+---
+
+## Today's Semiconductor Insight
+
+미세공정만으로는 AI 성능 경쟁에서 우위를 확보하기 어렵다. 앞으로는 첨단 패키징과 AI 반도체 기술이 핵심 경쟁력이 된다.
