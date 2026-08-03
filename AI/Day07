@@ -1,0 +1,42 @@
+# AI Study - Day07
+
+## Google AI
+
+### 핵심 내용
+- AI는 협업 파트너로 활용할 때 가장 큰 효과를 낸다.
+- 풍부한 Context를 제공할수록 결과 품질이 높아진다.
+- Meta Prompting으로 AI가 필요한 정보를 먼저 질문하도록 만들 수 있다.
+- Persona를 지정하면 전문가 관점의 답변을 얻을 수 있다.
+- 실행 계획은 표 형태 등 구조화된 형식으로 요청하는 것이 좋다.
+- Devil's Advocate 기법으로 리스크를 미리 검토할 수 있다.
+- 개인정보와 기업 기밀은 입력하지 않는다.
+
+---
+
+## KMOOC (AI)
+
+### 생성형 AI와 AI 인프라
+
+- 생성형 AI는 대규모 GPU 연산으로 동작한다.
+- AI 발전과 함께 데이터센터 전력 소비도 증가한다.
+- GPU 확보뿐 아니라 전력과 데이터센터 구축이 핵심 경쟁력이다.
+- AI 경쟁은 반도체 경쟁을 넘어 AI 인프라 경쟁으로 확대되고 있다.
+
+---
+
+## 핵심 키워드
+
+- Prompt Engineering
+- Meta Prompting
+- Persona
+- Context
+- GPU
+- AI Data Center
+- AI Infrastructure
+- Power Consumption
+
+---
+
+## 한 줄 정리
+
+좋은 AI 활용은 좋은 프롬프트에서 시작하며, AI 시대의 경쟁력은 GPU와 전력 인프라까지 포함한다.
