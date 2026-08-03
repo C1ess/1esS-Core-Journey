@@ -1,0 +1,114 @@
+# Day07 - 02_오답노트
+
+## 오답 주제
+**Oracle 제약조건(CREATE TABLE 문법)**
+
+---
+
+## 문제 요약
+
+CREATE TABLE에서 오류가 발생하는 제약조건을 찾는 문제였다.
+
+나는 **④번**을 선택했지만 정답은 **③번**이었다.
+
+---
+
+## 내가 헷갈린 부분
+
+CHECK 제약조건에서 컬럼끼리 비교하는 것은 사용할 수 없다고 생각했다.
+
+하지만 Oracle에서는 같은 행(Row)의 컬럼끼리 비교하는 CHECK 조건은 정상적으로 사용할 수 있다.
+
+반대로 `NOT NULL`은 테이블 레벨 제약조건으로 선언할 수 없다는 점을 놓쳤다.
+
+---
+
+## 핵심 개념
+
+### 1. NOT NULL 제약조건
+
+NOT NULL은 **컬럼 레벨(Column Level)** 에서만 선언할 수 있다.
+
+가능한 예시
+
+```sql
+MEMBER_CD VARCHAR2(10) NOT NULL
+```
+
+불가능한 예시
+
+```sql
+CONSTRAINT NN_MEMBER NOT NULL (MEMBER_CD)
+```
+
+또는
+
+```sql
+NOT NULL MEMBER_CD
+```
+
+처럼 테이블 레벨에서 선언하는 문법은 사용할 수 없다.
+
+---
+
+### 2. PRIMARY KEY
+
+PRIMARY KEY는 자동으로 NOT NULL 속성을 포함한다.
+
+```sql
+PRIMARY KEY (ROOM_SEQ)
+```
+
+별도로 NOT NULL을 추가하지 않아도 된다.
+
+---
+
+### 3. CHECK 제약조건
+
+같은 행의 컬럼끼리 비교하는 조건은 정상적으로 사용할 수 있다.
+
+예시
+
+```sql
+CHECK (END_DT >= START_DT)
+```
+
+예약 종료일이 시작일보다 빠를 수 없도록 제한하는 조건이다.
+
+---
+
+### 4. DEFAULT
+
+DEFAULT도 정상적으로 사용할 수 있다.
+
+```sql
+REG_DT DATE DEFAULT SYSDATE
+```
+
+데이터를 입력하지 않으면 현재 날짜가 자동 입력된다.
+
+---
+
+## 시험 포인트
+
+✅ NOT NULL → 컬럼 레벨에서만 선언 가능
+
+✅ PRIMARY KEY → 자동으로 NOT NULL 포함
+
+✅ CHECK → 같은 행의 컬럼끼리 비교 가능
+
+✅ DEFAULT → CREATE TABLE에서 정상 사용 가능
+
+---
+
+## 암기
+
+> **NOT NULL만 컬럼 정의 안에서 선언한다.**
+>
+> **PRIMARY KEY, CHECK, UNIQUE, FOREIGN KEY는 테이블 레벨에서도 선언 가능하다.**
+
+---
+
+## 오늘의 한 줄 정리
+
+**SQLD에서는 "NOT NULL은 컬럼 레벨에서만 선언 가능"이라는 문법 문제가 매우 자주 출제된다.**
