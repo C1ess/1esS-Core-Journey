@@ -1,0 +1,50 @@
+# Semiconductor Study - Day07
+
+## 5주차
+
+### 반도체란?
+
+- 반도체는 조건에 따라 도체와 부도체 성질이 바뀌는 물질이다.
+- 실리콘은 도핑을 통해 N형과 P형 반도체를 만든다.
+- 트랜지스터는 전압으로 전류를 제어하는 스위치 역할을 한다.
+
+---
+
+### MOSFET
+
+- MOS = Metal-Oxide-Silicon
+- NMOS는 양전압에서 ON
+- PMOS는 음전압(또는 Low)에서 ON
+- Gate 전압으로 Source와 Drain 사이 전류를 제어한다.
+
+---
+
+### Logic Gate
+
+- NOT Gate
+- AND Gate
+- OR Gate
+
+모든 디지털 회로는 기본 논리 게이트의 조합으로 구현된다.
+
+---
+
+## 핵심 용어
+
+- Silicon
+- Doping
+- N-type
+- P-type
+- MOSFET
+- NMOS
+- PMOS
+- Gate
+- Source
+- Drain
+- Logic Gate
+
+---
+
+## 한 줄 정리
+
+트랜지스터와 MOSFET은 모든 반도체 회로의 기본이며, NOT·AND·OR 게이트를 조합해 복잡한 디지털 시스템을 만든다.
