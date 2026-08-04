@@ -1,0 +1,143 @@
+# Day08
+
+📅 Date
+2026-08-04
+
+# 🎯 Today's Learning
+
+## 📚 SQLD
+### 관계(Relationship)
+
+- 관계는 엔터티 간의 업무적 연결이다.
+- 관계 종류
+  - 존재 관계
+  - 행위 관계
+- 관계 차수
+  - 1:1
+  - 1:N
+  - M:N
+- M:N 관계는 반드시 교차 엔터티를 이용하여
+  1:N + 1:N 관계로 변환한다.
+- 관계 선택성
+  - 필수 관계
+  - 선택 관계
+
+### 시험 핵심
+
+- 관계 = 업무적 연결
+- 존재 관계 ↔ 행위 관계 구분
+- M:N = 교차 엔터티
+- 1:N 관계가 가장 많이 출제
+
+---
+
+## 🇬🇧 English
+
+### TOEIC
+
+- Relative Pronouns
+  - whom
+- Relative Adverbs
+  - where
+  - when
+
+### TOEFL
+
+- adapt
+- strategy
+- survive
+
+### OPIc
+
+Describe your university.
+
+### Today's Expressions
+
+- whom
+- where
+- when
+- What I like most is...
+
+---
+
+## 🤖 AI
+
+### Google AI
+
+- Prompt Chaining을 이용하면 복잡한 문제를 여러 단계로 해결할 수 있다.
+- 이전 결과를 다음 프롬프트 입력으로 활용하면 더 높은 품질의 결과를 얻는다.
+- AI는 단순한 답변 도구가 아니라 협업 파트너로 활용해야 한다.
+
+### 핵심 키워드
+
+- Prompt Chaining
+- Powerful Prompt
+- Iterative Refinement
+
+---
+
+## 💻 Semiconductor
+
+### K-MOOC
+
+DRAM
+
+- DRAM = 트랜지스터 1개 + Capacitor 1개
+- Random Access = 위치와 관계없이 접근 가능
+- Dynamic = Refresh 필요
+- SRAM과 DRAM의 차이 이해
+- AI 시대에 DRAM의 중요성 증가
+
+### Card News
+
+AI GPU와 반도체 패권 경쟁
+
+- AI GPU는 국가 전략 자산이다.
+- 미국은 AI 반도체 수출을 제한하고 있다.
+- 중국은 자체 AI 칩 생태계를 구축 중이다.
+- 반도체 경쟁은 기업 경쟁을 넘어 국가 경쟁으로 확대되고 있다.
+
+---
+
+# ✅ Today Review
+
+### 오늘 가장 중요했던 내용
+
+- SQLD에서는 M:N 관계를 반드시 교차 엔터티로 변환한다.
+- Prompt Chaining은 AI 활용 능력을 크게 높이는 핵심 기법이다.
+- DRAM은 Refresh가 필요한 메모리이다.
+- AI GPU는 국가 경쟁력을 결정하는 전략 자산이다.
+- 영어에서는 관계대명사와 관계부사를 학습했다.
+
+---
+
+# 📌 Study Keywords
+
+SQLD
+- Relationship
+- Cardinality
+- Intersection Entity
+
+English
+- whom
+- where
+- when
+- adapt
+- strategy
+- survive
+
+AI
+- Prompt Chaining
+- Powerful Prompt
+
+Semiconductor
+- DRAM
+- Refresh
+- AI GPU
+- Chip Wars
+
+---
+
+# 🌟 Study Streak
+
+Day08 Complete ✅
