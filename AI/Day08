@@ -1,0 +1,41 @@
+# Day08 - Google AI
+
+## 🎯 핵심 내용
+
+- 복잡한 작업은 하나의 프롬프트보다 여러 단계로 나누는 Prompt Chaining이 효과적이다.
+- 강력한 프롬프트 문구를 활용하면 더 깊고 정확한 결과를 얻을 수 있다.
+- 이전 답변을 다음 프롬프트의 입력으로 사용하는 방식이 AI 협업의 핵심이다.
+- AI를 단순한 답변 도구가 아닌 사고 파트너로 활용한다.
+
+---
+
+## ✅ 반드시 기억할 것
+
+- Prompt Chaining
+- Powerful Prompt Phrases
+- Iterative Refinement
+- 단계별 문제 해결
+
+---
+
+## 🔍 알아두면 좋은 용어
+
+- Prompt Chaining
+- Powerful Prompt Phrases
+- Iterative Refinement
+- Micro-skill
+- Macro-skill
+
+---
+
+## 📈 추가 공부
+
+- 실제 프로젝트에 Prompt Chaining 적용
+- 단일 프롬프트와 체이닝 비교
+- 고급 프롬프트 작성 실습
+
+---
+
+## 💡 한 줄 정리
+
+> 복잡한 작업일수록 한 번에 시키지 말고 단계별로 연결해서 AI와 협업한다.
