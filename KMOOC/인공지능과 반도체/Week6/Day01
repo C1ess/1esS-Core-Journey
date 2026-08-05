@@ -1,0 +1,70 @@
+# Day01
+
+**6주차. 인공지능 전용 반도체 — 1차시: AI용 반도체 구조**
+
+## 🎯 핵심 내용
+
+**1. Neural Processing Unit (NPU): AI 전용 프로세서**
+- **GPU**: 원래 Graphic Processing을 위해 개발되었으나, 최근 인공지능 계산에 널리 사용됨
+- **NPU**: 처음부터 인공지능 계산을 목적으로 개발된 프로세서. 많은 빅테크 기업이 개발 중 (예: Google의 TPU)
+- AlphaGo 발전 사례로 본 AI 반도체 활용:
+  - AlphaGo Fan(2015.2): 176개 GPU 사용
+  - AlphaGo Lee(2016.3, 이세돌과 대결 4:1 승리): 48개 TPU(AI 반도체) 사용
+  - AlphaGo Zero(2017.10, 인간 기보 없이 자체 훈련, 이전 버전에 100:0 승리): 4개 TPU(차세대 AI 반도체) 사용
+
+**2. 인공신경망 계산 (순차적 방법)**
+- 하드웨어: **폰-노이만 구조** (곱셈기 1개, 덧셈기 1개인 경우 예시)
+- Step 1) 입력1×W1 → Step 2) 입력2×W2 → Step 3) 두 결과 덧셈 → Step 4) 입력3×W3 → Step 5) 누적 → Step 6) 입력4×W4 → Step 7) 누적 → Step 8) Activation function 계산
+- 중간값들을 DRAM에 저장하며 순차적으로 계산 → **시간이 매우 오래 걸림** (실제로는 각 step이 더 세분화된 여러 step으로 구성됨)
+
+**3. 인공신경망 계산 (병렬처리)**
+- 4개 입력이면 **4개의 곱셈기 + 3개의 덧셈기**를 동시에 사용
+- 중간결과를 저장할 필요 없음 → 고속 계산 가능
+- 단, 입력 개수에 비례해서 곱셈기·덧셈기 개수(하드웨어 자원)가 증가함
+
+**4. 다수 뉴런 처리 / 다수 입력 채널 처리**
+- 뉴런이 여러 개면 병렬 처리 자원도 뉴런 개수에 비례해서 증가
+- 입력 채널이 여러 개일 때 두 가지 방식:
+  - 연산기를 채널 수만큼 늘려 병렬처리 → 하드웨어 자원 급증
+  - **폰-노이만 구조(DRAM에 중간값 저장)** → 하드웨어 자원은 크게 늘지 않지만, DRAM 용량은 증가하고 계산 속도는 느려짐
+
+**5. Multi-layer 인공신경망**
+- 일반적으로 폰-노이만 구조 사용: 이전 layer의 결과를 DRAM에 저장하고 다음 layer에서 사용
+- 고속 처리를 위해 폰-노이만 구조 대신 하드웨어 자원(연산기 수)을 늘리는 방법도 제시됨
+
+**6. NPU(Neural Processing Unit)의 구조**
+- Deep Learning을 위해 GPU보다 **더 많은 core**를 사용
+- 하나의 core에서 실행되는 연산은 **MAC(Multiplication + Accumulation)**으로 GPU core보다 단순함
+  - Accumulation: 곱셈 결과를 누적하기 위한 덧셈
+- Many core를 활용한 Parallel Processing Program이 필요
+- 회사마다 다양한 이름을 쓰지만 **NPU**가 가장 널리 쓰이는 용어
+- 구조 비교:
+  - **CPU based**: Control + 소수의 ALU + Cache/Memory → 복잡한 문제에 적합 (Integrated multi-core)
+  - **GPU**: 수천 개의 병렬 연산 유닛(parallel computing unit) → 단순하고 대량의 연산(Massive computing)
+  - **NPU(ASIC/FPGA)**: 10⁴개 미만의 병렬 처리 요소(PE array), 행렬곱에 최적화 → 신경망(NN) 연산에 최적화
+
+## ✅ 반드시 기억할 것
+
+- AI 프로세서의 발전 흐름: **CPU → GPU → NPU**
+- 순차적 계산(폰-노이만, DRAM 중간값 저장)은 하드웨어 자원은 적게 들지만 **느림**
+- 병렬 계산은 **빠르지만** 입력·뉴런·채널 수에 비례해서 **하드웨어 자원이 급증**함
+- NPU의 핵심 연산은 **MAC(곱셈+누적)**이며, GPU보다 단순한 core를 훨씬 많이 사용하는 구조
+- Multi-layer 신경망은 각 layer 결과를 DRAM에 저장했다가 다음 layer에서 사용하는 것이 일반적
+
+## 🔍 알아두면 좋은 용어
+
+- **NPU(Neural Processing Unit)**: 인공지능 연산에 특화된 전용 프로세서
+- **폰-노이만 구조**: 연산장치와 메모리(DRAM)를 오가며 순차적으로 계산을 처리하는 컴퓨터 구조
+- **MAC(Multiplication + Accumulation)**: 곱셈과 누적 덧셈을 결합한 신경망의 기본 연산
+- **병렬처리(Parallel Processing)**: 여러 연산을 동시에 수행하는 방식
+- **PE(Processing Element) array**: NPU에서 행렬곱 연산에 최적화된 병렬 처리 요소 배열
+
+## 📈 추가로 공부하면 좋은 내용
+
+- CPU·GPU·NPU 구조의 세부 비교 (Control/ALU/Cache 구성 차이)
+- TPU(Tensor Processing Unit) 등 실제 상용 NPU 제품 사례
+- Deep Learning의 다층(Multi-layer) 구조와 Hidden Layer의 역할
+
+## 💡 한 줄 정리
+
+AI 연산은 대량의 곱셈·누적(MAC) 연산을 반복하는데, 이를 폰-노이만 구조로 순차 처리하면 느리고, 병렬 처리하면 빠른 대신 하드웨어 자원이 늘어나므로, NPU는 GPU보다 단순하지만 훨씬 많은 core로 이 균형을 최적화한 AI 전용 프로세서다.
