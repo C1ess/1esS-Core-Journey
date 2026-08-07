@@ -1,0 +1,56 @@
+# Day11
+
+> AI 관련 학습 정리 (Google AI + AI 관련 K-MOOC + AI 카드뉴스)
+
+---
+
+# 🤖 Google AI
+
+## Gemini & NotebookLM
+
+### 핵심 내용
+
+- 전문가 페르소나를 활용한 아이디어 확장
+- 비용-편익 분석을 통한 의사결정 지원
+- 프로젝트 의존성 및 일정 영향 분석
+- NotebookLM으로 중앙 집중식 지식 허브 구축
+- Notebook 공유를 통한 Single Source of Truth 구현
+
+### 베스트 프랙티스
+
+- Persona & Context 제공
+- Structured Output(Table) 활용
+- Dependency Analysis 수행
+- Notebook 기반 협업 환경 구축
+
+---
+
+# 🧠 AI 관련 K-MOOC
+
+## AI 시대 메모리 혁신
+
+### 무어의 법칙 한계
+
+- 공정 미세화만으로 성능 향상이 어려워짐
+- 패키징과 메모리 기술의 중요성 증가
+
+### AI 반도체 핵심 기술
+
+- SiP(MCM)
+- Chiplet
+- HBM3
+- PiM
+- CXL Memory
+- Memory Driven Computing
+
+### 핵심 정리
+
+- AI 성능 향상의 핵심은 연산 성능뿐 아니라 메모리 대역폭과 데이터 이동 효율이다.
+- 폰노이만 병목을 해결하기 위해 다양한 메모리 구조가 개발되고 있다.
+
+---
+
+# 💡 Today I Learned
+
+- AI 협업은 NotebookLM을 활용한 지식 관리까지 확장되고 있다.
+- AI 반도체는 메모리와 패키징 기술이 함께 발전해야 성능을 극대화할 수 있다.
