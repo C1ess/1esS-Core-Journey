@@ -1,0 +1,142 @@
+# Day11 - 02_오답노트
+
+## 오답 1. ANSI/ISO SQL 트랜잭션 격리 수준(Isolation Level)
+
+### 문제
+
+ANSI/ISO SQL 표준 기준 트랜잭션 격리 수준과 발생 가능한 현상의 연결으로 올바른 것은?
+
+### 정답
+
+**① READ UNCOMMITTED**
+
+### 핵심 암기표
+
+| 격리 수준            | Dirty Read | Non-Repeatable Read | Phantom Read |
+| ---------------- | ---------- | ------------------- | ------------ |
+| READ UNCOMMITTED | O          | O                   | O            |
+| READ COMMITTED   | X          | O                   | O            |
+| REPEATABLE READ  | X          | X                   | O            |
+| SERIALIZABLE     | X          | X                   | X            |
+
+### 왜 틀렸나?
+
+나는 격리 수준별 발생 현상을 제대로 외우지 못했다.
+
+특히 **READ COMMITTED에서 Phantom Read도 막힌다고 착각**하기 쉽다.
+
+하지만 ANSI SQL 표준에서는
+
+* READ COMMITTED → Dirty Read만 방지
+* REPEATABLE READ → Dirty Read + Non-Repeatable Read 방지
+* SERIALIZABLE → 모든 현상 방지
+
+이다.
+
+### 암기법
+
+* **RU : 전부 발생**
+* **RC : Dirty만 방지**
+* **RR : Phantom만 남음**
+* **SER : 전부 방지**
+
+---
+
+## 오답 2. NULL과 NOT IN
+
+### 문제 핵심
+
+```sql
+WHERE STUDENT_ID NOT IN ('S01','S02')
+```
+
+### 내가 착각한 부분
+
+NULL도 조건을 만족한다고 생각했다.
+
+하지만 SQL에서는
+
+```sql
+NULL = 값
+NULL <> 값
+```
+
+모두 **UNKNOWN**이다.
+
+WHERE절에서는 UNKNOWN은 FALSE처럼 처리되어 행이 제외된다.
+
+### 핵심
+
+```sql
+NULL NOT IN (...)
+```
+
+→ TRUE가 아니다.
+
+→ UNKNOWN
+
+→ 조회되지 않는다.
+
+### 반드시 기억
+
+* NULL 비교는 TRUE/FALSE가 아니다.
+* 결과는 UNKNOWN
+* WHERE절에서는 제외된다.
+
+---
+
+## 오답 3. 서브타입(Subtype) 물리 모델 구현
+
+### 문제
+
+"옳지 않은 설명"을 고르는 문제
+
+### 정답
+
+> **"슈퍼타입과 서브타입을 각각 별도 테이블로 유지하면 조인을 줄일 수 있다."**
+
+→ **틀린 설명**
+
+### 이유
+
+슈퍼타입과 서브타입을 각각 테이블로 분리하면
+
+```text
+SUPER
+   │
+PERSON
+   │
+EMPLOYEE
+```
+
+조회 시
+
+```sql
+SUPER
+JOIN EMPLOYEE
+```
+
+처럼 **조인이 반드시 필요**하다.
+
+즉
+
+* 조인 증가
+* 조회 성능 저하 가능
+
+반면
+
+공통 속성과 개별 속성 관리가 쉬워진다는 장점이 있다.
+
+### 구현 방식 비교
+
+| 방식       | 특징              |
+| -------- | --------------- |
+| 하나의 테이블  | 조회 빠름, NULL 증가  |
+| 슈퍼/서브 분리 | 관리 용이, JOIN 증가  |
+| 서브타입별 통합 | 조회 단순, 공통 속성 중복 |
+
+### 암기 포인트
+
+**슈퍼/서브 분리 = 관리는 편함 + JOIN은 많아짐**
+
+> "분리하면 JOIN 감소"는 SQLD에서 자주 나오는 함정이다.
