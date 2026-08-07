@@ -1,0 +1,140 @@
+# Day11
+
+> 오늘 학습한 내용을 통합 정리 (English + SQLD + Google AI + K-MOOC + Card News + Chip News)
+
+---
+
+# 📚 English
+
+## TOEIC
+### 문법
+- 사역동사(Causative Verbs): make, let, have, help
+- 지각동사(Perception Verbs): see, hear, watch
+
+### 핵심 표현
+- make + O + V
+- let + O + V
+- help + O + (to) V
+- I'm really into...
+
+## TOEFL Vocabulary
+- indicate
+- significant
+- interact
+
+## OPIc
+
+### Expression
+- I'm really into...
+
+### Question
+- Tell me about your favorite hobby.
+
+---
+
+# 🗄 SQLD
+
+## Day11 - 정규화(Normalization)
+
+### 정규화
+- 데이터의 중복을 최소화하고 무결성을 유지하기 위해 테이블을 분리하는 과정
+- 목적: 데이터 중복 제거, 데이터 일관성 유지, 이상 현상 방지
+
+### 이상(Anomaly)
+- 삽입 이상(Insert Anomaly)
+- 수정 이상(Update Anomaly)
+- 삭제 이상(Delete Anomaly)
+
+### 함수 종속(Function Dependency)
+- A → B : A를 알면 B를 항상 알 수 있음
+- 예) 학번 → 학생이름
+
+### 완전 함수 종속
+- 복합키의 모든 속성이 있어야 다른 속성을 결정
+
+### 부분 함수 종속
+- 복합키 일부만으로 다른 속성이 결정되는 경우
+- 정규화 대상
+
+### 핵심 암기
+- 정규화 = 중복 제거
+- 이상 현상 = 삽입 / 수정 / 삭제
+- 함수 종속 = A가 B를 결정
+- 부분 함수 종속 = 복합키 일부에 종속
+
+---
+
+# 🤖 Google AI
+
+## Gemini & NotebookLM 활용
+
+- 전문가 페르소나를 활용한 브레인스토밍
+- 비용-편익 분석(Table)으로 의사결정
+- 프로젝트 의존성 및 리스크 분석
+- NotebookLM을 활용한 중앙 집중식 지식 허브 구축
+- Notebook 공유를 통한 Single Source of Truth 구현
+
+### 핵심
+- Persona Prompting
+- Structured Output
+- Dependency Analysis
+- Notebook Sharing
+
+---
+
+# 💻 K-MOOC
+
+## Week6 Day3
+
+### 반도체 기술 발전
+
+- 무어의 법칙(18~24개월마다 성능 2배)
+- 7nm 이후 공정 미세화 한계
+- SiP(MCM)와 Chiplet 구조
+- HBM3 고대역폭 메모리
+- PiM(Processing-in-Memory)
+- CXL Memory
+- Memory Driven Computing
+
+## Week6 Day2 기말고사 복습
+
+- CPU
+- DRAM
+- NAND Flash
+- HBM
+- OLED / LCD
+- p형 반도체
+- 포토다이오드
+- 가속도 센서
+- 4-bit 이진수
+- DRAM 구조
+
+---
+
+# 📰 Card News
+
+## EP21 | TRUE OR CHIP
+
+### 반도체는 빛을 보면 고장 난다?
+
+- 포토레지스트는 빛에 매우 민감하다.
+- 노광 공정은 빛으로 회로를 만든다.
+- 원하지 않는 빛은 회로 불량을 유발한다.
+- 반도체 공장은 노란 조명을 사용해 빛을 관리한다.
+- 빛도 반도체 공정의 중요한 요소이다.
+
+---
+
+# 📰 Chip News
+
+- 오늘 없음
+
+---
+
+# 💡 Today I Learned
+
+- 정규화는 데이터 중복과 이상 현상을 제거하기 위한 핵심 데이터 모델링 기법이다.
+- NotebookLM은 문서 기반 AI 협업과 지식 관리에 활용할 수 있다.
+- AI 시대에는 메모리와 패키징 기술이 성능 향상의 핵심이 되고 있다.
+- 반도체 제조에서는 빛까지 정밀하게 제어해야 한다.
+- 사역동사와 지각동사의 문장 구조를 학습했다.
