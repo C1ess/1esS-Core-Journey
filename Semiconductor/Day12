@@ -1,0 +1,102 @@
+# Day12 - Semiconductor
+
+## 🔵 Card News
+
+### CHIP BASICS | EP.22
+### 스마트폰 속 칩 하나, 사실은 '180일의 결과'
+
+반도체는 하루 만에 만들어지지 않는다.
+
+- 최신 AI 반도체는 최소 3~4개월이 걸릴 수 있음
+- 복잡한 제품은 최대 180일 이상 제작되기도 함
+- 실리콘 웨이퍼 위에서 수백 번의 초정밀 공정을 반복
+- 주요 공정:
+  - 노광
+  - 식각
+  - 증착
+  - 세정
+  - 검사
+- 먼지 하나나 나노미터 수준의 오차도 불량으로 이어질 수 있음
+
+### 핵심 메시지
+
+> 반도체는 '빨리 만드는 산업'이 아니라  
+> '정확하게 만드는 산업'이다.
+
+---
+
+## 📚 K-MOOC
+
+### 1. 반도체 설계 전체 흐름
+
+**System Design**
+↓
+**Architecture Design**
+↓
+**Logic Design**
+↓
+**Physical Design**
+↓
+**Manufacturing**
+↓
+**Packaging**
+
+- System~Physical Design = 설계
+- Manufacturing~Packaging = 제조
+
+### 2. Fabless vs Foundry
+
+**Fabless**
+- 반도체 설계 전문 기업
+- 자체 생산 라인 없이 설계에 집중
+
+**Foundry**
+- 다른 기업의 설계도를 받아 반도체를 생산
+- 제조 공정 담당
+
+→ 현대 반도체 산업은 설계와 제조가 분업되는 구조를 가짐.
+
+### 3. 반도체 설계 목표
+
+**PPA**
+
+- Performance ↑
+- Power ↓
+- Area ↓
+
+즉,
+
+> 성능은 높이고 전력과 면적은 최소화하는 것이 핵심.
+
+### 4. ASIC vs FPGA
+
+**ASIC**
+- 특정 목적을 위한 주문형 반도체
+- 설계 후 목표 공정에서 실제 칩으로 제작
+- 전용 하드웨어 구현
+
+**FPGA**
+- 프로그래밍 가능한 하드웨어
+- FPGA Board에 설계를 구현
+- 재프로그래밍 가능
+
+두 방식 모두 System~Physical Design까지의 기본 설계 과정은 동일하지만 실제 구현 방식이 다르다.
+
+---
+
+## 🔍 핵심 용어
+
+- RTL
+- EDA
+- Fabless
+- Foundry
+- PPA
+- PPAC
+- ASIC
+- FPGA
+- Physical Design
+- Packaging
+
+## 💡 One-Line Review
+
+> 반도체는 정밀한 설계 과정을 거쳐 제조되며, 설계 단계에서는 PPA 최적화, 산업 구조에서는 Fabless-Foundry 분업이 핵심이다.
