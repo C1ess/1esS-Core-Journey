@@ -1,0 +1,49 @@
+# Week1 Day1
+
+## 🎯 핵심 내용
+
+**1. 반도체 설계 단계 (System Design → Packaging)**
+- 반도체 설계는 아래 6단계 순서로 진행됨: **System Design → Architecture Design → Logic Design → Physical Design → Manufacturing → Packaging**
+- 앞의 4단계(System~Physical Design)는 "설계" 영역, 뒤의 2단계(Manufacturing, Packaging)는 "제조" 영역으로 구분됨
+- 각 설계 단계는 자동화 툴(EDA 툴)의 지원을 받아 진행됨:
+  - System Design ← System-Verilog
+  - Architecture Design ← High-level-Verilog
+  - Logic Design ← RTL-Verilog (Design Compiler 등)
+  - Physical Design (Innovus, ICC2 등)
+  - 대표 EDA 회사: Cadence, Synopsys, Mentor Graphics
+
+**2. 반도체 설계와 공정의 관계 (Fabless vs Foundry)**
+- Architecture Design까지는 **Fabless company**(설계 전문 회사)가 주로 담당
+- Manufacturing 단계부터는 **Foundry company**(위탁 생산 회사)가 담당
+- 즉 설계와 제조가 서로 다른 회사에 의해 분업되는 구조 (Fabless-Foundry 모델)
+
+**3. 반도체 설계의 목표 (PPAC)**
+- 반도체 설계가 추구하는 목표는 **성능(Performance), 전력소모(Power), 면적(Area)**의 균형
+- 최종 목표: **성능(동작, 속도)을 최대화하면서 칩의 소모 전력과 면적을 최소화**하는 것
+- Wafer(웨이퍼) 위에서 다이(die)를 잘라내 DIP(Dual In-line Package) 등 패키지로 만드는 과정으로 이어짐
+
+**4. 주문형(Custom) vs 비주문형(FPGA) 반도체**
+- **주문형 반도체(ASIC 등)**: Physical Design 이후 Target process node에 맞춰 Foundry에서 제작 → Target design 완성
+- **비주문형 반도체(FPGA)**: Physical Design 이후 FPGA board(HW platform)에 프로그래밍하여 Target design 구현
+- 두 방식 모두 System~Physical Design까지의 설계 흐름은 동일하지만, 이후 실제로 구현되는 방식(전용 공정 vs 재프로그래밍 가능한 하드웨어)이 다름
+
+## ✅ 반드시 기억할 것
+- 설계 6단계: **System → Architecture → Logic → Physical → Manufacturing → Packaging**
+- 설계는 Fabless, 제조는 Foundry가 담당하는 분업 구조
+- 반도체 설계 목표 = **PPA(성능↑, 전력↓, 면적↓)**
+- 주문형(ASIC) vs 비주문형(FPGA)의 차이: 전용 공정 제작이냐, 프로그래머블 HW냐
+
+## 🔍 알아두면 좋은 용어
+- **RTL(Register Transfer Level)**: 논리 설계 단계에서 사용하는 하드웨어 기술 방식
+- **Fabless company**: 자체 생산 라인 없이 설계만 전문으로 하는 반도체 회사
+- **Foundry company**: 다른 회사의 설계도를 받아 위탁 생산하는 반도체 제조 회사
+- **DIP(Dual In-line Package)**: 칩을 감싸는 패키지 형태 중 하나
+- **PPAC**: Performance, Power, Area(, Cost) — 반도체 설계에서 최적화하려는 핵심 지표
+
+## 📈 추가로 공부하면 좋은 내용
+- EDA 툴(Cadence, Synopsys, Mentor Graphics)의 세부 기능 차이
+- ASIC vs FPGA의 개발 비용·기간·유연성 비교
+- Physical Design 단계에서의 배치(Placement)·배선(Routing) 개념
+
+## 💡 한 줄 정리
+반도체 설계는 System Design부터 Packaging까지 이어지는 단계별 흐름으로, 설계(Fabless)와 제조(Foundry)가 분업되며 궁극적으로 성능은 높이고 전력·면적은 줄이는 PPA 최적화를 목표로 한다.
