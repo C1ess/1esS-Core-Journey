@@ -1,0 +1,50 @@
+# Week1 Day2
+
+## 🎯 핵심 내용
+
+**1. MOS Transistors (NMOS, PMOS)**
+- MOS 트랜지스터는 Gate, Source, Drain으로 구성되며 전압에 따라 전류를 켜고 끄는 스위치 역할을 함
+- **NMOS**: Gate에 1(높은 전압)이 들어오면 켜짐(전류 연결) → A=1일 때 전류 연결, A=0일 때 전류 차단 → VSS(접지)에 연결하기 좋음
+- **PMOS**: Gate에 0(낮은 전압)이 들어오면 켜짐 → A=1일 때 전류 차단, A=0일 때 전류 연결 → VDD(전원)에 연결하기 좋음
+- **CMOS = PMOS + NMOS** (두 트랜지스터를 상보적으로 결합)
+
+**2. CMOS INVERTER Gate**
+- PMOS는 VDD(1.2V)쪽에, NMOS는 GND(0V)쪽에 연결되는 구조
+- Truth table: 입력 A=0V → 출력 Y=1.2V / 입력 A=1.2V → 출력 Y=0V (즉, 입력을 반전시켜 출력)
+- 입출력 전압 그래프는 S자 곡선 형태로, 입력 전압이 중간값(약 0.6V)을 넘는 순간 출력이 급격히 전환됨
+
+**3. 시그널 회복(Signal Recovery)**
+- 입력 신호가 손상(Damage)되어 다소 애매한 전압이 들어와도, CMOS 트랜지스터의 비선형 전달 특성 덕분에 출력은 명확한 0 또는 1(VOL, VOH)로 복원됨
+- **아날로그 회로**: 노이즈가 단마다 계속 누적됨 (Va + e1 + e2 + e3 …)
+- **디지털 회로(CMOS)**: 각 단을 지날 때마다 신호가 다시 Va로 회복됨 → 노이즈가 누적되지 않음
+- 이것이 디지털 회로가 아날로그 회로보다 노이즈에 강한 핵심 이유
+
+**4. 시스템 구조와 신호 처리**
+- 시스템은 Analog front end, Processor, Fixed-function digital logic, Memory가 System interconnect로 연결된 구조
+- 디지털 신호(V₁)는 노이즈(ε)가 섞여도 함수 f를 통과하면 원래 값 f(V₁)로 복원되지만, 아날로그 신호(V)는 노이즈가 섞인 채 f(V+ε)로 그대로 전달됨
+
+**5. CMOS Transistor 발전 단계**
+- 트랜지스터 구조는 **Planar-FET → Fin-FET → Nanosheet-FET → Complementary-FET(CFET)** 순으로 스케일링(미세화) 발전해옴
+- CFET은 기존 Conventional FET 대비 NMOS와 PMOS를 수직으로 쌓아 면적 효율을 높인 구조 (6-track → 3~4-track으로 축소)
+
+## ✅ 반드시 기억할 것
+- NMOS: Gate=1일 때 ON, VSS(접지)쪽에 사용 / PMOS: Gate=0일 때 ON, VDD(전원)쪽에 사용
+- CMOS = NMOS + PMOS 결합 구조
+- CMOS INVERTER: 입력을 반전시켜 출력 (0V↔1.2V)
+- 디지털 회로의 핵심 장점 = **시그널 회복력** (노이즈 누적 없음, 아날로그는 노이즈 누적됨)
+- 트랜지스터 발전 순서: Planar-FET → Fin-FET → Nanosheet-FET → CFET
+
+## 🔍 알아두면 좋은 용어
+- **Gate oxide**: Gate와 채널 사이의 절연막
+- **NFET/PFET**: NMOS/PMOS 트랜지스터의 다른 표기
+- **VOL, VOH**: 디지털 회로에서 인식되는 최종 Low/High 출력 전압
+- **VIL, VIH**: 입력 신호가 Low/High로 인식되는 전압 기준
+- **CFET(Complementary-FET)**: NMOS와 PMOS를 수직 적층한 차세대 트랜지스터 구조
+
+## 📈 추가로 공부하면 좋은 내용
+- FinFET과 Nanosheet-FET의 구조적 차이(핀형 vs 시트형 채널)
+- CMOS INVERTER의 스위칭 속도와 전력 소모(동적/정적 전력) 개념
+- VNML, VNMH(Noise Margin) 계산 방법
+
+## 💡 한 줄 정리
+CMOS는 NMOS와 PMOS를 상보적으로 결합해 신호를 명확한 0/1로 회복시키는 구조이며, 이 시그널 회복력이 디지털 회로가 아날로그보다 노이즈에 강한 핵심 원리다.
