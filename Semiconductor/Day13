@@ -1,0 +1,62 @@
+# Day13 - Semiconductor
+
+## 🟠 Card News
+
+### FAB DIARY | EP.23
+
+**왜 반도체 공장은 24시간 돌아갈까?**
+
+* 반도체는 수백 개의 공정을 순차적으로 거쳐 완성
+* 한 공정의 중단이 이후 공정과 전체 생산 일정에 영향을 줄 수 있음
+* 재가동에는 장비 점검과 공정 환경 안정화가 필요
+* 온도·습도·압력·진동·먼지 등을 다시 안정적인 상태로 맞춰야 함
+* 반도체 팹의 24시간 운영은 **공정 안정성 유지**와 밀접한 관련이 있음
+
+### 핵심 용어
+
+* Fab
+* Process
+* Cleanroom
+* Yield
+* Production Line
+* Process Stability
+
+---
+
+## 🧠 Semiconductor K-MOOC
+
+### Week 6 — Day13
+
+**MOS Transistor & CMOS**
+
+* NMOS: Gate = 1 → ON / VSS 방향
+* PMOS: Gate = 0 → ON / VDD 방향
+* CMOS = NMOS + PMOS
+* CMOS Inverter는 입력을 반전시킴
+* CMOS는 손상된 신호를 명확한 0/1로 회복
+* 디지털 회로의 높은 노이즈 내성에 중요한 역할
+* 트랜지스터 발전:
+  **Planar-FET → Fin-FET → Nanosheet-FET → CFET**
+* CFET은 NMOS와 PMOS를 수직 적층해 면적 효율을 높임
+
+---
+
+## 📰 Chip News
+
+### GPT-5.6 Luna 무료화
+
+* Free·Go 사용자에게 기본 모델로 제공
+* AI 접근성 확대
+* 역할 + 목표 + 상황 + 조건을 활용한 프롬프트 작성 중요
+* 1차 답변 → 검토 → 개선의 반복 활용
+* 복잡한 비교·분석·계획에는 Think 활용
+
+### Semiconductor 관점
+
+AI 활용이 확대될수록 AI를 실제로 구동하는 **반도체·메모리·패키징·트랜지스터 기술의 중요성도 함께 증가**한다.
+
+---
+
+## 🔥 Day13 Semiconductor Core
+
+> **트랜지스터 수준에서는 CMOS가 디지털 신호를 처리하고, 팹 수준에서는 수백 단계의 공정을 안정적으로 이어가며 하나의 칩을 완성한다.**
