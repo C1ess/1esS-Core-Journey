@@ -1,0 +1,64 @@
+# Week1 Day3
+
+## 🎯 핵심 내용
+
+**1. NAND Gate**
+- NAND는 PMOS 2개를 병렬로, NMOS 2개를 직렬로 연결한 구조
+- Truth table: A, B 입력 중 하나라도 0이면 출력 Y=1, 둘 다 1일 때만 Y=0 (AND의 반대)
+
+**2. NOR Gate**
+- NOR는 PMOS 2개를 직렬로, NMOS 2개를 병렬로 연결한 구조 (NAND와 반대 배치)
+- Truth table: A, B 둘 다 0일 때만 Y=1, 하나라도 1이면 Y=0 (OR의 반대)
+
+**3. AND, OR Gate**
+- CMOS는 기본적으로 NAND, NOR처럼 "반전(NOT)"이 포함된 게이트를 만들기 쉬운 구조
+- **AND gate = NAND + Inverter** (NAND 뒤에 인버터를 붙여 반전을 다시 반전시켜 AND를 구현)
+- **OR gate = NOR + Inverter** (NOR 뒤에 인버터를 붙여 OR을 구현)
+- 즉 AND/OR는 트랜지스터 스테이지가 2개 필요 (NAND/NOR보다 한 단계 더 필요)
+
+**4. AOI Gate (AND-OR-Invert)**
+- 여러 AND 연산 후 OR로 묶고 마지막에 반전(Invert)하는 복합 게이트
+- 예시: Y = (AB + CD)' → (A AND B) OR (C AND D)를 계산한 뒤 반전
+
+**5. OAI Gate (OR-AND-Invert)**
+- OR 연산 후 AND로 묶고 마지막에 반전하는 복합 게이트
+- 예시: Y = ((A+B)C)' → (A OR B)를 C와 AND한 뒤 반전
+- AOI/OAI는 NAND, NOR와 마찬가지로 트랜지스터 스테이지 1개로 구현 가능 (효율적)
+
+**6. Buffer와 Clock Signal**
+- **Buffer**: 입력을 그대로 출력 (반전 없음, 인버터 2개를 직렬로 연결해 구현)
+- 신호를 증폭하거나 지연시키는 용도로 사용되며, 클럭 신호 전달에도 활용됨
+
+**7. Tri-State Gate**
+- 일반적인 0/1 출력 외에 **Z(High Impedance, 고임피던스)** 상태를 추가로 가지는 게이트
+- OE(Output Enable) 신호로 출력을 제어:
+  - OE=0 → 정상 동작 (A=0→Y=1, A=1→Y=0, 인버터처럼 동작)
+  - OE=1 → 출력이 Z 상태 (연결이 끊긴 것처럼 동작, 출력 안 함)
+- Z 상태를 출력하기 때문에 **Tri-State Gate는 CMOS Logic Gate로 분류되지 않음** (일반 CMOS 게이트는 0/1만 출력)
+
+**8. CMOS Gate Network (Pull-up / Pull-down)**
+- CMOS 게이트는 **Pull-up Network(PFETs)**와 **Pull-down Network(NFETs)**로 구성됨
+- 한 순간에는 두 네트워크 중 **하나만 활성화**되어 0 또는 1을 출력 (동시에 켜지지 않음 → 전력 낭비 방지)
+- 회로 관계식: f'(a, b, c) = f^D(ā, b̄, c̄) — Pull-up Network는 Pull-down Network의 논리를 쌍대(dual)로 구현한 것
+
+## ✅ 반드시 기억할 것
+- NAND = PMOS 병렬 + NMOS 직렬 / NOR = PMOS 직렬 + NMOS 병렬
+- AND = NAND+인버터, OR = NOR+인버터 (스테이지 2개 필요)
+- NAND, NOR, AOI, OAI는 스테이지 1개로 구현 가능 (효율적인 CMOS 게이트)
+- Tri-State Gate의 출력은 0, 1, Z(고임피던스) 세 가지 → 일반 CMOS Logic Gate가 아님
+- CMOS 게이트는 Pull-up(PFETs)과 Pull-down(NFETs) 중 하나만 활성화되어 동작
+
+## 🔍 알아두면 좋은 용어
+- **AOI(AND-OR-Invert) / OAI(OR-AND-Invert)**: AND·OR 연산을 조합한 뒤 반전하는 복합 논리 게이트
+- **Tri-State Gate**: 0, 1 외에 고임피던스(Z) 상태를 가지는 게이트, 버스(bus) 회로 등에서 여러 출력을 공유할 때 사용
+- **OE(Output Enable)**: Tri-State Gate에서 출력을 활성화/비활성화하는 제어 신호
+- **Pull-up / Pull-down Network**: CMOS 게이트에서 각각 VDD/GND로 신호를 끌어올리거나 내리는 트랜지스터 네트워크
+- **Dual(쌍대) 관계**: Pull-up Network와 Pull-down Network가 서로 논리적으로 반대(dual) 구조를 가지는 특성
+
+## 📈 추가로 공부하면 좋은 내용
+- 복합 게이트(AOI/OAI)를 활용한 실제 회로 최적화 사례 (스테이지 수 줄이기)
+- Tri-State Gate가 사용되는 실제 응용 예시 (버스 시스템, 메모리 인터페이스 등)
+- Pull-up/Pull-down Network 설계 시 트랜지스터 개수 최소화 기법
+
+## 💡 한 줄 정리
+CMOS Logic Gate는 Pull-up(PFETs)과 Pull-down(NFETs) 네트워크가 서로 쌍대 관계를 이루며 하나만 활성화되어 0/1을 출력하고, NAND·NOR·AOI·OAI처럼 반전이 포함된 구조일수록 효율적으로 구현된다.
