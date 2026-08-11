@@ -1,0 +1,24 @@
+# Day 15
+
+## 🎯 Today's Learning
+
+### Google AI
+- Gemini에서 맞춤형 AI 전문가(Persona) 생성
+- 전문가 역할과 특성을 정의해 Expert Advisor 구축
+- AI에게 아이디어 검증과 비판적 피드백 요청
+- 전문가 페르소나를 재사용해 지식 자문 라이브러리로 활용
+
+### AI 관련 K-MOOC
+- 오늘 K-MOOC는 CMOS Logic Gate와 반도체 회로 설계 내용으로,
+  AI 관련 학습에서는 제외
+
+### Card News - AI 관련
+- EP.25 HBM의 역할과 AI 반도체에서의 중요성
+- GPU의 연산 성능을 뒷받침하는 HBM
+- HBM4 경쟁에서 성능·수율·생산량·전력 효율의 중요성
+
+## 💡 한 줄 정리
+
+AI 활용에서는 전문가 페르소나를 만들어
+아이디어를 검증할 수 있고,
+AI 반도체에서는 GPU와 HBM의 조합이 중요하다.
