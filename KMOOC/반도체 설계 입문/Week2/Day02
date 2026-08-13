@@ -1,0 +1,57 @@
+## Day02 (Week2 - Logic Block: Multiplexor & Combinational Logic)
+
+### 🎯 핵심 내용
+
+**1. Multiplexor (MUX)**
+
+- 여러 입력 중 select 신호에 따라 하나를 골라 출력하는 조합회로
+- **Binary Select MUX**: select bit가 binary code로 하나의 입력을 지정
+  - 2:1 MUX: F = a[1] if s=1, a[0] if s=0
+- **One-hot Select MUX**: select bit가 one-hot code(s[1], s[0] 각각 별도)로 지정
+  - 2:1 MUX: F = a[1] if s[1]=1, a[0] if s[0]=1
+- 작은 MUX로 큰 MUX 만들기: 2:1 MUX만으로 8:1 MUX 구현 가능 (트리 구조로 연결)
+- MUX를 이용한 임의 logic 구현: 8:1 MUX로 G = AB + A'BC + B'C' 같은 논리식을 select 입력에 변수를 연결해 구현 가능 (변수 개수보다 큰 MUX를 쓰면 data 입력에 상수/변수를 직접 연결)
+- Verilog 구현: `always @(*) if/else` 문 또는 조건 연산자 `assign f = ~a ? b&c : b|c;` 로 표현 가능 (두 방식은 동일한 MUX 회로로 합성됨)
+
+**2. Combinational Logic**
+
+- Combinational logic의 두 가지 조건
+  - **Memoryless**: 출력이 오직 현재 입력값에 의해서만 결정 (o = f(i)), 과거 상태를 저장하지 않음
+  - **No cycle**: 조합 블록들을 연결할 때 출력이 다시 자신의 입력으로 피드백되는 루프(cycle)가 없어야 함
+- **Logic Synthesis (2-Level Logic)**: 진리표로부터 논리식(F)을 유도하는 과정, don't care(x) 항이 있는 경우 이를 활용해 더 간단한 식으로 최적화 가능
+- **Combinational logic의 delay 계산**
+  - 각 게이트(예: Nand2=80ps, OAI21=120ps)의 delay를 이용해 신호 경로별 누적 delay 계산
+  - **Min. logic delay**: 가장 빠르게 도착하는 경로 기준 (조기 도착 시점)
+  - **Max. logic delay**: 가장 늦게 도착하는 경로 기준 (모든 신호가 안정화되는 시점, critical path)
+  - 여러 입력(a, b, cin)에서 출발해 여러 단(g', p', cout, s)을 거치며 경로별로 min/max를 각각 누적 계산
+- **Logic Optimization**
+  - **Technology independent optimization** (공정과 무관한 회로 최적화): 불리언 대수 법칙을 이용해 논리식 자체를 간소화
+    - 예: AB+AB'=A, A+AB=A, AB+A'C+BC=AB+A'C (consensus term 제거)
+  - **Technology dependent optimization** (공정 기반 회로 최적화): 실제 셀 라이브러리에 맞춰 최적화
+    - Technology mapping: 논리식을 실제 반도체 셀로 변환
+    - DeMorgan's law: 논리식 형태 변환의 기본 법칙
+    - Multi-level logic optimization: 다단(multi-level) 회로 전체를 최적화
+
+### ✅ 반드시 기억할 것
+
+- MUX는 binary select / one-hot select 두 방식이 있으며, 작은 MUX를 트리로 연결해 큰 MUX를 만들 수 있음 (N:1 MUX = 2:1 MUX N-1개)
+- MUX의 select 입력에 변수를, data 입력에 상수/변수(또는 그 보수)를 연결하면 임의의 논리식을 구현할 수 있음
+- Combinational logic 성립 조건: **Memoryless + No cycle**
+- delay 계산 시 min(최적 조건)과 max(critical path) 경로를 반드시 구분해서 계산
+- Logic optimization은 technology independent(수식 최적화)와 technology dependent(공정/셀 기반 최적화) 두 단계로 나뉨
+
+### 🔍 알아두면 좋은 용어
+
+- **Binary select / One-hot select**: MUX의 select 신호를 binary code로 줄지, one-hot code로 줄지의 방식 차이
+- **Critical path**: 회로 내에서 신호가 가장 늦게 도달하는 경로 (max delay를 결정)
+- **Don't care (x)**: 진리표에서 특정 입력 조합의 출력값이 중요하지 않아 0/1 중 유리한 쪽으로 정할 수 있는 항
+- **Technology mapping**: 최적화된 논리식을 실제 사용 가능한 반도체 셀(gate)로 변환하는 과정
+
+### 📈 추가로 공부하면 좋은 내용
+
+- MUX를 이용한 logic 구현 시, select 변수 개수에 따라 필요한 MUX 크기가 달라지는 원리 (n변수 함수는 (n-1)개 select로 2^(n-1):1 MUX 하나로 구현 가능)
+- Multi-level logic optimization의 구체적 기법(예: factoring, decomposition)이 실제 EDA 툴에서 어떻게 적용되는지
+
+### 💡 한 줄 정리
+
+Multiplexor는 select 신호로 여러 입력 중 하나를 골라 임의의 논리식까지 구현할 수 있는 범용 블록이고, Combinational logic은 memoryless·no cycle 조건을 만족하며 delay와 최적화 관점에서 분석되는 조합회로다.
