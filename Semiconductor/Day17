@@ -1,0 +1,54 @@
+# Day17 — Semiconductor Study
+
+## 🔬 K-MOOC — MUX & Combinational Logic
+
+### 1. Multiplexor (MUX)
+- 여러 입력 중 Select 신호에 따라 하나를 선택하는 조합회로
+- Binary Select와 One-hot Select 방식이 있음
+- 작은 MUX를 연결해 더 큰 MUX를 구성할 수 있음
+- MUX를 이용해 다양한 논리식을 구현할 수 있음
+
+### 2. Combinational Logic
+조합논리회로의 조건:
+
+- **Memoryless** → 과거 상태를 저장하지 않음
+- **No Cycle** → 출력이 다시 입력으로 돌아가는 피드백 루프가 없음
+
+### 3. Logic Delay
+- **Min Delay** → 가장 빠른 경로
+- **Max Delay** → 가장 늦은 경로
+- **Critical Path** → Max Delay를 결정하는 가장 긴 경로
+
+### 4. Logic Optimization
+- Technology Independent Optimization
+  → Boolean Algebra를 이용한 논리식 최적화
+- Technology Dependent Optimization
+  → 실제 공정·셀 라이브러리에 맞춘 최적화
+- Technology Mapping
+  → 논리식을 실제 반도체 셀로 변환
+
+---
+
+## 📰 Card News — EP.27
+
+### 주제
+**반도체 취업에서 학벌은 얼마나 중요할까?**
+
+### 핵심 내용
+- 학벌은 취업의 평가 요소 중 하나일 수 있음
+- 하지만 학벌만으로 취업이 결정되지는 않음
+- 기업은 전공지식, 직무 역량, 프로젝트, 문제 해결 경험 등을 함께 평가
+- 공정 직무 → 공정 지식·데이터 분석·문제 해결 능력
+- 설계 직무 → 회로 설계·Verilog·FPGA 등의 직무 연계 경험
+- 스스로 쌓을 수 있는 역량과 경험에 집중하는 것이 중요
+
+### 핵심 키워드
+- 직무 역량
+- 직무 적합성
+- 프로젝트
+- 포트폴리오
+- 문제 해결 경험
+
+## 💡 오늘의 한 줄
+
+**취업에서 중요한 것은 어디서 배웠는가뿐 아니라 무엇을 할 수 있는지를 증명하는 것이다.**
