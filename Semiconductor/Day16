@@ -1,0 +1,46 @@
+# Day16 — Semiconductor Study
+
+## 🔵 K-MOOC
+
+### Decoder
+- Binary code를 One-hot 형태로 변환
+- n비트 입력 → 2ⁿ개의 출력 중 하나만 활성화
+- 2:4 Decoder는 2비트 입력으로 4개 출력 중 하나를 1로 만듦
+
+### Encoder
+- One-hot 입력을 Binary code로 변환
+- Decoder의 반대 방향 변환을 수행
+- 조합회로(Combinational Circuit)
+
+### Priority Encoder
+- 여러 입력이 동시에 들어오는 문제를 해결
+- Arbiter가 우선순위가 높은 요청 하나를 선택
+- 이후 Encoder가 Binary code로 변환
+
+**Priority Encoder = Arbiter + Encoder**
+
+---
+
+## 🔵 Card News — EP.26
+
+### 주제
+**반도체 인터커넥트와 Backside Power Delivery**
+
+### 핵심 내용
+- 칩 내부에는 트랜지스터뿐 아니라 전력과 신호를 전달하는 금속 배선(Interconnect)이 존재
+- 서로 다른 배선층은 Via를 통해 연결
+- 미세화가 진행될수록 배선 폭 감소로 저항과 전력 손실 문제가 커짐
+- Backside Power Delivery는 전력 공급 경로를 칩 뒷면으로 이동시키는 기술
+- 앞면의 배선 공간을 신호 전달에 더 활용할 수 있다는 장점이 있음
+
+### 핵심 용어
+- Interconnect
+- Via
+- BEOL
+- IR Drop
+- Backside Power Delivery
+- BSPDN
+
+## 💡 오늘의 한 줄
+
+**반도체 성능은 트랜지스터뿐 아니라 신호와 전력을 얼마나 효율적으로 전달하느냐에도 좌우된다.**
