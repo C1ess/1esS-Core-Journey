@@ -1,0 +1,41 @@
+### 🎯 핵심 내용
+
+**1. Decoder (2:4 Decoder)**
+- n비트 binary code(a)를 입력받아 2ⁿ개 중 하나의 출력만 1로 활성화(one-hot)시키는 조합회로
+- 2:4 Decoder 진리표: a1,a0 조합에 따라 b3~b0 중 하나만 1
+  - 회로 구조: a1, a0를 그대로/반전시켜 AND 게이트 4개에 조합 → 각 AND 출력이 b3~b0
+- Verilog 구현: `wire [3:0] b = 1<<a;` 처럼 shift 연산으로 간단히 표현 가능 (parameter로 n, m 일반화 가능)
+
+**2. Encoder**
+- Decoder의 반대: one-hot 입력(a3~a0 중 하나만 1)을 받아 이를 binary code(b1,b0)로 변환
+- 진리표에서 논리식 유도: `b0 = a3 ∨ a1`, `b1 = a3 ∨ a2`
+- Verilog에서는 OR 조합으로 간단히 구현 가능 (`assign b = {a[3]|a[2], a[3]|a[1]}`)
+- summary 출력 c는 입력 중 하나라도 1이면 1 (`assign c = |a;`)
+
+**3. Priority Encoder**
+- 일반 Encoder는 입력이 one-hot(하나만 1)이어야 정상 동작 → 실제로는 여러 개의 요청(1)이 동시에 들어올 수 있음
+- 이를 해결하기 위해 **Arbiter**를 Encoder 앞에 연결
+  - Arbiter: request signal r[n-1:0] → 가장 먼저(우선순위 높은) 1의 위치만 남긴 grant signal g[n-1:0] 출력
+  - Arbiter + Encoder = **Priority Encoder** (a → one-hot 형태로 우선순위 선택 후 → b로 인코딩)
+
+### ✅ 반드시 기억할 것
+
+- Decoder: **binary → one-hot** 변환 (b[n-1:0] → o[2ⁿ-1:0])
+- Encoder: **one-hot → binary** 변환 (o[2ⁿ-1:0] → b[n-1:0])
+- 둘 다 조합회로(combinational block)이며 서로 정확히 반대 방향의 변환을 수행
+- Priority Encoder = Arbiter(우선순위 선택) + Encoder(인코딩), 여러 요청 신호 중 하나만 선택해 처리하는 역할
+
+### 🔍 알아두면 좋은 용어
+
+- **one-hot code**: 여러 비트 중 정확히 하나만 1인 코드 형태
+- **Arbiter**: 여러 개의 요청(request) 신호 중 우선순위가 가장 높은 하나만 grant 신호로 남기는 블록
+- **combinational block**: 입력의 현재 값에 의해서만 출력이 결정되는 회로 블록
+
+### 📈 추가로 공부하면 좋은 내용
+
+- Decoder를 이용한 로직 구현 예제 (3:8 Decoder로 짝/홀수 판별 로직 만들기 - `out = b[0]|b[2]|b[4]|b[6]`)처럼, Decoder를 조합해 임의의 조합 로직을 만드는 응용 방법
+- Priority Encoder가 실제 반도체 설계에서 버스 중재(bus arbitration), 인터럽트 컨트롤러 등에 어떻게 쓰이는지
+
+### 💡 한 줄 정리
+
+Decoder는 binary를 one-hot으로, Encoder는 one-hot을 binary로 바꾸는 조합회로이며, Priority Encoder는 Arbiter로 우선순위를 정한 뒤 Encoder로 인코딩하는 구조다.
