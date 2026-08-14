@@ -1,0 +1,45 @@
+## Day01 (Week3 - Storage: Latch)
+
+### 🎯 핵심 내용
+
+**1. Sequential Logic 개념 (Door Lock 예시)**
+- Combinational logic만으로는 "과거에 어떤 값이 입력되었는지"를 기억할 수 없음
+- Door Lock 예시: 이전에 입력한 코드값(C1, C2, C3)을 저장해두는 state가 필요하고, clock에 맞춰 state가 갱신되며, comb. logic이 select 신호를 만들어 Multiplexer로 값을 갱신할지/유지할지 결정
+- 이처럼 state(저장 요소)를 갖는 회로가 **Sequential logic**이며, Latch는 그 state를 저장하는 가장 기본적인 요소
+
+**2. Latch (기본 SR Latch)**
+- 2-input NOR gate 2개를 서로 교차 연결(cross-coupled)한 구조로 구성 (R, S 입력 → Q, Q' 출력)
+- 동작:
+  - S=1, R=0 → Q=1 (Set)
+  - S=0, R=1 → Q=0 (Reset)
+  - S=0, R=0 → 이전 상태 유지 (Hold)
+  - S=1, R=1 → Q, Q' 모두 0이 되어 **불안정(unstable)** 상태 → 이후 S,R이 동시에 0으로 바뀌면 **Race condition** 발생 가능(어느 쪽이 이길지 예측 불가)
+- State Diagram으로 표현하면 SR=00/01/10/11 조합에 따라 상태(QQ') 전이가 정의되며, SR=11 상태에서 SR=00으로 동시에 전이될 때 진동(race)이 생길 수 있음이 시각적으로 드러남
+
+**3. Gated Latch**
+- 기본 Latch에 **Enable** 신호를 추가한 구조: R, S 입력 앞에 AND gate를 붙여 Enable=1일 때만 R, S가 내부로 전달되도록 함
+- Timing diagram상 Enable이 1인 구간에서만 Set/Reset이 실제로 반영되고, Enable이 0이면 이전 값을 그대로 저장(hold)
+- **Signal Transparency 문제**: Enable이 켜져 있는 동안(즉 clock의 duty cycle 구간 내내)에는 입력(R,S)의 변화가 즉시 출력에 그대로 반영되어 버림 → 이 구간 동안은 사실상 "저장"이 아니라 입력이 그대로 투과(transparent)되는 상태 → 진짜 의미의 "특정 순간의 값만 저장"이 되지 않는 한계
+
+### ✅ 반드시 기억할 것
+
+- Latch = 2-input NOR gate 2개의 cross-coupled 구조, S→Q=1 / R→Q=0
+- S와 R이 동시에 1로 들어오면 Q가 **불안정한 상태**가 됨 (이후 함께 0이 될 때 race 발생)
+- Gated Latch = Latch + AND gate(Enable) 추가
+- Combination logic(즉 Enable이 켜진 구간)이 너무 짧으면(=너무 자주 열려있으면) **Signal Transparency 문제**가 발생
+
+### 🔍 알아두면 좋은 용어
+
+- **Sequential logic**: 현재 입력뿐 아니라 과거 상태(state)에도 출력이 의존하는 회로 (Latch/Flip-flop이 대표적)
+- **Race condition**: SR=11 → SR=00으로 동시에 전이될 때 두 출력이 서로 경쟁하며 예측 불가능한 진동이 발생하는 현상
+- **Signal Transparency**: Enable이 활성화된 구간 동안 입력 신호 변화가 그대로 출력에 반영되어버리는 (저장이 아닌 통과 상태가 되는) 문제
+- **Duty cycle**: clock 신호에서 한 주기(period) 중 신호가 High(활성) 상태인 비율
+
+### 📈 추가로 공부하면 좋은 내용
+
+- Gated Latch의 Signal Transparency 문제가 실제 회로 설계에서 왜 치명적인지 (다음 차시의 Flip-flop이 이를 어떻게 해결하는지와 연결지어 학습하면 좋음)
+- Race condition을 방지하기 위한 실제 설계 관례(SR=11 입력을 아예 금지하는 방식 등)
+
+### 💡 한 줄 정리
+
+Latch는 NOR 게이트 2개를 교차 연결해 상태를 저장하는 기본 회로이고, Gated Latch는 여기에 Enable을 추가했지만 Enable이 켜진 동안 입력이 그대로 출력에 투과되는 Signal Transparency 문제를 갖는다.
