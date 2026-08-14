@@ -1,0 +1,37 @@
+# Day18 — K-MOOC
+
+## 🎯 핵심 내용
+
+### 1. Sequential Logic
+- 현재 입력뿐 아니라 **과거의 상태(State)**를 기억하는 회로
+- Combinational Logic과 달리 저장 요소가 필요함
+
+### 2. SR Latch
+- NOR Gate 2개를 서로 교차 연결해 상태를 저장
+- S=1 → Set
+- R=1 → Reset
+- S=0, R=0 → 이전 상태 유지
+- S=1, R=1 → 불안정 상태
+
+### 3. Gated Latch
+- Latch에 **Enable** 신호를 추가한 구조
+- Enable=1 → 입력 변화가 반영됨
+- Enable=0 → 이전 상태 유지
+
+### 4. Signal Transparency
+- Enable이 활성화된 동안 입력 변화가 출력에 그대로 전달되는 문제
+- 특정 순간의 값만 저장하기 어렵다는 한계가 있음
+
+### 🔑 핵심 용어
+
+- Sequential Logic
+- State
+- SR Latch
+- Gated Latch
+- Race Condition
+- Signal Transparency
+- Duty Cycle
+
+## 💡 한 줄 정리
+
+Latch는 상태를 저장하는 기본 순차회로지만, Enable이 활성화된 동안 입력이 그대로 통과하는 Signal Transparency 문제가 있다.
