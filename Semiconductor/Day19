@@ -1,0 +1,42 @@
+# Day19 — Semiconductor
+
+## 🎯 핵심 내용
+
+- Flip-flop은 Latch의 Signal Transparency 문제를 해결하기 위해 사용되는 저장 소자다.
+- Master-Slave Flip-flop은 Gated Latch 2개를 직렬로 연결해 한 clock 주기에서 데이터를 안정적으로 전달한다.
+- D Flip-flop은 S와 R을 D와 D'로 구성해 불안정한 S=R=1 상태를 방지한다.
+- Flip-flop은 clock의 특정 edge에서 데이터를 저장하는 Edge-triggered 구조이고, Latch는 특정 레벨 동안 입력을 반영하는 Level-sensitive 구조다.
+- Flip-flop의 주요 timing 요소는 Setup Time, Hold Time, Clock-to-Q Delay다.
+- RTL Coding에서는 `posedge/negedge`를 사용하면 Flip-flop이 합성되고, 조건문의 대입이 불완전하면 Latch가 생성될 수 있다.
+- Multi-bit Flip-flop은 여러 bit가 clock buffer를 공유해 면적과 전력을 줄인다.
+- Clock Gating은 불필요한 clock toggling을 차단해 동적 전력 소모를 줄인다.
+
+## ✅ 반드시 기억할 것
+
+- Flip-flop = Edge-triggered
+- Latch = Level-sensitive
+- D Flip-flop = 안정적인 1-bit 데이터 저장
+- Setup Time = Clock edge 이전 데이터 안정 시간
+- Hold Time = Clock edge 이후 데이터 안정 시간
+- Clock-to-Q = Clock edge 이후 Q가 변화하기까지의 지연
+- `always @(posedge clk)` → Flip-flop
+- 불완전한 조건부 대입 → Latch Inference
+- Multi-bit FF → Clock buffer 공유를 통한 면적·전력 절감
+- Clock Gating → 불필요한 clock switching 차단
+
+## 🔍 알아두면 좋은 용어
+
+- Master-Slave Flip-flop
+- D Flip-flop
+- Setup Time
+- Hold Time
+- Clock-to-Q Delay
+- Edge-triggered
+- Level-sensitive
+- Latch Inference
+- Multi-bit Flip-flop
+- Clock Gating
+
+## 💡 한 줄 정리
+
+Flip-flop은 clock edge에서 데이터를 안정적으로 저장하는 핵심 순차회로이며, 실제 디지털 설계에서는 timing·RTL 구조·전력까지 함께 고려해야 한다.
