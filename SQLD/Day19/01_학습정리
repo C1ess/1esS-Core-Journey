@@ -1,0 +1,400 @@
+# DAY19 — 01_학습정리
+
+# SQLD 학습정리
+## 이기적 SQLD 기본서
+
+---
+
+# 01. GROUP BY
+
+GROUP BY
+→ 같은 값을 가진 행을 그룹으로 묶어 집계할 때 사용
+
+기본 구조:
+
+SELECT 그룹컬럼, 집계함수(컬럼)
+FROM 테이블
+GROUP BY 그룹컬럼;
+
+예:
+
+SELECT DEPT_ID, AVG(SALARY)
+FROM EMP
+GROUP BY DEPT_ID;
+
+→ 부서별 평균 급여
+
+### 핵심
+
+GROUP BY에 지정한 컬럼과
+집계함수를 함께 사용하는 것이 일반적이다.
+
+---
+
+# 02. HAVING
+
+HAVING
+→ GROUP BY로 만들어진 그룹에 조건을 적용
+
+WHERE
+→ 그룹화하기 전 개별 행에 조건 적용
+
+HAVING
+→ 그룹화한 후 그룹에 조건 적용
+
+예:
+
+SELECT DEPT_ID, AVG(SALARY)
+FROM EMP
+GROUP BY DEPT_ID
+HAVING AVG(SALARY) >= 3000;
+
+→ 평균 급여가 3000 이상인 부서만 조회
+
+### 암기
+
+WHERE → 행에 조건
+
+HAVING → 그룹에 조건
+
+---
+
+# 03. ORDER BY
+
+ORDER BY
+→ 조회 결과를 정렬
+
+기본값:
+ASC → 오름차순
+
+DESC → 내림차순
+
+예:
+
+SELECT EMP_NAME, SALARY
+FROM EMP
+ORDER BY SALARY DESC;
+
+→ 급여가 높은 순서
+
+### 여러 컬럼 정렬
+
+ORDER BY DEPT_ID ASC, SALARY DESC;
+
+→ 부서번호 오름차순
+→ 같은 부서 안에서는 급여 내림차순
+
+### NULL 정렬
+
+Oracle에서는 기본적으로
+
+ASC → NULLS LAST
+
+DESC → NULLS FIRST
+
+정렬 위치를 직접 지정할 수도 있다.
+
+ORDER BY SALARY DESC NULLS LAST;
+
+---
+
+# 04. 조인
+
+JOIN
+→ 여러 테이블의 데이터를 연결하여 조회
+
+일반적으로 공통된 컬럼을 기준으로 테이블을 연결한다.
+
+예:
+
+SELECT E.EMP_NAME, D.DEPT_NAME
+FROM EMP E
+JOIN DEPT D
+ON E.DEPT_ID = D.DEPT_ID;
+
+---
+
+# 05. 조인의 종류
+
+## INNER JOIN
+
+두 테이블에서 조인 조건을 만족하는 데이터만 조회
+
+INNER JOIN
+→ 양쪽 모두 일치하는 데이터
+
+---
+
+## OUTER JOIN
+
+조인 조건을 만족하지 않는 데이터도 조회
+
+### LEFT OUTER JOIN
+
+왼쪽 테이블의 데이터를 모두 조회
+
+→ 오른쪽에 일치하는 데이터가 없으면 NULL
+
+### RIGHT OUTER JOIN
+
+오른쪽 테이블의 데이터를 모두 조회
+
+→ 왼쪽에 일치하는 데이터가 없으면 NULL
+
+### FULL OUTER JOIN
+
+양쪽 테이블의 모든 데이터를 조회
+
+---
+
+## CROSS JOIN
+
+두 테이블의 모든 행을 조합
+
+A 테이블이 3행,
+B 테이블이 4행이면
+
+→ 3 × 4 = 12행
+
+---
+
+## SELF JOIN
+
+같은 테이블을 자기 자신과 조인
+
+대표적인 예:
+
+직원 ↔ 관리자
+
+같은 EMP 테이블을 서로 다른 별칭으로 사용한다.
+
+---
+
+# 06. 표준 조인
+
+표준 SQL에서 사용하는 JOIN 문법
+
+기본 형태:
+
+SELECT 컬럼
+FROM 테이블1
+[INNER/LEFT/RIGHT/FULL] JOIN 테이블2
+ON 조인조건;
+
+### INNER JOIN
+
+SELECT *
+FROM A
+INNER JOIN B
+ON A.ID = B.ID;
+
+### LEFT JOIN
+
+SELECT *
+FROM A
+LEFT JOIN B
+ON A.ID = B.ID;
+
+### RIGHT JOIN
+
+SELECT *
+FROM A
+RIGHT JOIN B
+ON A.ID = B.ID;
+
+### FULL JOIN
+
+SELECT *
+FROM A
+FULL OUTER JOIN B
+ON A.ID = B.ID;
+
+### ON
+
+두 테이블을 연결할 조인 조건을 지정
+
+---
+
+# 07. WHERE와 ON의 차이
+
+ON
+→ 테이블을 조인하는 조건
+
+WHERE
+→ 조인된 결과에서 최종적으로 행을 필터링
+
+특히 OUTER JOIN에서는
+ON과 WHERE의 위치에 따라 결과가 달라질 수 있으므로 주의한다.
+
+---
+
+# 08. 서브쿼리
+
+서브쿼리
+→ 하나의 SQL문 안에 포함된 또 다른 SELECT문
+
+예:
+
+SELECT EMP_NAME
+FROM EMP
+WHERE SALARY > (
+    SELECT AVG(SALARY)
+    FROM EMP
+);
+
+→ 전체 평균 급여보다 높은 직원 조회
+
+---
+
+# 09. 서브쿼리 위치에 따른 종류
+
+### WHERE절 서브쿼리
+
+조건에 사용
+
+→ 가장 일반적인 형태
+
+### FROM절 서브쿼리
+
+서브쿼리 결과를 하나의 테이블처럼 사용
+
+→ 인라인 뷰
+
+### SELECT절 서브쿼리
+
+하나의 값을 반환하는 형태
+
+→ 스칼라 서브쿼리
+
+---
+
+# 10. 단일 행 / 다중 행 서브쿼리
+
+## 단일 행 서브쿼리
+
+서브쿼리가 하나의 행을 반환
+
+주요 연산자:
+
+=, >, <, >=, <=, <>
+
+예:
+
+WHERE SALARY > (
+    SELECT AVG(SALARY)
+    FROM EMP
+);
+
+---
+
+## 다중 행 서브쿼리
+
+여러 행을 반환
+
+주요 연산자:
+
+IN
+ANY
+ALL
+EXISTS
+
+### IN
+
+여러 결과 중 하나와 일치
+
+### ANY
+
+서브쿼리 결과 중 하나라도 조건을 만족
+
+### ALL
+
+서브쿼리 결과의 모든 값에 대해 조건을 만족
+
+### EXISTS
+
+서브쿼리 결과가 존재하는지 확인
+
+---
+
+# 11. GROUP BY + HAVING 핵심
+
+실행 흐름을 이해하는 것이 중요하다.
+
+FROM
+→ WHERE
+→ GROUP BY
+→ HAVING
+→ SELECT
+→ ORDER BY
+
+### 핵심
+
+WHERE
+→ 그룹화 전에 행을 필터링
+
+GROUP BY
+→ 행을 그룹으로 묶음
+
+HAVING
+→ 그룹화된 결과를 필터링
+
+ORDER BY
+→ 최종 결과 정렬
+
+---
+
+# DAY19 핵심 암기
+
+GROUP BY
+→ 그룹화
+
+HAVING
+→ 그룹에 조건
+
+WHERE
+→ 행에 조건
+
+ORDER BY
+→ 최종 결과 정렬
+
+ASC
+→ 오름차순
+
+DESC
+→ 내림차순
+
+INNER JOIN
+→ 양쪽 모두 일치
+
+LEFT JOIN
+→ 왼쪽 전체
+
+RIGHT JOIN
+→ 오른쪽 전체
+
+FULL JOIN
+→ 양쪽 전체
+
+CROSS JOIN
+→ 모든 조합
+
+SELF JOIN
+→ 자기 자신과 조인
+
+ON
+→ 조인 조건
+
+서브쿼리
+→ SQL문 안의 SELECT문
+
+FROM 서브쿼리
+→ 인라인 뷰
+
+SELECT 서브쿼리
+→ 스칼라 서브쿼리
+
+단일 행 서브쿼리
+→ =, >, < 등
+
+다중 행 서브쿼리
+→ IN, ANY, ALL, EXISTS
