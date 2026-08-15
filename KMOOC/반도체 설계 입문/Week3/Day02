@@ -1,0 +1,69 @@
+## Day02 (Week3 - Storage: Flip-flop & RTL Coding)
+
+### 🎯 핵심 내용
+
+**1. Master-Slave Flip-flop**
+- Signal Transparency 문제를 해결하기 위해 **Gated Latch 2개를 직렬로 연결**한 구조
+- 앞단(Master latch)은 CLK, 뒷단(Slave latch)은 CLK'(반전된 clock)로 Enable을 받음 → 두 latch가 동시에 열리지 않고 번갈아 동작하므로 입력이 출력으로 그대로 투과되지 않음
+- CLK가 0일 때: Master가 열려 입력을 받아들이고, Slave는 닫혀 이전 값을 유지
+- CLK가 1일 때: Master는 닫혀 값을 고정, Slave가 열려 Master의 값을 출력으로 전달
+- 이 구조 덕분에 한 clock 주기 동안 딱 한 번만 값이 갱신됨
+
+**2. 1's Catching 문제**
+- Master-Slave Flip-flop도 완벽하지 않음: CLK=0인 구간(Master가 열려있는 동안) 중에 S 또는 R에 아주 짧은 순간적인 glitch(잘못된 펄스)가 들어오면, Master latch가 이를 그대로 받아들여 버림
+- 이후 그 glitch가 사라져도 Master는 이미 잘못된 값을 저장했으므로, CLK가 1이 되는 순간 Slave로 그 잘못된 값이 전달되어 출력이 틀어짐 → 이를 **1's Catching 문제**라 함
+- S=R=1은 "Not allowed"(사용 금지) 조합
+
+**3. D Flip-flop**
+- Master-Slave Flip-flop의 1's Catching 문제를 해결하기 위해, 입력단에 **인버터를 추가**해서 S와 R이 항상 서로 반대값(R = D', S = D)이 되도록 강제 → S=R=1(불안정 상태) 조합 자체가 원천적으로 발생할 수 없게 만듦
+- 입력이 D 하나로 통일되어 회로가 단순해지고 오동작 가능성이 사라짐
+- 실제 반도체 설계에서는 CLK와 CLK'(inverted clock)를 별도로 만들어 Master/Slave에 공급하는 형태로 구현 (Master 영역, Slave 영역으로 구분되는 실제 트랜지스터 레벨 구조)
+
+**4. Timing 정의 (Setup/Hold/Clock-to-Q)**
+- **Setup time (Tsu)**: clock edge가 오기 *전에* 입력 데이터가 안정적으로 유지되어야 하는 최소 시간
+- **Hold time (Th)**: clock edge가 온 *후에도* 입력 데이터가 계속 안정적으로 유지되어야 하는 최소 시간
+- **Clock-to-Q delay (Tc2q)**: clock edge가 들어온 시점부터 출력 Q가 실제로 바뀌기까지 걸리는 지연 시간
+- Timing Example: Tsu=1.8ns, Th=0.5ns, Tc2q=1.1ns처럼 각 flip-flop은 데이터시트 상에 이 세 값이 스펙으로 명시되어 있고, 이를 기반으로 회로의 최대 동작 주파수를 계산
+
+**5. Flip-flop vs. Latch (동작 방식 비교)**
+- **Flip-flop (edge-triggered)**: clock의 상승/하강 edge 순간에만 출력이 바뀜 → D가 그 사이에 여러 번 바뀌어도 edge 순간의 값만 반영됨
+- **Latch (level-sensitive)**: clock(또는 enable)이 특정 레벨(예: High)로 유지되는 동안 계속 입력을 반영 → 그 구간 동안 D가 여러 번 바뀌면 출력도 그때마다 따라 바뀜 (Signal Transparency)
+- 파형 비교에서 Qedge(flip-flop 출력)는 clock edge 순간에만 계단식으로 변하는 반면, Qlatch(latch 출력)는 enable 구간 내내 D를 따라 잔물결처럼 변함
+
+**6. RTL Coding: Latch/Flip-flop/Combinational Logic 코드 구분**
+- **Latch 유추**: `always @(clk, a, b) if (clk==1'b1) f<=a&b;` 처럼 조건문 안에서만 값이 대입되고 else가 없으면(모든 경우의 수를 다루지 않으면) 합성 시 **latch가 생성**됨 (의도치 않은 latch inference에 주의)
+- **Flip-flop 유추**: `always @(posedge clk)` 또는 `always @(negedge clk)`처럼 sensitivity list에 edge 키워드(posedge/negedge)가 있으면 **flip-flop**이 생성됨
+- **Combinational Logic 유추**: `always @(a, b, c)`처럼 입력 신호 전체를 sensitivity list에 나열하고, if-else로 모든 경우의 수를 다 처리하면(누락 없이) **조합회로**가 생성됨
+- Flip-flop 직접 생성 예시: `module DFF(clk, in, out)`에서 `always @(posedge clk) out <= in;` 형태로 파라미터화된 n비트 DFF 모듈을 만들고, `DFF #(8) flipflops(clk, next, state);`처럼 인스턴스화해서 재사용 가능
+
+**7. Multi-bit Flip-flop & Clock Gating (저전력 기법)**
+- **Multi-bit Flip-flop**: 여러 개의 1-bit Flip-flop이 각각 별도의 clock buffer(inverter 2개)를 갖는 대신, 여러 bit가 clock buffer를 공유하도록 묶어서 하나의 Multi-bit FF로 만들면 clock buffer 개수가 줄어 면적과 전력이 절감됨
+- **Clock Gating**: 기존 방식은 MUX로 en(enable) 신호에 따라 이전 출력을 다시 넣어줄지 새 데이터를 넣을지 결정하지만, clock 자체는 계속 토글되어 불필요하게 전력을 소모(High activity)
+  - 개선안: en 신호와 clk를 Latch+AND 게이트로 조합해 **gated clock(gclk)**을 만들어, en이 0일 때는 아예 flip-flop에 clock 토글 자체가 전달되지 않도록(Low activity) 차단 → 불필요한 clock toggling에 의한 전력 소모를 원천 차단
+
+### ✅ 반드시 기억할 것
+
+- Master-Slave Flip-flop = Gated Latch 2개 직렬 연결(Master: CLK, Slave: CLK') → Signal Transparency 해결
+- 하지만 Master-Slave도 CLK=0 구간 중 순간적 glitch에 의해 **1's Catching 문제** 발생 가능 (S=R=1은 not allowed)
+- D Flip-flop = Master-Slave에 인버터 추가해 S=D, R=D'로 만들어 1's Catching 문제를 원천 해결
+- Flip-flop은 edge-triggered(순간 반영), Latch는 level-sensitive(구간 내내 반영) — 이 차이가 핵심
+- RTL 코드에서: else 없는 조건부 대입 → Latch / posedge·negedge 사용 → Flip-flop / 모든 경우 처리하는 조합 조건문 → Combinational logic
+- 저전력 기법 두 가지: Multi-bit FF(clock buffer 공유로 면적·전력 절감), Clock Gating(불필요한 clock toggling 자체를 차단)
+
+### 🔍 알아두면 좋은 용어
+
+- **1's Catching**: Master latch가 열려있는 짧은 순간에 우연히 들어온 glitch를 그대로 저장해버려 잘못된 값이 출력되는 오류
+- **Setup time / Hold time / Clock-to-Q delay**: 각각 clock edge 전에 입력이 안정돼야 하는 시간, edge 후에도 안정돼야 하는 시간, edge 후 출력이 실제로 바뀌기까지 걸리는 시간
+- **Edge-triggered / Level-sensitive**: 각각 clock의 순간적 전이(edge)에만 반응 / clock이 특정 레벨을 유지하는 동안 계속 반응하는 방식
+- **Clock Gating**: enable 신호에 따라 flip-flop에 공급되는 clock 자체를 차단해 불필요한 전력 소모를 막는 저전력 설계 기법
+- **Latch inference**: RTL 코드에서 조건문의 모든 경우를 처리하지 않아 의도치 않게 latch가 합성되어버리는 현상
+
+### 📈 추가로 공부하면 좋은 내용
+
+- 실제 D Flip-flop의 트랜지스터 레벨 구조(Master/Slave 영역이 각각 어떤 트랜지스터 조합으로 구현되는지)
+- Setup/Hold time 위반 시 발생하는 metastability 문제와 이를 다루는 synchronizer 설계
+- Clock Gating이 실제 SoC 설계에서 clock tree synthesis와 어떻게 결합되어 적용되는지
+
+### 💡 한 줄 정리
+
+Master-Slave 구조와 D Flip-flop의 인버터 추가로 Signal Transparency와 1's Catching 문제를 해결한 것이 Flip-flop이며, RTL 코드에서는 always 블록의 sensitivity list와 조건 완전성으로 Latch/Flip-flop/조합회로가 결정되고, Multi-bit FF와 Clock Gating으로 전력 효율을 높일 수 있다.
