@@ -1,0 +1,71 @@
+# Daily Review - Day20
+
+## 📚 Today's Learning
+
+### English
+
+- TOEIC: to부정사 / 동명사 / 동사별 목적어 형태
+- TOEFL: enhance / inhibit / facilitate + 장단점·어휘 추론
+- OPIc: As a result,... / 노력 → 행동 → 결과 설명
+
+### Semiconductor
+
+- Static Timing Analysis (STA)
+- Clock Skew
+- Timing Slack
+- WNS / TNS
+- Timing Violation
+- Hold / Setup Timing Optimization
+- Gate Upsizing
+- Retiming
+- Timing Closure
+
+### K-MOOC
+
+- Timing Constraint
+- Clock Skew
+- Setup / Hold Analysis
+- Static Timing Analysis
+- Timing Violation 해결
+
+### Google AI
+
+- Gemini Live
+- Conversational Interface
+- Rubric
+- Persona Adoption
+- Context Grounding
+- Specific Targeting
+- AI 기반 실전 대화 연습
+- 페르소나 기반 피드백 및 문서 개선
+
+### SQLD
+
+- SQLD 학습 완료
+
+---
+
+## 🎯 Today's Key Points
+
+### English
+
+- 동명사와 to부정사를 목적어로 사용하는 동사를 구분한다.
+- enjoy / finish / avoid / consider → -ing
+- decide / plan / hope / want → to V
+- OPIc에서는 `As a result,...`를 활용해 노력 → 행동 → 결과를 연결한다.
+
+### Semiconductor
+
+- STA는 회로의 Timing 조건을 분석하는 방법이다.
+- Clock Skew는 Clock 도착 시간의 차이다.
+- Negative Slack은 Timing Violation을 의미한다.
+- Hold Violation → Short Path에 Delay 추가
+- Setup Violation → Long Path Delay 감소
+- WNS / TNS로 Timing 문제의 심각도를 확인한다.
+- 최종 목표는 Timing Closure다.
+
+---
+
+## 🔥 Study Streak
+
+Day 20 Complete ✅
