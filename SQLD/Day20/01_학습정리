@@ -1,0 +1,486 @@
+좋아. **DAY20 학습정리**는 오늘 공부한 범위만 넣고, 이전 DAY와 겹치는 설명은 최대한 줄여서 정리할게. 한 번에 복붙할 수 있도록 하나로 묶었어.
+
+````markdown
+# DAY20 — 01_학습정리
+
+# SQLD 학습정리
+## 이기적 SQLD 기본서
+
+---
+
+# 01. 집합 연산자
+
+여러 SELECT문의 결과를 하나의 결과로 결합한다.
+
+## UNION
+
+두 결과를 합치고 **중복 제거**
+
+```sql
+SELECT COL1 FROM T1
+UNION
+SELECT COL1 FROM T2;
+````
+
+## UNION ALL
+
+두 결과를 합치고 **중복 유지**
+
+```sql
+SELECT COL1 FROM T1
+UNION ALL
+SELECT COL1 FROM T2;
+```
+
+→ 중복을 제거하지 않으므로 일반적으로 UNION보다 빠르다.
+
+## INTERSECT
+
+두 결과에 **공통으로 존재하는 행**만 반환
+
+```sql
+SELECT COL1 FROM T1
+INTERSECT
+SELECT COL1 FROM T2;
+```
+
+## MINUS
+
+첫 번째 결과에는 존재하지만
+두 번째 결과에는 존재하지 않는 행 반환
+
+```sql
+SELECT COL1 FROM T1
+MINUS
+SELECT COL1 FROM T2;
+```
+
+### 집합 연산자 조건
+
+두 SELECT문의 컬럼 개수가 같아야 하고,
+대응되는 컬럼의 데이터 타입이 호환되어야 한다.
+
+### 핵심
+
+```text
+UNION       → 합집합 + 중복 제거
+UNION ALL   → 합집합 + 중복 유지
+INTERSECT   → 교집합
+MINUS       → 차집합
+```
+
+---
+
+# 02. 그룹 함수
+
+여러 행을 하나의 결과로 집계하는 함수
+
+대표적인 그룹 함수:
+
+* SUM → 합계
+* AVG → 평균
+* MAX → 최대값
+* MIN → 최소값
+* COUNT → 행 개수
+
+예:
+
+```sql
+SELECT DEPTNO, SUM(SAL)
+FROM EMP
+GROUP BY DEPTNO;
+```
+
+→ 부서별 급여 합계
+
+## COUNT 주의
+
+```text
+COUNT(*)       → 전체 행 개수
+COUNT(컬럼)    → NULL 제외한 값의 개수
+COUNT(DISTINCT 컬럼) → 중복과 NULL을 제외한 개수
+```
+
+---
+
+# 03. 윈도우 함수
+
+윈도우 함수
+→ 행마다 결과를 반환하면서
+다른 행과의 계산도 수행할 수 있는 함수
+
+GROUP BY와 달리
+**원래 행을 제거하지 않는다.**
+
+기본 형태:
+
+```sql
+함수() OVER (
+    PARTITION BY 컬럼
+    ORDER BY 컬럼
+)
+```
+
+---
+
+## PARTITION BY
+
+데이터를 그룹으로 나누어 계산
+
+```sql
+SUM(SAL) OVER (
+    PARTITION BY DEPTNO
+)
+```
+
+→ 부서별 급여 합계를 각 행에 표시
+
+---
+
+## ORDER BY
+
+윈도우 내부의 순서를 지정
+
+```sql
+ROW_NUMBER() OVER (
+    ORDER BY SAL DESC
+)
+```
+
+---
+
+## 대표적인 순위 함수
+
+### ROW_NUMBER
+
+각 행에 고유한 순번 부여
+
+```text
+1
+2
+3
+4
+```
+
+동점이어도 순번이 다르다.
+
+---
+
+### RANK
+
+동일한 값에 같은 순위 부여
+
+```text
+1
+1
+3
+4
+```
+
+동점만큼 다음 순위가 건너뛴다.
+
+---
+
+### DENSE_RANK
+
+동일한 값에 같은 순위 부여
+
+```text
+1
+1
+2
+3
+```
+
+RANK와 달리 순위가 건너뛰지 않는다.
+
+---
+
+## 순위 함수 비교
+
+```text
+ROW_NUMBER → 동점이어도 순번 다름
+RANK       → 동점 같은 순위 + 순위 건너뜀
+DENSE_RANK → 동점 같은 순위 + 순위 안 건너뜀
+```
+
+---
+
+# 04. TOP N 쿼리
+
+TOP N 쿼리
+→ 특정 기준으로 정렬한 결과에서
+상위 N개의 데이터를 조회하는 방법
+
+Oracle에서는 대표적으로 ROWNUM,
+ROW_NUMBER 등을 이용한다.
+
+## ROWNUM 주의
+
+ROWNUM은 조회되는 순서에 따라 부여된다.
+
+따라서 단순히
+
+```sql
+SELECT *
+FROM EMP
+WHERE ROWNUM <= 3
+ORDER BY SAL DESC;
+```
+
+라고 하면
+**급여 상위 3명**을 의미하지 않을 수 있다.
+
+정렬을 먼저 수행한 후 ROWNUM을 적용해야 한다.
+
+```sql
+SELECT *
+FROM (
+    SELECT *
+    FROM EMP
+    ORDER BY SAL DESC
+)
+WHERE ROWNUM <= 3;
+```
+
+→ 급여 상위 3명
+
+---
+
+## ROW_NUMBER를 이용한 TOP N
+
+```sql
+SELECT *
+FROM (
+    SELECT E.*,
+           ROW_NUMBER() OVER (ORDER BY SAL DESC) RN
+    FROM EMP E
+)
+WHERE RN <= 3;
+```
+
+→ 급여 상위 3명
+
+---
+
+# 05. 계층형 질의
+
+계층형 질의
+→ 데이터의 상하 관계를 트리 구조로 조회
+
+예:
+
+```text
+사장
+ ├─ 부장
+ │   ├─ 과장
+ │   └─ 과장
+ └─ 부장
+     └─ 과장
+```
+
+Oracle 계층형 질의의 대표적인 문법:
+
+```sql
+SELECT ...
+FROM EMP
+START WITH 조건
+CONNECT BY PRIOR 조건;
+```
+
+---
+
+## START WITH
+
+계층 구조의 시작점 지정
+
+예:
+
+```sql
+START WITH MGR IS NULL
+```
+
+→ 관리자가 없는 최상위 직원부터 시작
+
+---
+
+## CONNECT BY
+
+부모와 자식의 관계를 지정
+
+```sql
+CONNECT BY PRIOR EMPNO = MGR
+```
+
+→ 부모의 EMPNO와 자식의 MGR 연결
+
+---
+
+## PRIOR
+
+부모 행과 자식 행의 관계를 지정할 때 사용
+
+`PRIOR`가 어느 컬럼 앞에 붙는지에 따라
+부모 → 자식 또는 자식 → 부모 방향이 달라질 수 있다.
+
+---
+
+## LEVEL
+
+계층의 깊이를 나타낸다.
+
+```text
+최상위 → LEVEL 1
+하위   → LEVEL 2
+하위   → LEVEL 3
+```
+
+---
+
+## CONNECT_BY_ROOT
+
+현재 행에서 최상위 부모의 값을 가져온다.
+
+---
+
+## SYS_CONNECT_BY_PATH
+
+계층을 따라 특정 컬럼의 경로를 문자열로 표현한다.
+
+---
+
+## ORDER SIBLINGS BY
+
+같은 부모를 가진 형제(Sibling) 행의 순서를 정렬한다.
+
+```sql
+ORDER SIBLINGS BY ENAME;
+```
+
+계층 구조 자체는 유지하면서
+같은 레벨의 형제 행만 정렬한다.
+
+---
+
+# 06. 셀프 조인
+
+셀프 조인
+→ 하나의 테이블을 자기 자신과 조인
+
+대표적인 예:
+
+직원 테이블에서
+직원과 관리자의 이름을 함께 조회
+
+```sql
+SELECT E.ENAME AS 직원,
+       M.ENAME AS 관리자
+FROM EMP E
+JOIN EMP M
+ON E.MGR = M.EMPNO;
+```
+
+같은 EMP 테이블을
+
+```text
+E → 직원
+M → 관리자
+```
+
+처럼 별칭을 다르게 지정하여 사용한다.
+
+### 핵심
+
+셀프 조인에서는
+**같은 테이블을 서로 다른 별칭으로 구분하는 것**이 중요하다.
+
+---
+
+# DAY20 핵심 암기
+
+집합 연산자
+
+UNION
+→ 합집합 + 중복 제거
+
+UNION ALL
+→ 합집합 + 중복 유지
+
+INTERSECT
+→ 교집합
+
+MINUS
+→ 차집합
+
+---
+
+그룹 함수
+
+SUM → 합계
+AVG → 평균
+MAX → 최대
+MIN → 최소
+COUNT → 개수
+
+COUNT(*)
+→ 전체 행
+
+COUNT(컬럼)
+→ NULL 제외
+
+---
+
+윈도우 함수
+
+→ 행을 유지하면서 계산
+
+PARTITION BY
+→ 그룹 분할
+
+ROW_NUMBER
+→ 항상 다른 순번
+
+RANK
+→ 동점 같은 순위 + 건너뜀
+
+DENSE_RANK
+→ 동점 같은 순위 + 안 건너뜀
+
+---
+
+TOP N
+
+→ 상위 N개 조회
+
+Oracle ROWNUM
+→ 정렬 후 ROWNUM 적용에 주의
+
+---
+
+계층형 질의
+
+START WITH
+→ 시작점
+
+CONNECT BY
+→ 부모-자식 관계
+
+PRIOR
+→ 부모/자식 방향 지정
+
+LEVEL
+→ 계층 깊이
+
+ORDER SIBLINGS BY
+→ 같은 부모를 가진 형제 정렬
+
+---
+
+셀프 조인
+
+→ 같은 테이블을 자기 자신과 조인
+
+→ 서로 다른 별칭 사용
+
+```
+```
