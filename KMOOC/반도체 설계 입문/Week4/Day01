@@ -1,0 +1,42 @@
+🎯 학습 목표
+ * Setup time 제약 조건식을 도출하고 적용할 수 있다.
+ * Hold time 제약 조건식을 분석하고 설명할 수 있다.
+⏱️ 1. 기본 Timing 제약 조건 (Timing Constraints)
+Flip-flop 및 조합 논리회로가 안정적으로 동작하기 위해 반드시 만족해야 하는 타이밍 조건입니다.
+1.1 Setup Time (t_{s}) 조건
+데이터가 클럭 엣지(Clock Edge)가 도착하기 전까지 미리 안정적으로 유지되어야 하는 최소 시간입니다.
+ * 기본 조건식:
+   
+1.2 Hold Time (t_{h}) 조건
+데이터가 클럭 엣지가 도착한 이후에도 안정적으로 유지되어야 하는 최소 시간입니다.
+ * 기본 조건식:
+   
+⏰ 2. Clock Skew를 고려한 Timing 제약 조건
+실제 회로에서는 클럭 신호가 각 Flip-flop에 도달하는 데 시간차(Clock Skew, t_{k})가 발생합니다. 이를 고려한 제약 조건은 다음과 같습니다.
+ * Clock Skew가 반영된 Setup Time 조건:
+   
+ * Clock Skew가 반영된 Hold Time 조건:
+   
+🔍 Clock 관련 주요 용어
+ * Global clock skew
+ * Clock margin
+ * Local clock skew
+ * Clock delivery network
+📊 3. 회로 Timing 분석 (Static Timing Analysis)
+회로의 타이밍을 정량적으로 분석하기 위해 다음과 같은 수치들을 활용합니다. (STA: Static Timing Analysis)
+ * Setup slack: Setup 조건을 얼마나 여유 있게 만족하는지를 나타내는 지표입니다.
+ * Hold slack: Hold 조건을 얼마나 여유 있게 만족하는지를 나타내는 지표입니다.
+ * Total negative slack: 회로 내의 음수(위반) Slack 값들의 총합입니다.
+ * Worst negative slack: 회로 내에서 가장 심각한 타이밍 위반 지점의 Slack 값입니다.
+🛠️ 4. Timing 위반(Violation) 해결 방안
+타이밍 분석 결과 조건식을 만족하지 못할 경우, 다음과 같은 설계 수정 기법을 적용합니다.
+4.1 Hold Time 위반 해결 방안
+ * 문제 상황: t_{ccq} + t_{pd} > t_{hold} 조건을 불만족하는 경우 (예: 30 + 25\text{ps} > 120\text{ps} ❌)
+ * 해결책: 가장 짧은 데이터 경로(Short paths)에 버퍼(Buffers)를 추가하여 의도적으로 지연을 발생시킵니다. (Add buffers to the short paths)
+4.2 Setup Time 위반 해결 방안
+ * 해결책: 가장 긴 데이터 경로(Longest paths)의 게이트 크기를 키우거나(Upsize gates) 리타이밍(Retime)을 수행하여 지연 시간을 줄입니다. (Retime/upsize gates on the longest paths)
+⚠️ 5. 기타 주요 개념
+비동기식 회로 설계에서 발생할 수 있는 주요 이슈입니다.
+ * 비동기 신호 Timing 불일치: 외부 버스(bus) 등에서 들어오는 비동기 데이터 입력 시 타이밍 문제가 발생할 수 있습니다.
+ * Meta-Stability (메타-스테빌리티): 셋업/홀드 타임 위반으로 인해 출력 상태가 '0'도 '1'도 아닌 불안정한 상태에 머무는 현상입니다.
+ * MTBF (Mean Time Between Failures): 메타-스테빌리티 등으로 인한 시스템의 평균 무고장 시간을 의미합니다.
