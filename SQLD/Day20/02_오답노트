@@ -1,0 +1,172 @@
+좋아. 이 문제는 **`START WITH`가 어디에서 시작하는지 + `CONNECT_BY_ROOT`가 무엇을 기준으로 하는지**를 같이 보면 바로 이해돼.
+
+````markdown
+# DAY20 — 02_오답노트
+
+## 오답 01. CONNECT_BY_ROOT와 START WITH
+
+### 문제
+
+메뉴 테이블:
+
+| 메뉴ID | 상위메뉴ID |
+|---|---|
+| M1 | NULL |
+| M5 | M1 |
+| M6 | M5 |
+
+SQL:
+
+```sql
+SELECT 메뉴ID,
+       CONNECT_BY_ROOT 메뉴ID AS 루트ID
+FROM 메뉴
+START WITH 메뉴ID = 'M5'
+CONNECT BY PRIOR 메뉴ID = 상위메뉴ID;
+````
+
+내가 선택한 답:
+
+```text
+M5 → M1
+```
+
+정답:
+
+```text
+M5 → M5
+```
+
+---
+
+# 1. 핵심 개념
+
+`CONNECT_BY_ROOT 컬럼`
+
+→ 계층형 질의에서 **현재 계층의 시작점(루트)의 컬럼값**을 가져온다.
+
+여기서 가장 중요한 것은:
+
+> ROOT는 테이블의 최상위 부모가 아니라 `START WITH`에서 지정한 시작 행이다.
+
+---
+
+# 2. START WITH 확인
+
+SQL에서:
+
+```sql
+START WITH 메뉴ID = 'M5'
+```
+
+라고 했으므로 계층 탐색은 **M5에서 시작**한다.
+
+따라서 이 계층에서의 ROOT는:
+
+```text
+M5
+```
+
+이다.
+
+---
+
+# 3. CONNECT BY 확인
+
+조건:
+
+```sql
+CONNECT BY PRIOR 메뉴ID = 상위메뉴ID
+```
+
+현재 행의 메뉴ID를 기준으로
+그 메뉴를 상위메뉴ID로 가지고 있는 하위 메뉴를 찾는다.
+
+데이터:
+
+```text
+M1 → NULL
+M5 → M1
+M6 → M5
+```
+
+M5에서 시작하면:
+
+```text
+M5
+└─ M6
+```
+
+따라서 결과는:
+
+| 메뉴ID | CONNECT_BY_ROOT 메뉴ID |
+| ---- | -------------------- |
+| M5   | M5                   |
+| M6   | M5                   |
+
+---
+
+# 4. 왜 M1이 아니었나?
+
+여기서 가장 많이 헷갈리는 부분이다.
+
+전체 데이터에서 가장 위에 있는 메뉴는 M1이다.
+
+```text
+M1
+└─ M5
+   └─ M6
+```
+
+하지만 `START WITH 메뉴ID = 'M5'`이므로
+이번 계층형 질의의 시작점은 M5이다.
+
+따라서:
+
+```text
+전체 트리의 최상위
+→ M1
+
+이번 질의의 ROOT
+→ M5
+```
+
+이 둘을 구분해야 한다.
+
+---
+
+# 5. 핵심 암기
+
+```text
+START WITH
+→ 계층 탐색을 시작할 행
+
+CONNECT_BY_ROOT
+→ START WITH에서 시작한 행의 값
+```
+
+따라서
+
+```sql
+START WITH 메뉴ID = 'M5'
+```
+
+이면
+
+```sql
+CONNECT_BY_ROOT 메뉴ID
+```
+
+는 M5가 된다.
+
+---
+
+# 시험용 한 줄 암기
+
+**CONNECT_BY_ROOT = 전체 테이블의 최상위 부모가 아니라 START WITH로 지정한 시작점의 값**
+
+```text
+START WITH M5
+→ ROOT = M5
+→ M5, M5
+```
