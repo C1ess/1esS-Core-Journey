@@ -1,0 +1,64 @@
+# Day01
+
+## 🎯 핵심 내용
+
+### 1차시. State Diagram
+
+- **State Diagram**은 설계하고자 하는 문제를 상태(state), 전이(transition), 출력(output)으로 표현하는 방법이다.
+- 예제 1: **커피 자판기 설계**
+  - 1500원을 넣어야 커피가 나오고, 동전은 500원(N) 혹은 1000원(D) 중 하나씩만 투입 가능
+  - State: 0 → 500 → 1000 → 1500(open) 순으로 전이
+  - 상태·입력(D, N)·다음 상태·출력(open)을 표로 정리
+- 예제 2: **신호등 설계 (FSM)**
+  - Reset 시 north-south는 green, east-west는 red로 초기화
+  - east-west 방향에 차량 감지(carew)되면 east-west는 green으로, north-south는 red로 전환
+  - green → red 전환 시 중간에 반드시 yellow를 거침
+  - States: GNS(green NS) → YNS(yellow NS) → GEW(green EW) → YEW(yellow EW) 순환
+  - 입력: carew(차량 감지), reset / 출력: 6-bit 1-hot 신호등 색 (gyr gyr)
+- **Controller 설계 절차**
+  1. 문제 이해하기
+  2. State diagram 그리기
+  3. State diagram 최소화하기
+  4. State encoding 하기
+  5. Logic 구현하기 (flip-flop 할당 → next state logic → output logic → reset logic)
+  → 이후 A. RTL coding, B. 설계 자동화 툴 적용
+
+### 2차시. 설계 구현
+
+- 설계 내부 구조: **inputs → combinational logic for next state → reg(state) → logic for outputs → outputs**, state는 feedback으로 다시 combinational logic에 입력됨
+- **State Encoding**: state diagram의 상태를 binary code로 할당 (예: 커피 자판기 0→00, 500→01, 1000→10, 1500→11)
+- **Logic 구현 예시 (커피 자판기)**
+  - D1 = Q1 + D + Q0·N
+  - D0 = Q0'·N + Q0·N' + Q1·N + Q1·D
+  - OPEN = Q1·Q0
+  - D flip-flop 2개(Q1, Q0) + AND/OR 게이트로 구성
+- **신호등 설계 구현**
+  - State encoding: gns=00, yns=01, gew=11, yew=10
+  - ns1 = s0
+  - ns0 = (s0 | carew) & ¬s1
+  - lgns = ¬s0 & ¬s1 / lyns = s0 & ¬s1 / lrns = s1
+  - lgew = s0 & s1 / lyew = ¬s0 & s1 / lrew = ¬s1
+- **RTL Coding**
+  - `define`으로 state assignment(one-hot)와 output code 정의
+  - DFF 모듈을 만들어 state register로 재사용
+  - `always @(state or carew)` 블록의 `case` 문으로 next state와 output을 동시에 결정
+  - `assign next = rst ? GNS : next1;` 으로 reset 로직 추가
+
+## ✅ 반드시 기억할 것
+
+- State diagram은 **상태(state) + 입출력(input/output) + 초기상태(initial state)**로 구성되며, 핵심 요소는 **상태 전이 함수(state transition function)**와 **출력 함수(output function)**이다.
+- 설계 구현의 내부 구조는 **next-state combinational logic + register(state) + output combinational logic**의 3단 구조로 고정된다.
+
+## 🔍 알아두면 좋은 용어
+
+- **FSM (Finite State Machine)**: 유한한 개수의 상태와 상태 간 전이 규칙으로 동작을 표현하는 모델
+- **1-hot encoding**: 여러 state 중 정확히 하나의 bit만 1이 되도록 인코딩하는 방식 (신호등 예제의 GNS/YNS/GEW/YEW = 1000/0100/0010/0001)
+
+## 📈 추가로 공부하면 좋은 내용
+
+- State diagram 최소화(state minimization) 기법 — 동일하게 동작하는 state를 합치는 방법
+- Binary encoding vs one-hot encoding의 하드웨어 자원(게이트 수) 비교
+
+## 💡 한 줄 정리
+
+문제를 state diagram으로 설계 → binary encoding → next-state/output logic으로 구현하는 FSM 설계 흐름을 배웠다.
