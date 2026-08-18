@@ -1,0 +1,127 @@
+````markdown
+# Semiconductor - Day21
+
+## 🎯 Topic
+### FSM & State Diagram
+
+## 1. FSM (Finite State Machine)
+
+FSM은 디지털 시스템의 동작을 **상태(State)와 상태 전이(Transition)**로 표현하는 모델이다.
+
+### 주요 구성
+- State
+- Input
+- Transition
+- Output
+- Initial State
+
+---
+
+## 2. State Diagram
+
+문제를 상태와 전이 관계로 표현해 회로 설계에 활용한다.
+
+### FSM 설계 흐름
+
+```text
+문제 이해
+↓
+State Diagram
+↓
+State 최소화
+↓
+State Encoding
+↓
+Next-State Logic
+↓
+Output Logic
+↓
+RTL Coding
+````
+
+---
+
+## 3. FSM 하드웨어 구조
+
+```text
+Input
+  ↓
+Next-State Combinational Logic
+  ↓
+State Register
+  ↓
+Output Logic
+  ↓
+Output
+  ↺
+```
+
+* **Next-State Logic**: 현재 State와 Input을 바탕으로 다음 State 결정
+* **State Register**: 현재 State 저장
+* **Output Logic**: State와 Input을 바탕으로 Output 생성
+* State는 Feedback을 통해 다시 Next-State Logic으로 전달됨
+
+---
+
+## 4. State Encoding
+
+각 State에 디지털 코드를 할당하는 과정이다.
+
+### Binary Encoding
+
+State를 Binary Code로 표현한다.
+
+```text
+0    → 00
+500  → 01
+1000 → 10
+1500 → 11
+```
+
+### One-hot Encoding
+
+각 State에 하나의 Bit를 할당하고 현재 State 하나만 `1`로 표현한다.
+
+```text
+GNS = 1000
+YNS = 0100
+GEW = 0010
+YEW = 0001
+```
+
+---
+
+## 5. RTL Coding
+
+FSM은 RTL에서 다음 요소를 이용해 구현한다.
+
+* D Flip-flop
+* State Register
+* Next-State Logic
+* Output Logic
+* Reset Logic
+* `case`문
+
+---
+
+## 🔍 주요 용어
+
+* **FSM** — Finite State Machine
+* **State Diagram** — 상태와 상태 전이를 표현한 설계도
+* **State Transition** — 현재 상태에서 다음 상태로 이동하는 과정
+* **State Encoding** — 각 State에 Binary/One-hot 등의 코드를 할당하는 과정
+* **Binary Encoding** — State를 Binary Code로 표현
+* **One-hot Encoding** — 하나의 State만 `1`로 표현
+* **Next-State Logic** — 다음 State를 결정하는 조합논리
+* **State Register** — 현재 State를 저장하는 레지스터
+* **Output Logic** — 출력값을 결정하는 논리
+* **RTL Coding** — 하드웨어 동작을 RTL 수준에서 코드로 표현
+
+---
+
+## 💡 한 줄 정리
+
+State Diagram으로 시스템의 동작을 정의하고, State Encoding과 Next-State/Output Logic을 설계한 뒤 RTL로 구현하는 것이 FSM 설계의 기본 흐름이다.
+
+```
+```
