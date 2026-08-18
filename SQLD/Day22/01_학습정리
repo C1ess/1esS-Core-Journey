@@ -1,0 +1,443 @@
+좋아. **DAY22는 DML / DDL / TCL / DCL**만 깔끔하게 정리할게. 앞에서 배운 내용은 반복하지 않고, SQLD 시험에서 구분해야 할 부분 위주로 압축했어.
+
+````markdown
+# DAY22 — 01_학습정리
+
+# SQLD 학습정리
+## 이기적 SQLD 기본서
+
+---
+
+# 01. SQL 명령어 분류
+
+SQL 명령어는 크게 다음과 같이 구분한다.
+
+- DML → 데이터 조작
+- DDL → 데이터 정의
+- TCL → 트랜잭션 제어
+- DCL → 데이터 제어
+
+암기:
+
+DML = 데이터
+DDL = 구조
+TCL = 트랜잭션
+DCL = 권한
+
+---
+
+# 02. DML
+
+DML(Data Manipulation Language)
+
+→ 테이블의 데이터를 조회·추가·수정·삭제하는 명령어
+
+주요 명령어:
+
+- SELECT
+- INSERT
+- UPDATE
+- DELETE
+- MERGE
+
+---
+
+## INSERT
+
+데이터 삽입
+
+```sql
+INSERT INTO EMP (EMP_ID, NAME)
+VALUES (1, '홍길동');
+````
+
+---
+
+## UPDATE
+
+기존 데이터 수정
+
+```sql
+UPDATE EMP
+SET SALARY = 3000
+WHERE EMP_ID = 1;
+```
+
+WHERE가 없으면 모든 행이 수정될 수 있으므로 주의.
+
+---
+
+## DELETE
+
+데이터 삭제
+
+```sql
+DELETE FROM EMP
+WHERE EMP_ID = 1;
+```
+
+WHERE가 없으면 모든 행이 삭제될 수 있음.
+
+---
+
+## MERGE
+
+두 테이블의 데이터를 비교하여
+INSERT 또는 UPDATE 등을 하나의 문장으로 처리할 수 있다.
+
+```text
+조건 일치
+→ UPDATE
+
+조건 불일치
+→ INSERT
+```
+
+---
+
+# 03. DDL
+
+DDL(Data Definition Language)
+
+→ 데이터베이스의 객체와 구조를 정의하거나 변경
+
+주요 명령어:
+
+* CREATE
+* ALTER
+* DROP
+* TRUNCATE
+
+---
+
+## CREATE
+
+객체 생성
+
+```sql
+CREATE TABLE EMP (
+    EMP_ID NUMBER,
+    NAME VARCHAR2(20)
+);
+```
+
+---
+
+## ALTER
+
+기존 객체의 구조 변경
+
+```sql
+ALTER TABLE EMP
+ADD SALARY NUMBER;
+```
+
+---
+
+## DROP
+
+객체 자체를 삭제
+
+```sql
+DROP TABLE EMP;
+```
+
+→ 테이블 구조와 데이터가 모두 삭제
+
+---
+
+## TRUNCATE
+
+테이블의 전체 데이터를 삭제
+
+```sql
+TRUNCATE TABLE EMP;
+```
+
+→ 데이터 전체 삭제
+→ 테이블 구조는 유지
+
+---
+
+# 04. DELETE vs TRUNCATE vs DROP
+
+### DELETE
+
+```sql
+DELETE FROM EMP;
+```
+
+→ 데이터 삭제
+
+→ DML
+
+→ WHERE 사용 가능
+
+→ 조건에 따라 일부 삭제 가능
+
+---
+
+### TRUNCATE
+
+```sql
+TRUNCATE TABLE EMP;
+```
+
+→ 전체 데이터 삭제
+
+→ DDL
+
+→ WHERE 사용 불가
+
+→ 테이블 구조 유지
+
+---
+
+### DROP
+
+```sql
+DROP TABLE EMP;
+```
+
+→ 테이블 자체 삭제
+
+→ 구조 + 데이터 삭제
+
+---
+
+## 시험용 비교
+
+```text
+DELETE
+→ 데이터 삭제
+→ DML
+→ WHERE 가능
+
+TRUNCATE
+→ 전체 데이터 삭제
+→ DDL
+→ WHERE 불가능
+→ 구조 유지
+
+DROP
+→ 테이블 자체 삭제
+→ DDL
+→ 구조 + 데이터 삭제
+```
+
+---
+
+# 05. TCL
+
+TCL(Transaction Control Language)
+
+→ 트랜잭션을 제어하는 명령어
+
+주요 명령어:
+
+* COMMIT
+* ROLLBACK
+* SAVEPOINT
+
+---
+
+## COMMIT
+
+트랜잭션의 변경사항 확정
+
+```sql
+COMMIT;
+```
+
+---
+
+## ROLLBACK
+
+트랜잭션의 변경사항 취소
+
+```sql
+ROLLBACK;
+```
+
+---
+
+## SAVEPOINT
+
+트랜잭션 내 특정 지점을 저장
+
+```sql
+SAVEPOINT SP1;
+```
+
+특정 지점까지 롤백:
+
+```sql
+ROLLBACK TO SP1;
+```
+
+---
+
+# 06. DCL
+
+DCL(Data Control Language)
+
+→ 데이터베이스 객체에 대한 권한을 제어
+
+주요 명령어:
+
+* GRANT
+* REVOKE
+
+---
+
+## GRANT
+
+권한 부여
+
+```sql
+GRANT SELECT
+ON EMP
+TO USER1;
+```
+
+→ USER1에게 EMP 테이블의 SELECT 권한 부여
+
+여러 권한 부여:
+
+```sql
+GRANT SELECT, INSERT
+ON EMP
+TO USER1;
+```
+
+---
+
+## REVOKE
+
+부여한 권한 회수
+
+```sql
+REVOKE SELECT
+ON EMP
+FROM USER1;
+```
+
+---
+
+# 07. 주요 권한
+
+대표적인 객체 권한:
+
+* SELECT
+* INSERT
+* UPDATE
+* DELETE
+
+예:
+
+```sql
+GRANT SELECT, UPDATE
+ON EMP
+TO USER1;
+```
+
+---
+
+# 08. 권한과 ROLE
+
+ROLE
+
+→ 여러 권한을 묶어서 관리할 수 있는 객체
+
+사용자에게 여러 권한을 하나씩 부여하는 대신
+ROLE에 권한을 부여하고 ROLE을 사용자에게 부여할 수 있다.
+
+```text
+권한
+ ↓
+ROLE
+ ↓
+사용자
+```
+
+---
+
+# DAY22 핵심 암기
+
+## DML
+
+데이터 조작
+
+SELECT
+INSERT
+UPDATE
+DELETE
+MERGE
+
+---
+
+## DDL
+
+데이터베이스 구조/객체 정의
+
+CREATE
+ALTER
+DROP
+TRUNCATE
+
+---
+
+## TCL
+
+트랜잭션 제어
+
+COMMIT
+ROLLBACK
+SAVEPOINT
+
+---
+
+## DCL
+
+권한 제어
+
+GRANT
+REVOKE
+
+---
+
+# 가장 중요한 비교
+
+```text
+DML → 데이터
+DDL → 구조
+TCL → 트랜잭션
+DCL → 권한
+```
+
+```text
+DELETE
+→ DML
+→ 데이터 삭제
+→ WHERE 가능
+
+TRUNCATE
+→ DDL
+→ 전체 데이터 삭제
+→ WHERE 불가능
+→ 구조 유지
+
+DROP
+→ DDL
+→ 객체 자체 삭제
+```
+
+### 암기 문장
+
+**DML은 데이터를 만지고,
+DDL은 구조를 만들고,
+TCL은 트랜잭션을 조절하고,
+DCL은 권한을 조절한다.**
+
+```
+```
