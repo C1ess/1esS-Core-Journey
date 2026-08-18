@@ -1,0 +1,66 @@
+# Daily Review - Day21
+
+## 📚 Today's Learning
+
+### English
+- 영어 공부 완료
+
+### Card News
+- EP.31 — AI는 사람의 말을 어떻게 이해할까?
+- Token
+- Tokenization
+- Embedding
+- Vector
+- Context
+- LLM
+- Next Token Prediction
+
+### K-MOOC
+- FSM (Finite State Machine)
+- State Diagram
+- State Encoding
+- Next-State Logic
+- Output Logic
+- RTL Coding
+- Binary Encoding / One-hot Encoding
+
+### Google AI
+- Multimodal AI
+- Multimodal Prompting
+- Text-to-Image
+- Image-to-Video
+- Gemini Live
+- AI 기반 콘텐츠 제작
+- AI 결과물 검토 및 평가
+- Gemini + Google Slides
+- Veo 3.1
+
+### SQLD
+- SQLD 학습 완료
+
+---
+
+## 🎯 Today's Key Points
+
+### English
+- 영어 공부 완료
+
+### Card News / AI
+- AI는 텍스트를 Token으로 나누고 숫자 형태로 변환해 처리한다.
+- Embedding은 언어의 의미와 관계를 숫자 벡터로 표현한다.
+- LLM은 문맥과 토큰 간 관계를 계산해 다음 토큰을 예측한다.
+- AI는 텍스트뿐 아니라 이미지와 영상까지 처리하는 멀티모달 방식으로 확장되고 있다.
+- AI를 활용하면 아이디어부터 이미지·영상 제작까지 창작 과정을 단축할 수 있다.
+- AI 결과물은 사람이 직접 검토하고 판단해야 한다.
+
+### K-MOOC / Semiconductor
+- FSM은 상태와 상태 전이를 이용해 디지털 시스템의 동작을 표현한다.
+- State Diagram → State Encoding → Next-State Logic → Output Logic → RTL Coding 순으로 설계한다.
+- FSM은 Next-State Combinational Logic, State Register, Output Logic으로 구성된다.
+- State Encoding에는 Binary Encoding과 One-hot Encoding이 사용된다.
+
+---
+
+## 🔥 Study Streak
+
+Day 21 Complete ✅
