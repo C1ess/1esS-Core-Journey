@@ -1,0 +1,56 @@
+# Daily Review - Day22
+
+## 📚 Today's Learning
+
+### English
+- 영어 공부 없음
+
+### Card News
+- EP.32 — 유럽의 반도체 경쟁력과 반도체 생태계
+
+### K-MOOC
+- Number System
+- Sign and Magnitude
+- 2's Complement
+- Overflow
+
+### Google AI
+- Gemini Canvas
+- Google Slides Gemini Sidebar
+- AI 기반 슬라이드 제작 및 편집
+- AI 검색
+- Magic Erase
+- Circle to Search
+
+### SQLD
+- SQLD 학습 완료
+
+---
+
+## 🎯 Today's Key Points
+
+### AI
+- Gemini Canvas를 활용하면 긴 문서를 발표용 슬라이드로 빠르게 변환할 수 있다.
+- 전문가 역할과 대상에 맞는 프롬프트를 사용하면 슬라이드의 내용과 표현을 구체적으로 조정할 수 있다.
+- Google Slides의 Gemini 기능을 활용해 헤드라인과 이미지 등을 개선할 수 있다.
+- AI가 생성한 결과는 원본 문서와 비교해 누락이나 오류를 확인해야 한다.
+
+### Semiconductor
+- 유럽은 반도체 산업 전체에서 약한 것이 아니라 장비·자동차용·전력·산업용 반도체 등 특정 분야에서 강점을 가진다.
+- ASML은 최첨단 반도체 제조에 필요한 EUV 노광 장비 분야의 핵심 기업이다.
+- 최첨단 로직 파운드리의 대규모 생산에서는 한국·대만·미국이 강한 경쟁력을 보인다.
+- 반도체 산업은 설계 → 장비 → 소재 → 제조 → 패키징 → 테스트가 연결된 거대한 생태계다.
+- 반도체 경쟁력은 개별 기업뿐 아니라 산업 생태계 전체의 경쟁력으로 결정된다.
+
+### K-MOOC
+- Sign and Magnitude는 최상위 bit로 부호를 표현한다.
+- 2's Complement는 음수를 효율적으로 표현하고 뺄셈을 덧셈으로 처리할 수 있어 디지털 시스템에서 널리 사용된다.
+- 2's Complement에서는 0이 하나만 존재한다.
+- Overflow는 같은 부호의 두 수를 더할 때 발생할 수 있다.
+- 부호가 다른 두 수의 덧셈에서는 Overflow가 발생하지 않는다.
+
+---
+
+## 🔥 Study Streak
+
+Day 22 Complete ✅
