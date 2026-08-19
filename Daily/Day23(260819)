@@ -1,0 +1,60 @@
+# Daily Review - Day23
+
+## 📚 Today's Learning
+
+### English
+- 영어 공부 완료
+
+### Card News
+- EP.33 — AI 반도체의 발열과 냉각 기술
+
+### K-MOOC
+- Full Adder
+- Ripple Carry Adder (RCA)
+- Adder + Subtractor
+- Carry Save Adder (CSA)
+- Carry Save Adder Tree (CSA Tree)
+
+### Google AI
+- Gemini를 활용한 크리에이티브 피드백
+- 디자인 가이드라인 기반 평가
+- 목표 기반 구체적 피드백
+- 협업용 피드백 메모 작성
+- Context First
+- Anchor Guidelines
+- Iterative Consistency
+
+### SQLD
+- SQLD 학습 완료
+
+---
+
+## 🎯 Today's Key Points
+
+### AI
+
+- AI에게 단순히 "평가해줘"라고 요청하기보다 **청중·목표·제약조건**을 먼저 제공해야 더 정확한 결과를 얻을 수 있다.
+- 디자인 비평 전 객관적인 **가이드라인을 먼저 설정**하면 구체적인 피드백을 얻기 쉽다.
+- 마음에 든 결과물을 기준점으로 삼아 후속 결과물의 **스타일 일관성**을 유지할 수 있다.
+
+### Semiconductor
+
+- CPU와 GPU의 연산 과정에서는 열이 발생하며, 고성능 GPU일수록 발열 관리가 중요하다.
+- 과도한 온도 상승은 성능과 안정성에 영향을 줄 수 있다.
+- 히트싱크는 칩의 열을 외부로 전달하고 방출하는 기본적인 냉각 장치다.
+- 고성능 데이터센터에서는 액체 냉각의 중요성이 커지고 있다.
+- AI 반도체에서는 **연산 성능뿐 아니라 전력 효율과 열 관리**도 중요한 경쟁력이다.
+
+### K-MOOC
+
+- Full Adder는 A, B, Carry In을 입력받아 Sum과 Carry Out을 출력한다.
+- RCA는 Full Adder를 직렬 연결해 여러 비트의 덧셈을 수행하지만 Carry가 순차적으로 전파되어 비트 수가 증가할수록 지연이 커진다.
+- Adder + Subtractor는 2's Complement를 이용해 하나의 회로에서 덧셈과 뺄셈을 수행한다.
+- CSA는 Carry를 즉시 다음 비트로 전파하지 않고 별도의 Carry 벡터로 저장해 다수 피연산자를 빠르게 압축한다.
+- CSA Tree는 여러 피연산자를 단계적으로 2개까지 줄인 후 최종 가산기로 결과를 계산한다.
+
+---
+
+## 🔥 Study Streak
+
+Day 23 Complete ✅
