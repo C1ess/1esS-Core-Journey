@@ -1,0 +1,33 @@
+# Gemini를 활용한 데이터 분석 및 임원 보고 준비 실습
+
+## 1. 데이터 분석과 AI의 역할
+* **데이터 분석의 중요성**: 데이터는 최선의 의사결정을 돕고, 자신의 비즈니스 관점을 논리적으로 뒷받침하는 핵심 요소입니다.
+* **Gemini의 기능과 효율성**: 복잡한 데이터 이해 및 시각화를 지원합니다. 데이터 정리, 수식 해결, 패턴 발견을 자동화하여 분석 시간을 크게 단축하며, 자연어로 스프레드시트 수식을 생성하고 차트를 만들 수 있습니다.
+* **사용자의 역할과 보안 주의**:
+    * 사용자는 AI에게 좋은 질문을 던지고, 도출된 인사이트를 해석하며, 결과의 정확성을 반드시 검증해야 합니다.
+    * **보안**: 민감한 사내 데이터는 공개 AI 도구에 입력하지 않아야 하며, 기업의 AI 보안 정책 및 개인정보 보호 설정을 철저히 확인해야 합니다.
+
+## 2. 학습 목표
+* **전략적 집중**: 수많은 정보 중 가장 중요한 핵심 데이터가 무엇인지 빠르게 파악합니다.
+* **자신감 향상**: 이해관계자나 임원진의 날카로운 질문에 대비하여 데이터 논의를 주도할 수 있습니다.
+* **도구 활용 장벽 해소**: 데이터 도구 활용에 대한 명확한 단계별 가이드를 통해 기술적 장벽을 낮춥니다.
+
+---
+
+## 3. 실습 과제: 임원 보고 프레젠테이션 준비하기
+전자상거래 기업의 임원 보고 회의를 준비하는 시나리오입니다. 아래 프롬프트의 `[대괄호]` 부분을 본인의 산업, 목표, 보고 대상에 맞게 수정하여 Gemini와 새 채팅을 시작해 보세요.
+
+### Step 1: 주요 프레젠테이션 측정항목(Metrics) 파악하기
+보고 목적에 맞는 상위 5개 핵심 지표를 추천받습니다.
+> **프롬프트:**
+> I work at an `[your company type, e.g. apparel company]`. I'm preparing for an `[type of meeting, e.g. executive review of website performance]`. Our goal is to `[primary business goal, e.g. increase revenue in Q3]`. What are the top 5 metrics I should consider for my presentation?
+
+### Step 2: 리더십 예상 질문 예측 및 대비하기
+Step 1에서 Gemini가 제안한 측정항목 중 하나를 선택하여, 임원진이 제기할 수 있는 예상 질문을 파악합니다.
+> **프롬프트:**
+> What questions might our leadership team ask about `[one of Gemini's suggested metrics from the previous step]`?
+
+### Step 3 (선택 사항): 특정 데이터 소스에서 데이터 추출 가이드 받기
+필요한 데이터를 어디서 구해야 할지 알지만 추출(Export) 방법을 모를 경우 도움을 요청합니다.
+> **프롬프트:**
+> How do I export `[data, e.g. website traffic data]` from `[data source, e.g. Google Analytics]` so I can analyze it in `[destination, e.g. a Google Sheet]`?
