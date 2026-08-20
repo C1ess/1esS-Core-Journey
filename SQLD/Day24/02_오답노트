@@ -1,0 +1,404 @@
+````markdown
+# DAY24 — 02_오답노트
+
+# SQLD 기출유형 오답노트
+
+---
+
+## 오답 01. OUTER JOIN + UNION
+
+### 문제
+
+T1
+
+| ID | NAME |
+|---:|---|
+| 1 | A |
+| 2 | B |
+
+T2
+
+| ID | LOC |
+|---:|---|
+| 1 | SE |
+| 3 | BU |
+
+다음 SQL의 결과:
+
+```sql
+SELECT T1.ID, NAME, LOC
+FROM T1
+LEFT OUTER JOIN T2
+ON T1.ID = T2.ID
+
+UNION
+
+SELECT T1.ID, NAME, LOC
+FROM T1
+RIGHT OUTER JOIN T2
+ON T1.ID = T2.ID;
+````
+
+내가 선택한 답:
+
+| ID | NAME | LOC  |
+| -: | ---- | ---- |
+|  1 | A    | SE   |
+|  2 | B    | NULL |
+|  3 | NULL | BU   |
+
+정답:
+
+→ 위 결과가 맞는 것처럼 보이지만, **실제 SQL의 `UNION` 결과에서 컬럼 별칭과 NULL 매칭을 정확히 이해해야 한다.**
+
+### 풀이
+
+#### ① LEFT OUTER JOIN
+
+```sql
+T1
+LEFT OUTER JOIN T2
+ON T1.ID = T2.ID
+```
+
+왼쪽 테이블인 T1의 모든 행을 유지한다.
+
+| T1.ID | NAME | T2.LOC |
+| ----: | ---- | ------ |
+|     1 | A    | SE     |
+|     2 | B    | NULL   |
+
+---
+
+#### ② RIGHT OUTER JOIN
+
+```sql
+T1
+RIGHT OUTER JOIN T2
+ON T1.ID = T2.ID
+```
+
+오른쪽 테이블인 T2의 모든 행을 유지한다.
+
+| T1.ID | NAME | T2.LOC |
+| ----: | ---- | ------ |
+|     1 | A    | SE     |
+|  NULL | NULL | BU     |
+
+중요한 점:
+
+T2에만 존재하는 ID = 3은
+
+```text
+T1.ID → NULL
+```
+
+이 된다.
+
+따라서 두 번째 SELECT의 ID 컬럼은 `T1.ID`이므로
+ID 3이 그대로 출력되는 것이 아니다.
+
+---
+
+### 최종 결과
+
+첫 번째 SELECT:
+
+```text
+1 A SE
+2 B NULL
+```
+
+두 번째 SELECT:
+
+```text
+1 A SE
+NULL NULL BU
+```
+
+`UNION`은 중복을 제거하므로 최종 결과:
+
+```text
+1     A     SE
+2     B     NULL
+NULL  NULL  BU
+```
+
+---
+
+### 핵심 오답 포인트
+
+문제에서 선택한 답처럼
+
+```text
+3 NULL BU
+```
+
+이 되는 것이 아니라,
+
+**SELECT에서 `T1.ID`를 조회하고 있기 때문에 T2에만 존재하는 ID 3은 NULL이 된다.**
+
+만약 다음과 같이 작성했다면:
+
+```sql
+SELECT T2.ID, NAME, LOC
+```
+
+T2에만 존재하는 3이 출력된다.
+
+### 암기
+
+**OUTER JOIN에서 어느 테이블의 컬럼을 SELECT하는지 반드시 확인한다.**
+
+```text
+T2에만 존재하는 ID 3
+
+SELECT T1.ID
+→ NULL
+
+SELECT T2.ID
+→ 3
+```
+
+---
+
+# 오답 02. VIEW와 DML
+
+### 문제
+
+VIEW에 대한 설명으로 옳지 않은 것을 고르는 문제
+
+내가 선택한 답:
+
+> VIEW는 쿼리를 저장하고 실행 시 해당 쿼리를 다시 실행한다.
+
+정답:
+
+> VIEW가 복합 테이블 기반일 때 DML이 가능하다.
+
+---
+
+### 핵심 개념
+
+VIEW는 실제 데이터를 별도로 저장하는 테이블이 아니라
+**SELECT문을 기반으로 만들어지는 논리적인 가상 테이블**이다.
+
+따라서 일반적인 VIEW는 조회할 때
+기반 테이블의 데이터를 이용한다.
+
+내가 선택한 문장:
+
+> VIEW는 쿼리를 저장하고 실행 시 해당 쿼리를 다시 실행한다.
+
+→ VIEW의 기본적인 특징을 설명하는 내용이므로
+옳은 설명이다.
+
+---
+
+### DML이 가능한 VIEW
+
+VIEW라고 해서 모두 DML이 가능한 것은 아니다.
+
+#### 단순 VIEW
+
+하나의 테이블을 기반으로 하고
+복잡한 연산이 없는 경우
+
+→ DML이 가능한 경우가 많다.
+
+#### 복합 VIEW
+
+여러 테이블의 JOIN이나
+GROUP BY, 집계함수 등을 사용하는 경우
+
+→ 일반적으로 DML이 제한된다.
+
+따라서
+
+> "VIEW가 복합 테이블 기반일 때 DML이 가능하다."
+
+는 옳지 않은 설명이다.
+
+---
+
+### 예시
+
+#### 단순 VIEW
+
+```sql
+CREATE VIEW V_EMP AS
+SELECT EMPNO, ENAME, SAL
+FROM EMP;
+```
+
+단순한 하나의 테이블 기반 VIEW이므로
+조건에 따라 DML이 가능하다.
+
+#### 복합 VIEW
+
+```sql
+CREATE VIEW V_EMP_DEPT AS
+SELECT E.EMPNO,
+       E.ENAME,
+       D.DNAME
+FROM EMP E
+JOIN DEPT D
+ON E.DEPTNO = D.DEPTNO;
+```
+
+여러 테이블을 JOIN한 복합 VIEW이므로
+일반적으로 DML이 제한된다.
+
+---
+
+### 핵심 암기
+
+```text
+단순 VIEW
+→ DML 가능성이 높음
+
+복합 VIEW
+→ 일반적으로 DML 제한
+```
+
+**VIEW는 무조건 DML이 가능한 것이 아니다.**
+
+---
+
+# 오답 03. Isolation Level
+
+### 문제
+
+Isolation Level에 대한 설명 중 옳은 것을 고르는 문제
+
+정답:
+
+> Serialization은 모든 동시성 문제를 방지하지만 성능이 저하된다.
+
+---
+
+### 핵심 개념
+
+Isolation Level
+
+→ 동시에 여러 트랜잭션이 실행될 때
+트랜잭션 간의 데이터 접근을 어느 정도까지 격리할지 결정하는 수준
+
+격리 수준이 높아질수록
+데이터의 일관성은 높아지지만
+동시 처리 성능은 떨어질 수 있다.
+
+---
+
+### Serialization
+
+직렬화 수준
+
+→ 트랜잭션을 순차적으로 실행하는 것과
+유사한 결과를 보장
+
+따라서 동시성 문제를 가장 강하게 방지한다.
+
+대신 다른 트랜잭션이 기다려야 하는 경우가 많아
+
+```text
+동시성 ↑
+→ 성능 ↑
+
+격리 수준 ↑
+→ 동시성 ↓
+→ 일관성 ↑
+→ 성능 ↓
+```
+
+의 관계를 기억해야 한다.
+
+---
+
+### 대표적인 동시성 문제
+
+#### Dirty Read
+
+다른 트랜잭션이 아직 COMMIT하지 않은 데이터를 읽는 문제
+
+#### Non-Repeatable Read
+
+같은 행을 두 번 조회했는데
+중간에 다른 트랜잭션이 수정하여 결과가 달라지는 문제
+
+#### Phantom Read
+
+같은 조건으로 다시 조회했을 때
+이전에 없던 행이 새롭게 나타나는 문제
+
+---
+
+### 핵심
+
+Serialization 수준에서는
+동시성 문제를 강하게 방지할 수 있지만
+
+→ 그만큼 잠금 및 대기 가능성이 증가
+→ 동시 처리 성능 저하
+
+따라서 정답 문장이 옳다.
+
+---
+
+# DAY23 추가 핵심 암기
+
+## OUTER JOIN
+
+```text
+LEFT JOIN
+→ 왼쪽 테이블 전체
+
+RIGHT JOIN
+→ 오른쪽 테이블 전체
+
+FULL JOIN
+→ 양쪽 테이블 전체
+```
+
+그리고 가장 중요한 것:
+
+**JOIN 결과에서 NULL이 되는 컬럼은 SELECT에서 어느 테이블의 컬럼을 선택했는지 확인한다.**
+
+---
+
+## VIEW
+
+```text
+VIEW
+→ SELECT문 기반의 가상 테이블
+
+단순 VIEW
+→ DML 가능성이 높음
+
+복합 VIEW
+→ 일반적으로 DML 제한
+```
+
+---
+
+## Isolation Level
+
+```text
+격리 수준 ↑
+→ 데이터 일관성 ↑
+→ 동시성 ↓
+→ 성능 ↓
+
+Serialization
+→ 동시성 문제를 가장 강하게 방지
+→ 성능 저하 가능
+```
+
+### 최종 암기
+
+**VIEW는 쿼리를 기반으로 만들어지는 가상 테이블이고, 복합 VIEW는 일반적으로 DML이 제한된다.**
+
+**Serialization은 동시성 문제를 방지하는 대신 성능 저하가 발생할 수 있다.**
+
+```
+```
