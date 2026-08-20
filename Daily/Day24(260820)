@@ -1,0 +1,44 @@
+# Daily Review — Day24
+
+## 🎯 오늘 공부한 내용
+
+* **영어 공부 완료**
+* **SQLD 공부 완료**
+* **K-MOOC:** 빠른 가산기
+
+  * Parallel Prefix Adder (PPA)
+  * Carry Lookahead Adder (CLA)
+  * Carry Select Adder (CSLA)
+  * 고속 가산기의 구조·속도·면적 비교
+* **Google AI:** Gemini를 활용한 데이터 분석 및 임원 보고 준비
+
+  * 핵심 데이터 및 Metrics 선정
+  * 임원 예상 질문 준비
+  * 데이터 추출 가이드
+  * AI 결과 검증 및 보안
+* **Semiconductor:** 반도체 취업에서 학점의 의미
+
+  * 학점과 전공역량
+  * 프로젝트·직무 경험의 중요성
+  * FPGA·Verilog 등 실무 역량
+  * 학점과 실제 직무 수행 능력의 연결
+* **Card News:** EP.34 「반도체 취업, 학점이 낮으면 끝일까요?」 학습·정리 완료
+
+## 🔑 오늘의 Key Points
+
+* **PPA:** Prefix 구조로 Carry를 병렬 계산해 빠른 연산 구현
+* **CLA:** Carry를 미리 계산해 RCA의 순차적 Carry 전파 지연을 줄임
+* **CSLA:** Carry 입력 0/1의 결과를 미리 계산한 뒤 MUX로 선택해 속도를 높임
+* **AI:** 데이터 분석에서 AI는 분석과 시각화를 돕지만, 결과 검증과 보안은 사용자의 책임
+* **취업:** 학점은 중요한 지표지만, 최종 경쟁력은 전공 지식과 프로젝트·직무 경험을 실제 역량으로 연결하는 것
+
+## 🔥 Day24 Status
+
+* 영어 ✅
+* SQLD ✅
+* K-MOOC ✅
+* Google AI ✅
+* Semiconductor ✅
+* Card News ✅
+
+**Day24 Complete ✅**
