@@ -1,0 +1,57 @@
+# Daily Review - Day25
+
+## 📚 Today's Learning
+
+- 영어 공부 완료
+- SQLD 공부 완료
+- K-MOOC: 빠른 가산기
+  - Parallel Prefix Adder (PPA)
+  - Carry Lookahead Adder (CLA)
+  - Carry Select Adder (CSLA)
+- Google AI: 비정형 데이터 분석
+  - 이미지·PDF 데이터 추출
+  - Google Sheets와 `=AI()` 활용
+  - 데이터 분류·감정분석
+  - 비정형 데이터를 실행 가능한 인사이트로 전환
+- Semiconductor: 전력과 반도체 성능의 관계
+  - 전력 증가 ≠ 성능 증가
+  - 성능을 결정하는 다양한 요소
+  - 전력 효율과 발열 관리의 중요성
+- Card News: 🟡 TRUE OR CHIP | EP.35
+
+---
+
+## 🎯 Today's Key Points
+
+### AI
+
+- 이미지·PDF 같은 비정형 데이터도 AI를 활용해 분석 가능한 데이터로 변환할 수 있다.
+- Sheets의 자연어 기반 AI 기능을 이용하면 복잡한 수식 없이 데이터를 분류하고 분석할 수 있다.
+- AI를 활용하면 수작업 데이터 처리 시간을 줄이고 인사이트 도출에 집중할 수 있다.
+
+### Semiconductor
+
+- 전력을 많이 사용한다고 해서 칩의 성능이 반드시 높아지는 것은 아니다.
+- 칩 성능은 클럭 속도, 아키텍처, 트랜지스터 수, 공정 기술 등 여러 요소의 영향을 받는다.
+- 전력 소비가 증가하면 발열과 냉각 문제도 커질 수 있다.
+- AI 반도체에서는 단순한 최고 성능보다 **전력 대비 성능**, 즉 전력 효율이 중요하다.
+
+### K-MOOC
+
+- **PPA**는 Prefix Tree를 이용해 Carry를 병렬적으로 계산하여 지연을 줄인다.
+- **CLA**는 Carry를 미리 계산해 RCA의 순차적인 Carry 전파 문제를 해결한다.
+- **CSLA**는 Carry In이 0과 1일 때의 결과를 미리 계산하고 MUX로 선택한다.
+- 빠른 가산기는 일반적으로 속도를 높이는 대신 면적이나 전력 측면의 비용이 증가할 수 있다.
+
+---
+
+## 🔥 Day25 Status
+
+- English ✅
+- SQLD ✅
+- K-MOOC ✅
+- Google AI ✅
+- Semiconductor ✅
+- Card News ✅
+
+**Day25 Complete ✅**
