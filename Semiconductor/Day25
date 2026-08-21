@@ -1,0 +1,55 @@
+# Semiconductor - Day25
+
+## 🟡 TRUE OR CHIP | EP.35
+
+### 🎯 핵심 내용
+
+- **전력 소비가 높다고 해서 칩 성능이 반드시 높은 것은 아니다.**
+- CPU·GPU 성능은 클럭 속도, 아키텍처, 트랜지스터 수, 공정 기술 등 여러 요소에 의해 결정된다.
+- 전력 소비가 증가하면 발열과 냉각 문제도 커질 수 있다.
+- AI 반도체에서는 단순한 연산 성능뿐 아니라 **전력 효율**이 중요한 경쟁 요소다.
+
+## 🔧 K-MOOC | 빠른 가산기
+
+### Parallel Prefix Adder (PPA)
+
+- 트리 구조의 Prefix 연산을 이용해 여러 비트의 **Carry를 병렬적으로 계산**하는 고속 가산기.
+- 기본 흐름:
+  1. 각 비트의 Propagate(`P`)와 Generate(`G`) 생성
+  2. Prefix 네트워크를 이용해 Carry 계산
+  3. Carry와 입력을 이용해 Sum 계산
+- Carry를 순차적으로 전달하는 RCA보다 빠르며, 지연 시간이 **O(log N)** 수준으로 감소한다.
+
+### Carry Lookahead Adder (CLA)
+
+- Carry가 다음 비트로 순차적으로 전달되는 것을 기다리지 않고 **Carry Look-ahead 로직으로 미리 계산**한다.
+- RCA의 Carry 전파 지연을 줄여 더 빠른 연산이 가능하다.
+
+### Carry Select Adder (CSLA)
+
+- `Cin = 0`과 `Cin = 1`인 경우를 **동시에 미리 계산**한다.
+- 실제 Carry가 결정되면 MUX를 통해 올바른 결과를 선택한다.
+- 속도는 빠르지만 중복된 가산기를 사용하기 때문에 **면적과 전력 소모가 증가**한다.
+
+## 📊 고속 가산기 비교
+
+| 구조 | 핵심 방식 | 지연 시간 | 면적 |
+|---|---|---:|---:|
+| RCA | Carry 순차 전파 | O(N) | 작음 |
+| PPA | Prefix 트리로 Carry 병렬 계산 | O(log N) | 큼 |
+| CLA | Carry를 미리 계산 | 낮음 | 중간~큼 |
+| CSLA | 두 Carry 경우를 선계산 후 MUX 선택 | 낮음 | 큼 |
+
+## 🔍 K-MOOC 핵심 용어
+
+- **RCA** — Ripple Carry Adder
+- **PPA** — Parallel Prefix Adder
+- **CLA** — Carry Lookahead Adder
+- **CSLA** — Carry Select Adder
+- **Carry** — 덧셈 과정에서 다음 자리로 전달되는 올림수
+- **Prefix Network** — Carry 정보를 트리 구조로 병렬 계산하는 회로
+- **MUX** — 여러 입력 중 하나를 선택하는 회로
+
+## 💡 오늘의 핵심
+
+> 반도체 설계에서는 **연산 속도만 높이는 것이 아니라, 속도·면적·전력 사이의 균형**을 맞추는 것이 중요하다.
