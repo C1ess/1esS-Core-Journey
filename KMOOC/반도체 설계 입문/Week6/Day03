@@ -1,0 +1,34 @@
+Week 6 - Day 03: 빠른 가산기
+1. Parallel Prefix Adder (PPA)
+트리 구조의 Prefix 연산을 통해 모든 비트의 Carry를 병렬적으로 계산하여 지연 시간을 획기적으로 줄이는 고속 가산기입니다.
+ * 3단계 연산 프로세스
+   * P_i, G_i 생성: 각 비트 위치(A_i, B_i)에 대해 전파 신호(P_i)와 생성 신호(G_i)를 병렬로 생성합니다.
+   * Carry bit C_i 생성: Prefix 트리 네트워크를 거쳐 각 비트 위치 i에 대한 올림수 C_i를 병렬 도출합니다.
+   * Sum bit S_i 생성: 각 비트의 입력(A_i, B_i)과 도출된 올림수(C_i)를 결합하여 최종 합 S_i를 생성합니다.
+ * Prefix 기본 셀 논리식
+   *    *  * 대표적인 Prefix Adder 발전 흐름
+   * 1960: J. Sklansky (Conditional Adder)
+   * 1973: Kogge-Stone Adder
+   * 1980: Ladner-Fischer Adder
+   * 1982: Brent-Kung Adder
+   * 1987: Han-Carlson Adder
+   * 1999: S. Knowles
+2. Carry Lookahead Adder (CLA)
+하위 비트의 캐리가 상위 비트로 순차 전파되는 것을 기다리지 않고, Carry Look-ahead 로직을 통해 상위 비트들의 캐리(C_1, C_2, C_3, C_4 \dots)를 동시에 계산하는 가산기입니다.
+ * 특징: N비트 가산 시 RCA의 직렬 전파 지연 문제를 해결하여 연산 속도를 대폭 개선합니다.
+3. Carry Select Adder (CSLA)
+올림수 입력(C_{in})이 0인 경우와 1인 경우의 연산 결과를 미리 동시에 계산해 두고, 하위 블록에서 실제 Carry가 넘어오면 2:1 Multiplexer(MUX)로 올바른 결과를 선택하는 가산기입니다.
+ * 동작 원리 (8비트 연산 예시)
+   * 하위 4비트([3:0]): 일반 4-Bit Adder로 덧셈을 수행하여 합(S_0\sim S_3)과 Carry 출력(C_4)을 생성합니다.
+   * 상위 4비트([7:4]):
+     * C_{in} = 0으로 가정한 4-bit Adder와 C_{in} = 1로 가정한 4-bit Adder를 병렬로 동시 실행합니다.
+     * 하위 블록의 C_4 신호가 2:1 MUX의 선택 신호로 인가되어, 미리 계산된 두 값 중 맞는 결과(S_4\sim S_7, C_8)를 즉시 선택하여 출력합니다.
+ * 장단점
+   * 장점: Carry 전파 대기 시간을 MUX 선택 지연 시간 수준으로 단축합니다.
+   * 단점: 동일 비트 폭에 대해 가산기를 중복 배치하므로 하드웨어 면적과 전력 소모가 증가합니다.
+고속 가산기 구조별 특성 비교
+| 가산기 구조 | 동작 방식의 핵심 | 지연 시간 (Delay) | 하드웨어 면적 (Area) |
+|---|---|---|---|
+| Ripple Carry Adder (RCA) | 비트별 Carry를 순차적으로 전파 | 높음 (O(N)) | 최소 |
+| Parallel Prefix Adder (PPA) | 트리 구조의 병렬 Prefix 네트워크로 Carry 일괄 계산 | 매우 낮음 (O(\log N)) | 큼 |
+| Carry Select Adder (CSLA) | C_{in}\in\{0, 1\} 결과를 선계산 후 MUX로 선택 | 낮음 | 큼 (중복 Adder 필요) |
