@@ -1,0 +1,49 @@
+# Semiconductor - Day26
+
+## 🔵 CHIP BASICS | EP.36
+
+### 핵심 내용
+
+- 반도체 자체가 검은색인 것은 아니다.
+- 핵심 소재인 **실리콘은 회색빛**을 띠는 반도체 재료다.
+- 우리가 흔히 보는 검은색은 주로 **반도체 패키지의 외관** 때문이다.
+- 실제 반도체 **Die(다이)**는 패키지 내부에 들어간다.
+- 패키지는 칩을 **충격·습기·오염**으로부터 보호한다.
+- 모든 반도체가 검은색인 것은 아니며, 패키지 소재와 구조에 따라 색과 형태가 달라진다.
+
+---
+
+## 📚 K-MOOC | Day26
+
+### 반도체 설계 총괄 복습
+
+- **Standard Cell**: 파운드리 공정 정보를 반영해 최적화된 기본 논리회로 라이브러리
+- **반도체 설계 흐름**: System → Architecture → Logic → Physical Design → Manufacturing → Packaging
+- **FinFET**: Fin 개수 증가 → 채널 폭 증가 → 구동 전류 증가 → 지연시간 감소
+- **CMOS 3-input AND Gate**: 3-input NAND + Inverter → 총 8개 트랜지스터
+- **Priority Encoder**: Arbiter와 Encoder를 이용해 구현
+- **Latch / Flip-Flop**: Level-sensitive와 Edge-triggered 구조
+- **Setup / Hold Time**: 데이터 경로 지연을 조절해 Timing Violation 해결
+- **Clock Skew**: 클럭 도착 시간을 조절해 Timing 최적화 가능
+- **RCA**: Carry가 순차적으로 전파되어 지연시간이 `O(N)`
+- **PPA**: Prefix Tree를 이용해 Carry를 병렬 계산하여 지연시간을 `O(log N)`으로 감소
+- **Multiplier Tree**: Partial Product 생성 → 압축 → 최종 덧셈
+
+### 핵심 용어
+
+- Standard Cell
+- FinFET
+- CMOS
+- MUX
+- Priority Encoder
+- Latch
+- Setup / Hold Time
+- Clock Skew
+- RCA
+- PPA
+- Die
+- Package
+
+## 💡 한 줄 정리
+
+> **반도체 설계는 논리회로부터 물리 설계·제조·패키징까지 이어지며, 성능을 높이기 위해 회로 구조와 타이밍을 최적화한다.**
