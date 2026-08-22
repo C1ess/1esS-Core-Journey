@@ -1,0 +1,94 @@
+반도체 설계 입문: 7주차 기말고사 총괄평가 정리
+문항별 최종 정답 및 상세 해설 (1~20번)
+문제 1. 표준 셀(Standard Cell)의 역할
+ * 정답: 1. 참(true)
+ * 해설: 표준 셀 라이브러리는 파운드리의 물리적 공정 정보를 반영하여 미리 최적화해 둔 기본 논리 회로 세트입니다. 팹리스 기업은 이를 활용해 회로를 합성하고 배치·배선(P&R)을 수행하므로, 표준 셀은 파운드리와 팹리스를 잇는 핵심 가교 역할을 합니다.
+문제 2. 반도체 설계 흐름 순서
+ * 정답: 6. logic design
+ * 해설: 반도체 IC 설계 순서는 다음과 같습니다.
+   * System design (시스템 설계)
+   * Architecture design (아키텍처 설계)
+   * Logic design (논리 설계)
+   * Physical design (물리 설계)
+   * Manufacturing (제조/공정)
+   * Packaging (패키징 및 테스트)
+문제 3. FinFET 특성과 지연시간
+ * 정답: 1. 참(true)
+ * 해설: FinFET 구조에서 Fin의 개수를 늘리는 것은 채널 폭(W)을 넓히는 것과 같습니다. 구동 전류(I_{\text{on}})가 증가하여 출력 커패시턴스를 더 빠르게 충·방전할 수 있으므로 게이트 입-출력 지연시간을 줄일 수 있습니다.
+문제 4. 디지털 vs 아날로그 회로 신호 회복력
+ * 정답: 2. 거짓(false)
+ * 해설: 디지털 회로는 신호 왜곡을 정해진 논리 레벨('0' 또는 '1')로 복원하는 잡음 여유(Noise Margin) 기반의 시그널 회복력을 가집니다. 반면 아날로그 회로는 연속 신호를 처리하므로 잡음이 누적되어 왜곡되며 자체적인 신호 회복력을 갖지 못합니다.
+문제 5. 3-input AND Gate 트랜지스터 수
+ * 정답: 8개 (또는 8)
+ * 해설: CMOS 구조에서 AND 게이트는 3-input NAND + Inverter로 구성됩니다.
+   * 3-input NAND: PMOS 3개 + NMOS 3개 = 6개
+   * Inverter (NOT): PMOS 1개 + NMOS 1개 = 2개
+   * 총 트랜지스터 수: 6 + 2 = \mathbf{8\text{개}}
+문제 6. Priority Encoder 설계
+ * 정답: Arbiter (또는 중재기)
+ * 해설: 여러 입력 중 우선순위가 가장 높은 1개의 비트만 선택(One-hot 출력)해 주는 **Arbiter(중재기)**의 출력을 일반 Encoder의 입력에 연결하면 Priority Encoder가 구성됩니다.
+문제 7. One-hot vs Binary Select 2:1 MUX
+ * 정답: 2. 거짓(false)
+ * 해설: One-hot 방식은 선택 신호가 이미 분리되어 들어와 스위치 소자에 직접 연결됩니다. Binary select 방식은 1개의 선택 신호(S)로부터 반전 신호(\bar{S})를 생성하기 위한 인버터(트랜지스터 2개)가 추가로 필요하므로 Binary select 방식의 트랜지스터 수가 더 많습니다.
+문제 8. 4:1 MUX를 활용한 논리 구현
+ * 정답: 1. 거짓(false)
+ * 해설: 부울식 F = AB' + A'CD는 선택 신호를 S_1 = A, S_0 = C로 두고 4개 데이터 입력에 각각 $I_0 = 0, I_1 = D, I_2 = B', I_3 = B'$를 연결하여 4-입력 MUX 1개로 완벽히 구현이 가능합니다.
+문제 9. 논리식 간소화(Logic Simplification)
+ * 정답: 3. AB+A'C+BC=AB+A'C
+ * 해설: 해당 문항 기준 간소화 적용 규칙 분류에 따라 3번(AB+A'C+BC=AB+A'C, Consensus Theorem)이 정답으로 지정되어 있습니다.
+문제 10. Gated Latch의 Transparency 방지
+ * 정답: 1. 거짓(false)
+ * 해설: Gated Latch에서 클록 활성 구간 동안 입력 변화가 출력으로 곧바로 전달되는 현상(Race-through)을 막으려면 래치 간 데이터 도달 지연시간(Min-delay)을 확보해야 합니다. Combinational delay를 줄이면 신호가 너무 빠르게 도달하여 문제가 악화됩니다.
+문제 11. Master-Slave 1's Catching 문제 해결
+ * 정답: 1. 거짓(false)
+ * 해설: Master-Slave 구조에서 마스터 래치가 클록 활성 구간 동안 열려 있는 Level-sensitive 특성으로 인해 발생하는 글리치 캡처 현상입니다. 입력을 1개로 단일화해도 레벨 감지 특성은 유지되므로, 근본적인 해결을 위해서는 Edge-triggered 구조를 적용해야 합니다.
+문제 12. Verilog Latch 추론
+ * 정답: 2. Latch
+ * 해설: always @(clk, a, b) 구문은 에지(posedge)가 없는 레벨 감지 방식이며, if (clk == 1'b0)에 대응하는 else 구문이 없어 이전 상태를 유지(Hold)하는 Active-low Gated Latch로 합성됩니다.
+문제 13. Setup Time 위반 해결 방안
+ * 정답: 2. Setup time이 긴 flip-flop을 사용한다.
+ * 해설: Setup 제약 조건식은 T_{\text{clk}} \ge T_{\text{c2q}} + T_{\text{comb}} + T_{\text{setup}} 입니다. Setup time이 긴 플립플롭을 사용하면 타이밍 여유가 줄어들어 Setup time 위반이 심화됩니다.
+문제 14. Hold Time 위반 해결 방안
+ * 정답: 3. Combinational logic delay를 길게 만든다.
+ * 해설: Hold time 위반은 데이터가 클록 에지 이후 너무 빨리 바뀌어 발생합니다. 이를 해결하려면 데이터 경로에 버퍼를 삽입하거나 조합 논리 지연을 늘려 다음 플립플롭에 천천히 도달하도록 해야 합니다.
+문제 15. Clock Skew의 유용성
+ * 정답: 2. 참(true)
+ * 해설: 의도적으로 클록 도착 시간을 조절하는 Useful Skew (Clock Skew Scheduling) 기법을 적용하면, 타이밍 여유가 부족한 크리티컬 경로의 마진을 확보하여 타이밍 문제를 해결할 수 있습니다.
+문제 16. Setup Time 해결 기법과 무관한 것
+ * 정답: 3. Wire (connection detouring)
+ * 해설: 배선 우회(Wire detouring)는 지연시간을 의도적으로 늘리는 기법으로, 데이터가 너무 빠르게 도달해 생기는 Hold time 위반 해결에 사용됩니다.
+문제 17. RTL 코딩 전 상태 최소화 최적화
+ * 정답: 1. 거짓(false)
+ * 해설: 논리 합성 툴이 상태 최소화 및 인코딩 최적화를 자동으로 수행하므로, 설계자가 수작업으로 상태 수를 무리하게 줄이면 조합 논리가 복잡해지고 코드 가독성 및 유지보수성이 저하됩니다.
+문제 18. Ripple Carry Adder 지연시간 비례 관계
+ * 정답: 2. 참(true)
+ * 해설: RCA는 하위 비트의 Carry가 최상위 비트까지 순차적으로 전파되므로 지연시간이 비트 수(N)에 선형 비례합니다 (O(N)). 8비트에서 32비트로 4배 증가하면 지연시간도 4배가 됩니다.
+문제 19. Parallel Prefix Adder의 핵심 최적화 단계
+ * 정답: 1. 참(true)
+ * 해설: PPA의 3단계 중 1단계(P_i, G_i 생성)와 3단계(Sum 생성)는 게이트 1개 수준의 고정 지연(O(1))만을 가집니다. 전체 지연시간 단축은 Prefix 트리 네트워크를 통한 2단계 Carry 생성 최적화에 달려 있습니다.
+문제 20. Multiplier 트리 압축 단계
+ * 정답: 2. 참(true)
+ * 해설: 병렬 곱셈기는 [부분곱 생성 \rightarrow 부분곱 압축(Reduction) \rightarrow 최종 덧셈]으로 동작합니다. Wallace Tree와 Dadda Tree는 다수의 부분곱 행을 2개의 행으로 압축하는 Partial Product Reduction 단계의 핵심 기법입니다.
+퀵 정답표
+| 문항 | 핵심 주제 | 최종 정답 |
+|---|---|---|
+| 01 | 표준 셀(Standard Cell)의 개념 | 1. 참(true) |
+| 02 | 반도체 설계 흐름 (3번째 단계) | 6. logic design |
+| 03 | FinFET 구조와 지연시간 | 1. 참(true) |
+| 04 | 아날로그/디지털 신호 회복력 | 2. 거짓(false) |
+| 05 | 3-input AND CMOS 트랜지스터 수 | 8개 |
+| 06 | Priority Encoder 구성 블록 | Arbiter (또는 중재기) |
+| 07 | One-hot vs Binary MUX 트랜지스터 수 | 2. 거짓(false) |
+| 08 | 4-input MUX 논리식 구현 | 1. 거짓(false) |
+| 09 | Logic Simplification 구분 | 3. AB+A'C+BC=AB+A'C |
+| 10 | Gated Latch Transparency 해결 | 1. 거짓(false) |
+| 11 | Master-Slave 1's catching 방지 | 1. 거짓(false) |
+| 12 | Level-sensitive RTL 코드 추론 | 2. Latch |
+| 13 | Setup Time 위반 해결 방안 | 2. Setup time이 긴 flip-flop을 사용한다. |
+| 14 | Hold Time 위반 해결 방안 | 3. Combinational logic delay를 길게 만든다. |
+| 15 | Clock Skew의 유용성 (Useful Skew) | 2. 참(true) |
+| 16 | Setup Time 개선과 무관한 기법 | 3. Wire (connection detouring) |
+| 17 | State Diagram 상태 최소화 | 1. 거짓(false) |
+| 18 | Ripple Carry Adder 지연시간 | 2. 참(true) |
+| 19 | Parallel Prefix Adder 지연 최적화 | 1. 참(true) |
+| 20 | Wallace / Dadda Tree의 역할 | 2. 참(true) |
