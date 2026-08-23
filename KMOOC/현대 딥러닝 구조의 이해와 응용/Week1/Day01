@@ -1,0 +1,78 @@
+# [Week 1 - Day 1] Multi-layer Perceptron (MLP)
+
+본 정리는 K-MOOC '현대 딥러닝 구조의 이해와 응용 (성균관대학교)' 강의를 바탕으로 작성되었습니다.
+
+---
+
+## 1. 퍼셉트론 (The Perceptron)
+
+딥러닝의 가장 기본이 되는 단위인 퍼셉트론의 구조와 순전파(Forward Propagation) 과정입니다.
+
+### 순전파 (Forward Propagation)
+다수의 입력(Inputs)을 받아 가중치(Weights)와 곱하여 합산한 후, 비선형 활성화 함수(Non-Linearity)를 거쳐 최종 출력(Output)을 생성합니다.
+
+*   **입력 (Inputs):** $x_1, x_2, ..., x_m$
+*   **가중치 (Weights):** $w_1, w_2, ..., w_m$
+*   **편향 (Bias):** $w_0$ (또는 $b$)
+*   **가중합 (Linear combination of inputs):** 
+    $$ z = w_0 + \sum_{j=1}^{m} x_j w_j $$
+*   **활성화 함수 (Non-linear activation function):** $g(z)$
+*   **최종 출력 (Output):** 
+    $$ \hat{y} = g\left(w_0 + \sum_{i=1}^{m} x_i w_i\right) $$
+
+<br>
+
+## 2. 활성화 함수 (Activation Functions)
+
+단순한 가중합($z$)을 비선형적인 형태로 변환하여, 신경망이 복잡한 패턴을 학습할 수 있도록 돕습니다.
+
+*   **출력 수식 (벡터 형태):**
+    $$ \hat{y} = g(w_0 + X^T W) $$
+*   **대표적인 예시: 시그모이드(Sigmoid) 함수**
+    $$ g(z) = \sigma(z) = \frac{1}{1 + e^{-z}} $$
+    *   입력값을 0과 1 사이의 값으로 압축(squash)합니다. 주로 이진 분류의 출력층에 사용됩니다.
+
+<br>
+
+## 3. 다층 퍼셉트론 (Multilayer Perceptron, MLP)
+
+단일 퍼셉트론의 한계를 극복하기 위해 퍼셉트론을 여러 층(Layer)으로 쌓아 올린 구조입니다.
+
+### Architecture Basics (구조)
+*   **Input Layer (입력층):** 데이터를 받아들이는 층
+*   **Hidden Layer (은닉층):** 입력층과 출력층 사이에서 복잡한 특징을 추출하는 층 (여러 개 존재 가능)
+*   **Output Layer (출력층):** 최종 결과를 도출하는 층
+*   **Width (너비):** 각 층에 존재하는 노드(뉴런)의 개수
+*   **Depth (깊이):** 신경망을 구성하는 총 층(Layer)의 개수
+
+### 계층적 연산 (Hierarchical Computation)
+MLP는 층을 거듭할수록 점진적으로 더 복잡한 특징(Feature)을 계산해 냅니다.
+
+*   **(Before) 단층 신경망 (Linear score function):** 
+    $$ f = Wx $$
+*   **(Now) 2-layer Neural Network:** 
+    $$ f = W_2 \max(0, W_1 x) $$
+*   **(Now) 3-layer Neural Network:** 
+    $$ f = W_3 \max(0, W_2 \max(0, W_1 x)) $$
+    *(여기서 $\max(0, z)$는 ReLU 활성화 함수를 의미합니다.)*
+*   **차원(Dimension) 예시:**
+    *   $x \in \mathbb{R}^D$ (입력 차원)
+    *   $W_1 \in \mathbb{R}^{H \times D}$ (첫 번째 가중치 행렬, H는 은닉층 노드 수)
+    *   $W_2 \in \mathbb{R}^{C \times H}$ (두 번째 가중치 행렬, C는 출력 클래스 수)
+    *   *실제 구현 시에는 각 층마다 학습 가능한 편향(Bias)이 추가됩니다.*
+
+<br>
+
+## 4. 신경망은 왜 '깊게(Deeper)' 만들어야 할까?
+
+### Universal Approximator Theorem (보편적 근사 정리)
+*   이론적으로는 **단 하나의 은닉층(One hidden layer)**만으로도 적절한 활성화 함수가 있다면 어떤 복잡한 함수라도 임의의 정확도로 근사(represent)할 수 있습니다. 
+*   **그렇다면 왜 굳이 층을 깊게(Deep) 쌓아야 할까요?**
+
+### 깊이의 장점 (Advantage of Depth)
+1.  **Exponential Representation (기하급수적인 표현력):** 
+    *   층이 깊어질수록 공간을 분할하는 영역의 수가 기하급수적으로(Exponentially) 증가합니다. 
+    *   얕은 신경망에 비해 훨씬 적은 수의 파라미터(노드)로도 훨씬 더 복잡하고 정교한 함수(패턴)를 표현할 수 있습니다.
+2.  **Better Generalization with Greater Depth (일반화 성능 향상):**
+    *   실험 결과, 동일한 수준의 파라미터 수를 가질 때, 층이 얕고 넓은 구조보다 **층이 깊은(Layers가 많은) 구조가 테스트 정확도(Test Accuracy) 측면에서 더 높은 성능**을 보여줍니다. 
+    *   즉, 본 적 없는 새로운 데이터에 대한 예측력(일반화, Generalization)이 더 뛰어납니다.
