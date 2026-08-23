@@ -1,0 +1,54 @@
+# Daily Review - Day27
+
+## 📚 Today's Learning
+
+* 영어 공부 완료
+* K-MOOC: 완료
+* Google AI: 완료
+* Semiconductor: 🟠 FAB DIARY | EP.37
+
+---
+
+## 🎯 Today's Key Points
+
+### AI
+
+* Gemini를 활용한 데이터 분석 실전 학습
+* 비정형 데이터를 AI로 분류하고 감성 분석하는 방법 학습
+* `=AI()` 함수를 활용해 스프레드시트 데이터를 자동 분석
+* AI가 생성한 데이터는 기존 수식 등을 활용해 교차 검증해야 함
+* Gemini Canvas를 활용해 **What-If 기반 대화형 비즈니스 시뮬레이터**를 구축할 수 있음
+* 슬라이더와 토글을 활용해 다양한 변수에 따른 결과를 실시간으로 확인할 수 있음
+
+### K-MOOC
+
+* **Multi-layer Perceptron(MLP)**의 기본 구조 학습
+* 퍼셉트론의 가중합과 활성화 함수 기반 순전파 과정 이해
+* Sigmoid와 ReLU 등 활성화 함수의 역할 학습
+* Input / Hidden / Output Layer 구조 이해
+* Width와 Depth의 개념 학습
+* 신경망을 깊게 구성하면 더 복잡한 패턴을 효율적으로 표현할 수 있음
+* Universal Approximator Theorem과 Deep Network의 표현력 및 일반화 성능 이해
+
+### Semiconductor
+
+**🟠 FAB DIARY | EP.37 — 반도체 공장의 우주복 같은 옷은 왜 입을까?**
+
+* 반도체 공장의 우주복 같은 옷은 **방진복**이다.
+* 방진복의 핵심 목적은 사람이 반도체를 오염시키는 것을 막는 것이다.
+* 피부 조각, 머리카락, 먼지, 미세 입자도 반도체 제조의 오염원이 될 수 있다.
+* 미세한 입자 하나가 웨이퍼의 회로를 손상시키거나 불량을 만들 수 있다.
+* 반도체 공장은 **클린룸**에서 공기 중 입자뿐 아니라 온도와 습도 등을 관리한다.
+* 방진복·마스크·장갑·부츠 등은 작업자에게서 발생하는 입자가 웨이퍼에 닿는 것을 방지한다.
+* 반도체 제조에서는 **눈에 보이지 않는 아주 작은 입자까지 관리하는 것**이 핵심이다.
+
+---
+
+## 🔥 Day27 Status
+
+* English ✅
+* K-MOOC ✅
+* Google AI ✅
+* Semiconductor EP.37 ✅
+
+**Day27 Complete ✅**
