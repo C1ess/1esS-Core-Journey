@@ -1,0 +1,52 @@
+# [Week 1 - Day 2] Backpropagation (역전파)
+
+본 정리는 K-MOOC '현대 딥러닝 구조의 이해와 응용 (성균관대학교)' 강의 1주차 2일 차 내용을 바탕으로 작성되었습니다.
+
+<br>
+
+## 1. 역전파 (Backpropagation) 개요
+
+* **딥러닝의 핵심 알고리즘:** 역전파는 딥러닝에서 그래디언트(Gradient, 기울기)를 계산하기 위한 가장 중심이 되는 알고리즘입니다.
+* **연쇄 법칙(Chain Rule):** 미적분학의 연쇄 법칙을 똑똑하고 효율적으로 활용하여 연산을 수행합니다.
+* **가중치의 영향력 계산:** 특정 가중치(Weight)의 작은 변화가 최종 손실 함수(Loss function)에 어떤 영향을 미치는지 계산합니다.
+  * 수식 예시: $\frac{\partial J(W)}{\partial w_2} = \frac{\partial J(W)}{\partial \hat{y}} \times \frac{\partial \hat{y}}{\partial w_2}$
+
+<br>
+
+## 2. 경사 하강법 (Gradient Descent)
+
+* **개념:** 기울기(Gradient)를 각각 계산해 보고, 기울기가 가장 가파른 방향으로 내려가면서 비용 함수 $J(w)$의 전역 최소점(Global cost minimum)을 찾는 최적화 과정입니다.
+* **업데이트 수식:** 시작 지점 $w_0$에서 출발하여 아래 수식을 반복하며 가중치를 업데이트합니다.
+  $$w_t = w_{t-1} - \eta \frac{\partial l}{\partial w_{t-1}}$$
+* **핵심 요소:**
+  * **Gradient:** 함수의 값을 증가시키는 방향입니다 (따라서 최솟값을 찾기 위해 수식에서 빼줍니다).
+  * **학습률 (Learning rate, $\eta$):** 한 번에 내려갈 때의 보폭 크기(Step length)를 결정하는 하이퍼파라미터입니다.
+
+<br>
+
+## 3. 학습 방식의 차이: Batch vs SGD
+
+* **Batch Gradient Descent (배치 경사 하강법):** 가장 가파른 하강 방향으로 정확하게 이동하지만, 데이터셋의 크기가 클 경우 매 반복(iteration)마다 계산 속도가 느리다는 단점이 있습니다.
+* **SGD (Stochastic Gradient Descent, 확률적 경사 하강법):** 하나의 샘플만 가지고 그래디언트를 계산하는 알고리즘입니다.
+  * 다소 노이즈가 섞인 궤적(Noisy descent)을 그리며 불안정하게 움직일 수 있지만, Batch 방식에 비해 모델 파라미터를 업데이트하는 속도가 훨씬 빠릅니다.
+
+<br>
+
+## 4. 역전파의 계산 메커니즘
+
+일반적인 미적분학 수업에서 하듯 전체 수식을 한 번에 편미분하려면 과정이 매우 길고 복잡해집니다. 따라서 역전파는 연쇄 법칙을 사용하여 이를 국소적인 연산으로 쪼개어 해결합니다.
+
+### 연쇄 법칙과 그래디언트의 전달 (Summary)
+특정 노드 $f$에 대한 연산 구조는 세 가지 방향의 기울기로 나눌 수 있습니다:
+1. **Upstream gradient (상류 기울기):** 이전 층(출력 측)에서 넘어온 기울기 (예: $\frac{\partial L}{\partial z}$)
+2. **Local gradient (국소 기울기):** 현재 노드 자체의 입력에 대한 기울기 (예: $\frac{\partial z}{\partial x}$, $\frac{\partial z}{\partial y}$)
+3. **Downstream gradient (하류 기울기):** 다음 층(입력 측)으로 내려보낼 기울기로, 아래와 같이 곱해서 구합니다.
+   * **`Downstream gradient` = `Upstream gradient` $\times$ `Local gradient`**
+   * 수식 예시: $\frac{\partial L}{\partial x} = \frac{\partial L}{\partial z} \times \frac{\partial z}{\partial x}$
+
+### 역전파 예제 (Simple Example)
+함수 $f(x,y,z) = (x+y)z$ 를 미분하는 과정:
+* $q = x+y$ 로 치환하면, $f = qz$ 가 됩니다.
+* $\frac{\partial q}{\partial x} = 1$, $\frac{\partial q}{\partial y} = 1$ (Local gradients)
+* $\frac{\partial f}{\partial q} = z$, $\frac{\partial f}{\partial z} = q$ (Local gradients)
+* 최종적으로 $\frac{\partial f}{\partial x}$ 를 구하려면 연쇄 법칙에 의해 $\frac{\partial f}{\partial q} \times \frac{\partial q}{\partial x}$ 를 계산하면 됩니다.
