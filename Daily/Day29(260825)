@@ -1,0 +1,50 @@
+# 📅 Daily Review — Day29
+
+## 📚 Today's Learning
+
+* 영어 공부 완료
+* K-MOOC: 완료
+* Google AI: 완료
+* Semiconductor: 🔴 CHIP WARS | EP.39
+
+---
+
+## 🎯 Today's Key Points
+
+### 🇺🇸 English
+
+* 오늘 영어 공부 완료 ✅
+
+### 🧠 K-MOOC
+
+* **MLP**는 Fully Connected Layer로 구성된다.
+* **Backpropagation**은 Chain Rule을 활용해 Gradient를 계산한다.
+* Gradient Descent, SGD, Adam 등을 이용해 가중치를 업데이트한다.
+* Activation Function은 신경망에 **비선형성**을 추가한다.
+* Softmax는 출력을 확률 형태로 변환하고, NLL을 통해 Loss를 계산한다.
+* 정답에 가까운 예측일수록 Loss가 작아진다.
+
+### 🤖 Google AI
+
+* **Vibe Coding**은 자연어로 AI에게 요구사항을 전달해 앱을 개발하는 방식이다.
+* Google AI Studio를 활용하면 앱의 설계부터 테스트, 오류 수정까지 AI와 함께 진행할 수 있다.
+* **Tiebreaker, Marketing Asset Generator, Interactive Dashboard** 등의 앱 제작 사례를 학습했다.
+* 핵심 개발 과정은 **요구사항 전달 → 생성 → 테스트 → Auto-fix → 재검증**이다.
+
+### 🔴 Semiconductor — CHIP WARS | EP.39
+
+* TSMC는 대표적인 **파운드리 기업**이다.
+* 애플·엔비디아·AMD 등은 칩을 설계하고 제조를 전문 기업에 맡길 수 있다.
+* TSMC의 핵심 경쟁력은 **첨단 공정 + 높은 수율 + 안정적인 대량 생산**이다.
+* AI·스마트폰·자동차·데이터센터용 칩 수요가 증가할수록 파운드리의 중요성도 커진다.
+
+---
+
+## 🔥 Day29 Status
+
+* English ✅
+* K-MOOC ✅
+* Google AI ✅
+* Semiconductor EP.39 ✅
+
+**Day29 Complete ✅**
