@@ -1,0 +1,17 @@
+# 📚 K-MOOC Week 1 Day 3: Modern Deep Learning Architectures 이 문서는 K-MOOC '현대 딥러닝 구조의 이해와 응용' 1주차 3일차 학습 내용을 정리한 자료입니다. --- ## 1. 퀴즈 리뷰: 딥러닝 핵심 개념 복습 
+* **Q1. MLP(Multi-Layer Perceptron)의 각 층(Layer)은 Fully Connected Layer로 구성된다.** * **정답:** O (True) * **해설:** MLP는 이전 층의 모든 뉴런이 다음 층의 모든 뉴런과 연결되는 완전 연결 계층(Fully Connected Layer)으로 구성됩니다.
+* **Q2. Backpropagation(역전파)는 주로 출력층에서 입력층으로 에러 신호를 전파하며 가중치를 업데이트하는 방식이다.** * **정답:** O (True) * **해설:** 순전파로 얻은 예측값과 실제값의 오차(Loss)를 구하고, 연쇄 법칙을 이용해 출력층에서 입력층 방향으로 오차를 역전파하며 가중치를 업데이트합니다.
+* **Q3. MLP에서 가중치 업데이트에 주로 사용하는 알고리즘은 무엇인가요?** * **정답:** 경사 하강법(Gradient Descent) 및 최적화 기법(SGD, Adam 등) 
+* **Q4. Deep Feedforward Network에서 활성화 함수(Activation Function)의 역할은?** * **정답:** 네트워크에 비선형성(Non-linearity)을 추가하기 위함 * **해설:** 비선형성을 추가해야 모델이 복잡한 패턴과 규칙을 학습할 수 있습니다.
+* **Q5. 역전파(Backpropagation) 과정에서 Upstream Gradient란 무엇을 의미하나요?** * **정답:** 이전 레이어로부터 전달받은 Gradient * **해설:** 출력에 더 가까운 층에서 계산되어 현재 층으로 넘어온 기울기를 의미합니다.
+ --- ## 2. 코드 및 실습 핵심 요약 (PyTorch) ### 2.1. 데이터 증강 및 전처리 (Data Transforms) ```python # 학습 데이터 전처리: Data Augmentation 적용 (과적합 방지) train_transforms = transforms.Compose([ transforms.RandomRotation(5, fill=(0,)), transforms.RandomCrop(28, padding=2), transforms.ToTensor(), transforms.Normalize(mean=[mean], std=[std]) ]) # 평가 데이터 전처리: 증강 없이 텐서 변환 및 정규화만 적용 test_transforms = transforms.Compose([ transforms.ToTensor(), transforms.Normalize(mean=[mean], std=[std]) ]) 
+2.2. 모델 정의 및 파라미터 수 확인 (MLP Model)
+INPUT_DIM = 28 * 28 # 입력 차원 (예: 28x28 이미지) OUTPUT_DIM = 10 # 출력 차원 (예: 0~9의 10개 클래스) model = MLP(INPUT_DIM, OUTPUT_DIM) # 학습 가능한 파라미터 개수 계산 def count_parameters(model): return sum(p.numel() for p in model.parameters() if p.requires_grad) 
+• 은닉층 연산을 반복한 후 최종적으로 설정된 OUTPUT_DIM(10개)의 output을 뽑아냅니다.
+• p.requires_grad를 통해 학습 과정에서 역전파로 업데이트할 실질적인 파라미터(Weight, Bias) 수를 구합니다.
+2.3. 손실 함수 (Loss Function & Cross Entropy)
+• Softmax: 모델의 출력을 클래스별 '확률' 형태로 변환합니다. [0.8585, 0.0157, 0.0157, ...]
+• Negative Log Likelihood (NLL): 정답 클래스에 해당하는 예측 확률에 음의 로그(-log)를 취해 Loss를 계산합니다.
+◦ 정답(class 0) 예측 확률이 높을 때(0.8585): -log(0.8585) = 0.153... (Loss 낮음)
+◦ 정답(class 5) 예측 확률이 낮을 때(0.0157): -log(0.0157) = 4.154... (Loss 높음)
+• 결론: 모델의 prediction(output)값과 정답이 가까우면 loss 값이 작아지고, 멀어지면 loss 값이 커지게 됩니다.
