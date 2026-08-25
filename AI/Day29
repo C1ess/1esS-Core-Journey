@@ -1,0 +1,54 @@
+# 🤖 AI — Day29
+
+## 1. K-MOOC | Modern Deep Learning Architectures
+
+### 🧠 MLP (Multi-Layer Perceptron)
+
+* **MLP**는 여러 개의 Fully Connected Layer를 쌓은 신경망 구조다.
+* 구조는 **Input Layer → Hidden Layer → Output Layer**로 구성된다.
+* Perceptron은 입력값에 가중치와 Bias를 적용한 뒤 Activation Function을 거쳐 출력을 만든다.
+* Activation Function은 신경망에 **비선형성(Non-linearity)**을 추가해 복잡한 패턴을 학습할 수 있도록 한다.
+* 대표적인 Activation Function으로 **Sigmoid, ReLU** 등이 있다.
+* 네트워크의 **Depth(깊이)**가 증가하면 더 복잡한 특징을 계층적으로 표현할 수 있다.
+
+### 🔄 Backpropagation
+
+* **Backpropagation(역전파)**은 신경망의 Gradient를 계산하는 핵심 알고리즘이다.
+* **Chain Rule(연쇄법칙)**을 활용해 출력에서 입력 방향으로 Gradient를 전달한다.
+* 특정 Weight가 Loss에 얼마나 영향을 미치는지를 계산하고 이를 바탕으로 Weight를 업데이트한다.
+* 기본 흐름은 **Forward Propagation → Loss 계산 → Backpropagation → Weight Update**다.
+
+### 📉 Gradient Descent
+
+* Gradient를 이용해 Loss가 작아지는 방향으로 Weight를 업데이트한다.
+* **Learning Rate**는 한 번에 얼마나 이동할지를 결정한다.
+* 대표적인 최적화 방식:
+
+  * Batch Gradient Descent
+  * SGD
+  * Adam
+
+### 🧪 PyTorch 학습
+
+* Data Augmentation을 통해 학습 데이터를 다양화하여 **과적합을 방지**할 수 있다.
+* `requires_grad`를 통해 역전파 과정에서 학습되는 파라미터를 확인할 수 있다.
+* **Softmax**는 모델 출력을 클래스별 확률 형태로 변환한다.
+* **NLL(Negative Log Likelihood)**은 정답 클래스의 예측 확률을 기반으로 Loss를 계산한다.
+* 정답을 높은 확률로 예측할수록 **Loss는 작아진다.**
+
+---
+
+## 2. Google AI | AI Vibe Coding & Google AI Studio
+
+* **Vibe Coding**은 자연어로 원하는 기능과 아이디어를 설명하면 AI가 코드를 작성해 앱을 구현하는 방식이다.
+* **Google AI Studio**를 활용하면 대화형으로 앱을 설계하고 실제 프로토타입을 만들 수 있다.
+* 주요 실습:
+
+  * **Tiebreaker** — 의사결정 지원
+  * **Marketing Asset Generator** — 마케팅 자료 생성
+  * **Interactive Dashboard** — 데이터 시각화
+* 개발 과정은 **앱 정의 → 테스트 → 오류 수정(Auto-fix) → 재검증**으로 진행된다.
+
+### 💡 Day29 AI 한 줄 정리
+
+**K-MOOC에서는 AI의 기본 구조와 학습 원리를, Google AI에서는 AI를 실제 앱 개발에 활용하는 방법을 학습했다.**
