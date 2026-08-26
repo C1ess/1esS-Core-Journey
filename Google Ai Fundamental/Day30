@@ -1,0 +1,48 @@
+Google AI 실습 과제
+🚀 실습 1: 브랜드 빌더 앱 (Brand Builder App) 만들기
+1단계: 앱 프로토타입 정의하기
+ * AI Studio 접속 및 Google 계정 로그인 상태 확인
+ * **‘AI 앱 구축’**으로 이동
+ * ‘구축’ 페이지의 입력란에 아래 앱 설명 프롬프트 입력:
+I want an app called the Brand builder app that lets me describe a product and imagine it across a bunch of different mediums, this could include a billboard, a newspaper, and a social post. Maintain product consistency between each shot. I do not want to see people in any of the images. You must use the Nano-Banana model for these images.
+
+ * 준비가 되면 ‘Build’ 버튼 클릭
+2단계: 초기 제품 테스트 실행
+ * 앱 인터페이스가 로드되면, 제품 설명 필드에 아래 텍스트 입력:
+Augmented Reality AI glasses
+
+ * ‘생성’ 버튼 클릭
+   (생성이 실패하거나 오류 메시지가 표시되면 다음 단계 진행)
+3단계: AI를 활용하여 문제 해결
+ * 창 오른쪽 하단에 있는 오류 버튼 클릭
+ * 오류 항목을 선택하여 복사한 후, 왼쪽의 프롬프트 상자에 붙여넣기
+ * 동일한 프롬프트 상자에서 오류 아래에 수정 프롬프트 입력:
+Please make sure you do not use any other image models. Use only Gemini 2.5 Flash or Nano-Banana for all steps.
+
+ * “프롬프트 보내기” 버튼을 클릭하여 모델이 코드를 수정하도록 적용
+4단계: 캠페인 시각화
+ * 수정이 완료되면, 제품 아이디어를 다시 입력하고 “생성” 버튼 클릭
+ * 갤러리를 검토하여 모든 이미지에서 제품의 일관성이 유지되고, 원래 지침이 모두 준수되었는지 확인
+📊 실습 2: 대화형 대시보드 앱 (Interactive Dashboard App) 만들기
+1단계: 앱 프로토타입 정의하기
+ * AI Studio 접속 및 Google 계정 로그인 상태 확인
+ * **‘AI 앱 구축’**으로 이동
+ * ‘구축’ 페이지의 입력란에 아래 앱 설명 프롬프트 입력:
+I want to make an interactive dashboard that allows me to visualize data in many different ways. I am going to provide the data for you, so please set up the dashboard with it accurately.
+
+ * 데이터 파일 첨부 (샘플 데이터 또는 직접 준비한 데이터)
+ * 준비가 되면 ‘Build’ 버튼 클릭
+2단계: 데이터 탐색 및 필터링
+ * AI Studio에서 앱이 생성되면 상호작용 기능 테스트 진행
+ * 자동 생성된 다양한 차트 유형(원형 차트, 선 그래프, 데이터 테이블 등) 확인
+ * 자동 생성된 필터를 사용하여 특정 데이터 포인트 심층 분석 (예: “프리미엄 맞춤 바지” 필터링)
+ * 필터를 변경할 때 차트가 실시간으로 업데이트되는지 확인
+3단계: 디자인 및 레이아웃 수정
+ * 프롬프트 상자에서 “앱에 주석 달기” 버튼 클릭
+ * 주석 도구를 사용하여 특정 영역 강조 표시 (예: KPI 카드 주위에 상자 그리기)
+ * 다음 디자인 요청 사항 입력:
+Let's make these cards white
+
+ * “확인” 클릭 (피드백이 포함된 스크린샷이 프롬프트 상자에 자동 추가됨)
+ * “프롬프트 보내기” 버튼을 클릭
+ * 기술적 세부 사항 설명 없이 모델이 시각적 피드백을 분석하여 앱 코드를 업데이트하는 과정 관찰 (지적한 요소가 어떻게 변경되었는지 확인)
