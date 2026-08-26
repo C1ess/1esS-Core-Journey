@@ -1,0 +1,42 @@
+합성곱 신경망 (Convolutional Networks, CNNs) (1)
+약간의 역사 (A bit of history)
+ * 대뇌 피질의 지형학적 매핑 (Topographical mapping in the cortex):
+   * 피질의 인접한 세포들은
+   * 시야의 인접한 영역을 나타냄
+합성곱 연산 (The Convolution Operation)
+ * 모든 지점에서의 함수의 가중 평균 (A weighted average of a function at every point):
+   
+   * s(t): 특징 맵 (Feature map)
+   * x(a): 입력 (Input)
+   * w(t-a): 커널 (Kernel)
+   * a: 타임 스텝 (Time Step)
+ * 예시: 우주선의 위치를 추정하는 데 사용되는 노이즈가 있는 레이저 센서. \rightarrow 최근 측정값에 더 많은 가중치를 부여하는 가중 평균을 수행함.
+ * 2D 합성곱 공식:
+   
+ * VALID 합성곱 (The VALID Convolution): 커널이 이미지 내에 완전히 포함되는 위치로만 출력이 제한됨.
+도입 배경 (Motivation)
+1. 희소 상호작용 (Sparse Interactions) / 희소 연결 (Sparse Connectivity) / 희소 가중치 (Sparse weights)
+ * 커널 크기가 입력보다 작기 때문에 출력 유닛이 모든 입력 유닛과 연결되지 않음.
+   * \rightarrow 파라미터 수 감소! (Fewer Parameters!)
+   * \rightarrow 연산량 감소! (Fewer Computations!)
+   * 희소 연결 (O(k*n), 여기서 k \ll m) vs 밀집 연결 (O(m*n)).
+ * 더 깊은 레이어 유닛의 수용 영역 (Receptive Field): 직접적인 연결은 희소하더라도, 신경망이 충분히 깊다면 간접적인 연결을 통해 거의 모든 입력 뉴런의 영향을 받음.
+2. 파라미터 공유 (Parameter Sharing) / Tied weights
+ * 동일한 파라미터가 여러 번 사용됨: 커널의 각 요소가 입력 픽셀의 각 위치에서 동일하게 사용됨.
+3. 평행 이동에 대한 등변성 (Equivariance to Translation)
+ * 합성곱 변환은 평행 이동에 대해 등변성을 가짐: "입력이 변경되면 출력도 동일한 방식으로 변경됨".
+ * 합성곱 후 이동 \Leftrightarrow 이동 후 합성곱 (Convolving + shifting \Leftrightarrow Shifting + Convolving)
+풀링 (Pooling)
+풀링이란? (What is Pooling?)
+ * 개념적으로 풀링 연산은 입력의 특정 영역을 해당 영역의 요약 통계량으로 대체하는 것으로 구성됨.
+   * 예시: **최대 풀링(max-pooling)**은 특정 영역을 해당 영역 내의 최댓값으로 대체함.
+ * 다른 유형: 평균 풀링(Avg Pool), L^2 노름(L^2 norm), 가중 평균(Weight average).
+ * 왜 풀링을 사용하는가? 표현(representation)이 작은 평행 이동에 대해 근사적으로 불변(invariant)하게 만들기 위함.
+풀링의 특성
+ * 풀링은 다양한(varying) 크기의 이미지를 처리하는 데 도움을 줄 수 있음.
+ * 분류(classification) 레이어 직전의 마지막 레이어로서, 고정된 출력 그리드 크기를 갖도록 설정할 수 있음.
+무한히 강한 사전 지식으로서의 풀링 (Pooling as Infinitely Strong Prior)
+ * 풀링은 역연산(inverse operation)이 없음.
+ * 풀링 후에는 정확한 공간 정보를 유지하지 않음.
+ * 따라서, 정확한 공간 정보를 보존해야 하는 태스크의 경우 모든 특징에 풀링을 사용하면 학습 오차(training error)가 증가할 수 있음.
+   * \rightarrow 과소적합 (underfitting) 발생 가능성
