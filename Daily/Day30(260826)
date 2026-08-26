@@ -1,0 +1,57 @@
+# Daily Review - Day30
+
+## 📚 Today's Learning
+
+* 영어 공부 완료
+* K-MOOC: 완료
+* Google AI: 완료
+* Semiconductor: 🟢 TECH EXPLAINED | EP.40
+
+---
+
+## 🎯 Today's Key Points
+
+### AI
+
+* **K-MOOC — CNN(Convolutional Neural Networks)**
+
+  * 합성곱은 입력의 특정 영역을 커널로 처리해 특징을 추출한다.
+  * **희소 연결(Sparse Connectivity)**을 통해 파라미터와 연산량을 줄일 수 있다.
+  * **파라미터 공유(Parameter Sharing)**로 동일한 커널을 여러 위치에 적용한다.
+  * 합성곱은 **평행 이동에 대한 등변성(Equivariance)**을 가진다.
+  * **Pooling**은 영역의 대표값으로 정보를 요약해 작은 이동에 대한 불변성을 높인다.
+  * Pooling은 공간 정보를 잃게 하므로 정확한 위치 정보가 중요한 작업에서는 주의가 필요하다.
+
+### Google AI
+
+* **Brand Builder App**
+
+  * Google AI Studio에서 자연어로 앱의 기능과 목적을 정의할 수 있다.
+  * Nano-Banana를 활용해 하나의 제품을 다양한 매체에 일관된 형태로 시각화할 수 있다.
+  * 오류 메시지를 AI에게 전달하고 수정 프롬프트를 통해 앱을 개선할 수 있다.
+* **Interactive Dashboard App**
+
+  * 데이터를 기반으로 차트·테이블·필터가 포함된 대시보드를 생성할 수 있다.
+  * 자연어와 시각적 피드백을 이용해 앱의 디자인과 레이아웃을 수정할 수 있다.
+  * AI Studio는 데이터 시각화뿐 아니라 **대화형 앱 프로토타이핑과 개선**까지 지원한다.
+
+### Semiconductor
+
+* 🟢 **TECH EXPLAINED | EP.40 — 스마트폰은 충전할 때 무슨 일이 일어날까?**
+
+  * 충전기의 전기는 바로 배터리로 들어가지 않고 **충전 회로**를 거친다.
+  * 충전 회로가 배터리에 적합한 전압과 전류로 조절한다.
+  * 리튬이온 배터리에서는 충전 과정에서 리튬 이온이 전극 사이를 이동한다.
+  * 전기 에너지는 배터리 내부에서 **화학적 에너지** 형태로 저장된다.
+  * 충전은 전기 에너지를 저장 가능한 형태로 변환하는 과정이다.
+
+---
+
+## 🔥 Day30 Status
+
+* English ✅
+* K-MOOC ✅
+* Google AI ✅
+* Semiconductor EP.40 ✅
+
+**Day30 Complete ✅**
