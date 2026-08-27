@@ -1,0 +1,30 @@
+합성곱 신경망 (Convolutional Networks, CNNs) (2)
+합성곱 계층 (Convolution Layer)
+기본 구조와 연산
+ * 보통 컬러 영상은 RGB(Red, Green, Blue) 채널로 표현되므로 32 \times 32 \times 3과 같은 형태를 가짐.
+ * 입력 이미지는 3D 형태(32 \times 32 \times 3)를 띠며 공간적 구조(spatial structure)를 보존함.
+ * 합성곱 연산(Convolutional operation)은 입력 신호에 커널(Kernel)을 곱하여 하나의 숫자를 도출하는 과정임.
+ * 예를 들어, 32 \times 32 \times 3 이미지의 작은 영역과 5 \times 5 \times 3 필터(가중치 w) 사이의 내적(dot product)을 계산함.
+ * 이는 75차원(5 \times 5 \times 3 = 75)의 내적에 편향(bias)을 더하는 연산(w^T x + b)이며, 그 결과로 단일 숫자(1 number)가 생성됨.
+ * 필터가 모든 공간적 위치를 슬라이딩(convolve)하며 연산을 수행하여 활성화 맵(Activation map, 또는 Feature map)을 생성함.
+다중 필터와 신경망의 구성
+ * 만약 5 \times 5 크기의 필터를 6개 사용한다면, 6개의 분리된 활성화 맵이 생성됨.
+ * 생성된 각각의 활성화 맵은 이를 생성한 커널의 가중치(weight) 정보를 담고 있음.
+ * 이 6개의 활성화 맵을 쌓아 올려(stack) 28 \times 28 \times 6 크기의 "새로운 이미지(new image)" 형태를 구성함.
+ * 합성곱 신경망(ConvNet)은 이러한 합성곱 계층(Convolution Layers)과 활성화 함수(activation functions, 예: ReLU)가 교차로 나열된 연속(sequence) 구조임.
+ * 합성곱 연산만 반복해서 수행하면 활성화 맵의 공간적 크기는 계속 줄어듦 (예: 32 \times 32 \rightarrow 28 \times 28 \rightarrow 24 \times 24 \dots).
+ * 계층을 여러 개 쌓음으로써, 저수준 특징(Low-level features)부터 시작해 중간 수준(Mid-level), 고수준 특징(High-level features)으로 점진적으로 특징을 추출하고, 마지막에 선형 분류기(Linearly separable classifier)를 통과함.
+제로 패딩 (Zero Padding)
+ * 실제 환경에서는 테두리에 0을 덧대는 제로 패딩(zero pad the border)을 흔히 사용함.
+ * 예시: 7 \times 7 입력에 3 \times 3 필터를 스트라이드(stride) 1로 적용할 때, 1 픽셀의 테두리 패딩을 추가함.
+ * 패딩을 적용함으로써 입력 크기와 출력 크기를 동일하게(예: 7 \times 7 출력) 맞출 수 있음.
+ * 출력 크기 계산 공식:
+   * 패딩이 없을 때 (복습): (N - F) / \text{stride} + 1
+   * 패딩이 있을 때: (N + 2P - F) / \text{stride} + 1
+     * N: 입력 크기
+     * F: 필터 크기
+     * P: 패딩 크기
+뇌/뉴런 관점에서의 합성곱 계층 (The brain/neuron view of CONV Layer)
+ * 예를 들어 5개의 필터를 사용할 경우, 합성곱 계층은 28 \times 28 \times 5 크기의 3D 그리드로 배열된 뉴런들로 구성된다고 볼 수 있음.
+ * 입력 볼륨의 같은 영역을 바라보는 5개의 서로 다른 뉴런이 존재하는 것과 같음.
+ * 커널을 여러 개 사용하는 것은 하나의 대상(입력)을 한 사람이 보는 것이 아니라, 여러 사람(뉴런)이 각각의 관점으로 보는 것이라고 생각할 수 있음.
