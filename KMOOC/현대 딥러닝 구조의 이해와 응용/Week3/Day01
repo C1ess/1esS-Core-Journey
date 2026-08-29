@@ -1,0 +1,40 @@
+배치 정규화 (Batch Normalization)
+1. 배치 정규화의 도입 배경 (Motivation)
+ * 단일 계층 y=Wx를 고려해 볼 때, 특정 요인들이 모델의 최적화(optimization)를 어렵게 만들 수 있음.
+ * 입력 x가 0을 중심으로 정렬(centered)되어 있지 않으며, 이로 인해 큰 편향(bias) 값이 필요해짐.
+ * 입력 x의 각 요소(element)마다 스케일(scaling)이 다름 (따라서 가중치 W의 항목들이 크게 변해야 함).
+ * 핵심 아이디어: 각 계층에서 입력이 "적절하게 스케일(nicely scaled)" 되도록 강제하는 것.
+2. 연산 과정 및 공식
+ * 입력: x : N \times D (N은 배치 차원, D는 특징 차원).
+ * 채널별 평균 (Per-channel mean): 모양(shape)은 D 차원임.
+   
+ * 채널별 분산 (Per-channel var): 모양(shape)은 D 차원임.
+   
+ * 정규화 (Normalized x): 모양(shape)은 N \times D임.
+   
+ * 학습 가능한 파라미터 (Learnable parameters): 학습 가능한 스케일 파라미터 \gamma와 시프트 파라미터 \beta (차원은 D)를 추가로 사용함.
+ * 최종 출력 (Output): 모양(shape)은 N \times D임.
+   
+ * 학습을 통해 \gamma = \sigma, \beta = \mu가 될 경우 원래의 항등 함수(identity function)로 복원될 수 있음.
+3. 네트워크 내 배치 정규화의 위치
+ * 일반적으로 완전 연결 계층(Fully Connected layer)이나 합성곱(Convolutional) 계층 바로 뒤, 그리고 비선형 활성화 함수(nonlinearity) 직전에 삽입됨.
+ * 구조 예시: FC -> BN -> tanh -> FC -> BN -> tanh ....
+ * 정규화 수식: \hat{x}^{(k)} = \frac{x^{(k)} - E[x^{(k)}]}{\sqrt{Var[x^{(k)}]}}.
+4. 배치 정규화의 장점 및 특징
+ * 깊은 신경망(deep networks)을 훨씬 쉽게 학습시킬 수 있음.
+ * 그래디언트의 흐름(gradient flow)을 개선함.
+ * 더 높은 학습률(learning rates)을 사용할 수 있어 수렴 속도가 빨라짐.
+ * 네트워크가 가중치 초기화(initialization)에 대해 덜 민감해짐 (강인해짐).
+ * 학습 과정에서 일종의 정규화(regularization) 역할을 수행함.
+ * 주의 사항: 학습(training)과 테스트(testing) 시에 다르게 동작하며, 이는 버그가 발생하는 매우 흔한 원인이 됨.
+5. 배치 정규화 vs 레이어 정규화 (Layer Normalization)
+ * 배치 정규화 (완전 연결 신경망 기준):
+   * 입력 x : N \times D에 대해 연산 수행.
+   * 추출되는 평균(\mu)과 표준편차(\sigma)의 차원은 1 \times D임 (배치 N 차원 방향으로 정규화 수행).
+   * 파라미터 \gamma, \beta의 차원은 1 \times D임.
+ * 레이어 정규화 (Layer Normalization):
+   * 학습(train)과 테스트(test) 시에 동일하게 동작함.
+   * 순환 신경망(recurrent networks)에서도 사용 가능함.
+   * 입력 x : N \times D에 대해 연산 수행.
+   * 추출되는 평균(\mu)과 표준편차(\sigma)의 차원은 N \times 1임 (특징 D 차원 방향으로 정규화 수행).
+   * 파라미터 \gamma, \beta의 차원은 1 \times D임.
