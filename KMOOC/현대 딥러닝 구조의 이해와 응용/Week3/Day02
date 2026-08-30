@@ -1,0 +1,33 @@
+최신 CNN 아키텍처 (Modern CNN Architectures)
+1. 이미지넷 시각 인식 대회 (ILSVRC) 우승 모델 흐름
+ * 2012년 AlexNet (8 레이어): 딥러닝 시대를 연 최초의 논문이자 첫 CNN 기반 우승 모델이며 에러율은 16.4%를 기록함.
+ * 2014년 VGGNet (19 레이어) 및 GoogLeNet (22 레이어)이 등장하며 모델이 점차 깊어지는 양상을 보임.
+ * 2015년 ResNet (152 레이어): 에러율 3.6%를 달성하여 사람의 에러율(5.1%)을 뛰어넘음.
+2. 주요 아키텍처 사례 연구 (Case Studies)
+VGGNet [Simonyan and Zisserman, 2014]
+ * 핵심 아이디어: 레이어를 깊게 사용하여 더 풍부한 피처(feature)를 학습하자는 접근법에서 출발함.
+ * 특징:
+   * 기존 8 레이어(AlexNet)에서 16~19 레이어(VGG16Net, VGG19Net)로 더 깊은(Deeper) 네트워크를 구축함.
+   * 오직 3x3 합성곱(CONV) (stride 1, pad 1)과 2x2 최대 풀링(MAX POOL) (stride 2) 같은 작은 필터만을 사용함.
+   * 에러율 개선: ILSVRC'13의 ZFNet(11.7%)에서 ILSVRC'14의 VGGNet(7.3%)으로 향상됨.
+ * 왜 3x3 작은 필터를 사용하는가?
+   * 3x3 합성곱 계층 3개를 쌓은 것의 유효 수용 영역(effective receptive field)은 7x7 합성곱 계층 1개와 동일함.
+   * 하나의 레이어 대신 3개의 레이어로 늘어났기 때문에 더 많은 비선형성(non-linearities)이 확보되며, 뒤로 갈수록 고차원적이고 다양한 표현을 배울 수 있음.
+   * 레이어당 C 채널 기준, 파라미터 수가 7^2 C^2에 비해 $3 \times (3^2 C^2)$로 더 적음.
+ResNet [He et al., 2015]
+ * 핵심 아이디어: 레지듀얼 커넥션(Residual connections)을 사용하여 매우 깊은(Very deep) 네트워크를 학습시킬 수 있게 함.
+ * 특징:
+   * ImageNet을 위한 152-레이어 모델 구조를 가짐.
+   * 원하는 기본 매핑(underlying mapping)인 $H(x)$를 직접 학습하는 대신, 레지듀얼 맵핑(residual mapping)인 F(x) = H(x) - x를 학습하도록 구성함.
+   * 얕은(shallow) 레이어의 출력을 다음 뒷단의 레이어로 바로 보내주는 항등 매핑(Identity mapping, x) 구조(Residual block: H(x) = F(x) + x)를 도입함.
+   * 이를 통해 네트워크의 성능이 비약적으로 향상되어 ILSVRC'15 및 COCO'15의 모든 분류 및 탐지 대회에서 우승을 차지함 (분류 에러율 3.57%).
+3. 핵심 요약 (Main takeaways)
+이러한 초기 모델들의 아이디어는 최신 딥러닝 모델에서도 변형되어 다양하게 사용됨.
+ * AlexNet: 컴퓨터 비전 모델 학습에 CNN을 사용할 수 있음을 입증함.
+ * VGG: 더 큰(Bigger) 네트워크가 더 나은 성능을 보인다는 것을 보여줌.
+ * ResNet: 극도로 깊은(Extremely deep) 네트워크를 학습시키는 방법을 제시함.
+   * 이제 한계는 오직 GPU와 메모리뿐임.
+   * 네트워크가 커질수록 성능 향상 폭이 줄어드는 수확 체감(diminishing returns) 현상을 확인시켜 줌.
+ * ResNet 이후: CNN이 인간의 척도(human metric)를 능가하게 되면서, 연구의 초점이 다른 주제로 이동함.
+   * 효율적인 네트워크 (Efficient Networks): MobileNet, ShuffleNet.
+   * 신경망 구조 탐색 (Neural Architecture Search): 이제 아키텍처 설계를 자동화할 수 있음.
