@@ -1,0 +1,7 @@
+수십억 개의 트랜지스터가 들어간 칩에서 전기 신호가 서로 섞이지 않는 이유는 뭘까요?
+
+정답은 **금속 배선, 절연막, Via**에 있습니다.
+
+작은 칩 안에도 신호가 이동하는 정교한 길이 만들어져 있습니다.
+
+#semiconductor #interconnect #vlsi #chipdesign #microelectronics
