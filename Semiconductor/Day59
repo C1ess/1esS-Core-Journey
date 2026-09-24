@@ -1,0 +1,39 @@
+# 💻 Semiconductor — Day 59
+
+### K-MOOC — MOSFET 증폭기 & CMOS 인버터
+
+* **Common-Source (CS)**
+
+  * Gate 입력 → Drain 출력
+  * **180° 위상 반전**
+  * 전압 증폭에 사용
+
+* **Common-Gate (CG)**
+
+  * Source 입력 → Drain 출력
+  * **동상(In-phase) 증폭**
+
+* **Common-Drain (CD) / Source Follower**
+
+  * Gate 입력 → Source 출력
+  * 전압 이득 ≈ 1
+  * **버퍼 역할**
+
+* **CMOS Inverter**
+
+  * PMOS + NMOS 구조
+  * 입력 High → 출력 Low
+  * 입력 Low → 출력 High
+  * 기생 커패시터로 **Delay 및 유한한 Rising/Falling Edge** 발생
+
+### EP.69 ⚪ CAREER CORE
+
+* 반도체 직무 → **설계·공정·소자·장비·테스트** 등
+* 설계 → 논리회로·회로이론·컴퓨터 구조·Verilog
+* 공정 → 공정·소자·재료·공정 조건·데이터 분석
+* 다른 직무도 서로의 분야에 대한 **기초적인 이해**가 필요
+* 취업 준비 → **기초 지식은 넓게 + 목표 직무는 깊게**
+
+### 🔑 핵심
+
+> **CS는 반전 증폭, CG는 동상 증폭, CD는 버퍼로 구분하고, 목표 직무에 맞는 전문 역량을 깊게 쌓는 것이 중요하다.**
