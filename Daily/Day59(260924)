@@ -1,0 +1,68 @@
+# 📅 Day 59
+
+## 🎯 Today's Goal
+
+* Claude Cowork **Plugin** 이해
+* MOSFET 증폭기와 CMOS 인버터 정리
+* 반도체 직무별 필요 역량 이해
+* 영어 학습 완료
+
+---
+
+# 🇺🇸 English
+
+* **TOEIC** 완료
+* **TOEFL** 완료
+* **OPIc** 완료
+
+---
+
+# 🤖 AI
+
+### Claude Cowork Lecture 8 — Plugin
+
+* **Plugin** = 여러 Skills를 묶은 공유 가능한 툴킷
+* 형태:
+
+  * **End-to-End Pipeline** → 여러 작업 단계를 하나로 연결
+  * **직무별 Toolkit** → 특정 직무의 Skills를 모음
+* 기존 Plugin을 설치한 뒤 팀의 템플릿과 자료에 맞게 커스터마이징 가능
+* 작은 Skills를 만들고 → 여러 개가 쌓이면 Plugin으로 패키징
+* `/setup-cowork` → 업무에 맞는 Plugin 추천 및 설치 지원
+
+### 🔑 핵심
+
+> **Skill이 개인의 업무 노하우라면 Plugin은 팀의 전문성을 패키징한 것이다.**
+
+---
+
+# 💻 Semiconductor
+
+### K-MOOC — MOSFET 증폭기 & CMOS 인버터
+
+* **Common-Source** → Gate 입력 / Drain 출력 / **180° 위상 반전**
+* **Common-Gate** → Source 입력 / Drain 출력 / **동상 증폭**
+* **Common-Drain** → Gate 입력 / Source 출력 / **전압 이득 ≈ 1 / 버퍼**
+* **CMOS Inverter** → PMOS + NMOS / 입력 신호 반전
+* CMOS 인버터는 기생 커패시터로 인해 **Delay와 유한한 Rising/Falling Edge** 발생
+
+### EP.69 ⚪ CAREER CORE
+
+* 반도체 직무 → **설계·공정·소자·장비·테스트** 등
+* 설계 → 논리회로, 회로이론, 컴퓨터 구조, Verilog
+* 공정 → 공정, 소자, 재료, 공정 조건, 데이터 분석
+* 다른 직무에 대한 **기초적인 이해도 필요**
+* 취업 준비 → **기초는 넓게 + 목표 직무는 깊게**
+
+---
+
+# 🌱 Today's Key Takeaways
+
+> **AI:** Skills를 묶으면 팀 단위 Plugin이 된다.
+> **반도체:** CS·CG·CD의 구조와 특성을 구분하고 CMOS 인버터의 동작을 이해했다.
+> **Career:** 반도체 기초를 넓게 익히고 목표 직무의 역량을 깊게 쌓는 것이 핵심이다.
+> **English:** TOEIC · TOEFL · OPIc 완료.
+
+## 📝 Daily Review
+
+오늘은 **AI 업무 시스템화 → 반도체 회로 → 직무 이해 → 영어**까지 학습을 완료했다.
