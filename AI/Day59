@@ -1,0 +1,16 @@
+# 🤖 AI — Day 59
+
+### Claude Cowork 강의 8 — Plugin
+
+* **Plugin** = 여러 Skills와 커넥터·서브에이전트를 묶은 **공유 가능한 툴킷**
+* 주요 형태:
+
+  * **End-to-End Pipeline** → 여러 작업 단계를 하나의 워크플로로 연결
+  * **직무별 Toolkit** → 특정 직무에서 자주 사용하는 Skills를 묶음
+* 기존 Plugin을 설치한 후 **팀의 템플릿·과거 자료에 맞게 커스터마이징** 가능
+* 작은 Skills를 먼저 만들고, 여러 개가 쌓이면 Plugin으로 패키징할 수 있음.
+* `/setup-cowork`를 통해 업무에 맞는 Plugin을 추천받고 설치할 수 있음.
+
+### 🧠 핵심
+
+> **Skill이 개인의 업무 방식을 패키징한다면, Plugin은 여러 Skills를 묶어 팀의 전문성을 공유하는 도구다.**
